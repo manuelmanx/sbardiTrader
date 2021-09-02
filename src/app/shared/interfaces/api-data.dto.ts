@@ -13,6 +13,10 @@ export interface $ForexDataRetrivingParamsInterface {
     timeframe: $ForexTimeframeEnum,
 }
 
+export interface $SystemConfigurationInterface {
+    apiKey: string;
+}
+
 export enum $ForexTimeframeEnum {
     "1min" = "1min",
     "5min" = "5min",

@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { $DataCandleInterface, $ForexDataRetrivingParamsInterface } from '../../interfaces/api-data.dto';
+import { $DataCandleInterface, $ForexDataRetrivingParamsInterface, $SystemConfigurationInterface } from '../../interfaces/api-data.dto';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ApiServiceService {
-
+  private _config: $SystemConfigurationInterface;
+  private _localChartData: $DataCandleInterface[];
   constructor(private _http: HttpClient) { }
+
+
 
   public async getHistoricalChartData(params: $ForexDataRetrivingParamsInterface): Promise<$DataCandleInterface[]> {
     return new Promise((resolve, reject) => {
@@ -20,5 +21,40 @@ export class ApiServiceService {
         }
       )
     })
+  }
+
+  public async downloadConfig$(): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      this._http.get("app/config/config.json").subscribe(
+        success => {
+          this._config = success as $SystemConfigurationInterface
+          resolve(true);
+        },
+        error => {
+          reject(false);
+        }
+      )
+    })
+  }
+
+  public async downloadLoacalChartData$(): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      this._http.get("app/config/tmp-data.json").subscribe(
+        success => {
+          this._localChartData = success as $DataCandleInterface[]
+          resolve(true);
+        },
+        error => {
+          reject(false);
+        }
+      )
+    })
+  }
+
+  public getLocalChartData(): $DataCandleInterface[] {
+    return this._localChartData;
+  }
+  public getConfig(): $SystemConfigurationInterface {
+    return this._config;
   }
 }
