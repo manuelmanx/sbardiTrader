@@ -7,6 +7,7 @@ import { $DataCandleInterface, $ForexDataRetrivingParamsInterface, $ForexTimefra
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
+  title = 'Sbardi Trader';
   constructor() { }
   public callParams: $ForexDataRetrivingParamsInterface = { pair: "EURUSD", timeframe: $ForexTimeframeEnum['15min'], apikey: "e821fab50c2e78d7c3702a947a0750d6" }
   ngOnInit(): void {

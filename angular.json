@@ -29,7 +29,8 @@
               "src/app/config"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/app/style/theme.scss"
             ],
             "scripts": []
           },

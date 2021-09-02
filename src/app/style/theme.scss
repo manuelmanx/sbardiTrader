@@ -1,0 +1,15 @@
+@import './home-page.theme.scss';
+$theme:(
+    anchor_navy:#293f55,
+    background_neavy:#334a5f,
+    primary_blue:#2294d6,
+    slate_grey:#f1f1f3,
+    snow_white:#ffffff,
+    secondary_blue:#63cae4,
+    red_error:#eb666d,
+    info_purple:#7c8fe2,
+    green_success:#4ac077,
+    yellow_warning:#fcb958,
+);
+
+@include home-page-theme($theme);
