@@ -2,6 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { $DataCandleInterface, $ForexDataRetrivingParamsInterface, $SystemConfigurationInterface } from '../../interfaces/api-data.dto';
 //**https://financialmodelingprep.com/developer/docs#Historical-Forex-Price
+//**https://codesandbox.io/s/apx-candlestick-line-combo-forked-3q0se?file=/src/app/app.component.ts 
+//**https://apexcharts.com/angular-chart-demos/candlestick-charts/candlestick-with-line/    
+//**Esempio Grafico */
 
 @Injectable()
 export class ApiServiceService {
