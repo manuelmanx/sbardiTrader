@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { $DataCandleInterface, $ForexDataRetrivingParamsInterface, $SystemConfigurationInterface } from '../../interfaces/api-data.dto';
+//**https://financialmodelingprep.com/developer/docs#Historical-Forex-Price
 
 @Injectable()
 export class ApiServiceService {
@@ -12,7 +13,7 @@ export class ApiServiceService {
 
   public async getHistoricalChartData(params: $ForexDataRetrivingParamsInterface): Promise<$DataCandleInterface[]> {
     return new Promise((resolve, reject) => {
-      this._http.get(`https://financialmodelingprep.com/api/v3/historical-chart/${params["timeframe"]}/${params["pair"]}?apikey=${params["apikey"]}`).subscribe(
+      this._http.get(`https://financialmodelingprep.com/api/v3/historical-chart/${params["timeframe"]}/${params["pair"]}?apikey=${this._config.apiKey}`).subscribe(
         success => {
           resolve(success as $DataCandleInterface[]);
         },
