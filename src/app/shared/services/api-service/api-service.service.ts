@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { $DataCandleInterface, $ForexDataRetrivingParamsInterface, $SystemConfigurationInterface } from '../../interfaces/api-data.dto';
+import { $DataCandleInterface, $ForexDataRetrivingParamsInterface } from '../../interfaces/api-data.dto';
+import { ConfigService } from '../config/config.service';
 //**https://financialmodelingprep.com/developer/docs#Historical-Forex-Price
 //**https://codesandbox.io/s/apx-candlestick-line-combo-forked-3q0se?file=/src/app/app.component.ts 
 //**https://apexcharts.com/angular-chart-demos/candlestick-charts/candlestick-with-line/    
@@ -8,57 +9,22 @@ import { $DataCandleInterface, $ForexDataRetrivingParamsInterface, $SystemConfig
 
 @Injectable()
 export class ApiServiceService {
-  private _config: $SystemConfigurationInterface;
-  private _localChartData: $DataCandleInterface[];
-  constructor(private _http: HttpClient) { }
 
-
+  constructor(private _http: HttpClient, private _configService: ConfigService) { }
 
   public async getHistoricalChartData(params: $ForexDataRetrivingParamsInterface): Promise<$DataCandleInterface[]> {
+    let apiKey = this._configService.getConfig().apiKey
     return new Promise((resolve, reject) => {
-      this._http.get(`https://financialmodelingprep.com/api/v3/historical-chart/${params["timeframe"]}/${params["pair"]}?apikey=${this._config.apiKey}`).subscribe(
-        success => {
-          resolve(success as $DataCandleInterface[]);
+      this._http.get(`https://financialmodelingprep.com/api/v3/historical-chart/${params?.timeframe}/${params?.pair}?apikey=${apiKey}`).subscribe(
+        (success: $DataCandleInterface[]) => {
+          resolve(success);
         },
         error => {
           reject(error);
+          this._configService.throwError(`${error}`)
         }
       )
     })
   }
 
-  public async downloadConfig$(): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      this._http.get("app/config/config.json").subscribe(
-        success => {
-          this._config = success as $SystemConfigurationInterface
-          resolve(true);
-        },
-        error => {
-          reject(false);
-        }
-      )
-    })
-  }
-
-  public async downloadLoacalChartData$(): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      this._http.get("app/config/tmp-data.json").subscribe(
-        success => {
-          this._localChartData = success as $DataCandleInterface[]
-          resolve(true);
-        },
-        error => {
-          reject(false);
-        }
-      )
-    })
-  }
-
-  public getLocalChartData(): $DataCandleInterface[] {
-    return this._localChartData;
-  }
-  public getConfig(): $SystemConfigurationInterface {
-    return this._config;
-  }
 }
