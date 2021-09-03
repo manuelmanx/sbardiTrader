@@ -17,7 +17,7 @@ import { SbardiIconComponent } from './components/sbardi-icon/sbardi-icon.compon
     AppComponent,
     HomePageComponent,
     SbardiChartComponent,
-    SbardiIconComponent,
+    SbardiIconComponent
   ],
   imports: [
     BrowserModule,
