@@ -1,5 +1,5 @@
 @mixin home-page-theme($theme){
     .home-page-container{
-        background-color: map-get($theme,background_neavy)!important;
+        background-color: map-get($theme,secondary)!important;
     }
 }
