@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "sbarditrader": {
+      "hosting": {
+        "sbardiTrader": [
+          "sbarditrader"
+        ]
+      }
+    }
+  }
+}
