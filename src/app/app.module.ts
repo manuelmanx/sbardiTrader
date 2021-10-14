@@ -15,11 +15,14 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { LoginComponent } from './pages/login/login.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     ChartplotComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    FormsModule
   ],
   providers: [
     AuthGuardService,

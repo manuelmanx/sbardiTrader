@@ -7,7 +7,7 @@ import { $DataCandleInterface, $ForexDataRetrivingParamsInterface, $ForexTimefra
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
-
+  title = 'Sbardi View';
   constructor() { }
   ngOnInit(): void {
 

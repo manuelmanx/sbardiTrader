@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable, zip } from 'rxjs';
+import { from, Observable, zip } from 'rxjs';
 import { ConfigService } from '../config/config.service';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
 
-  constructor(private _configService: ConfigService) { }
+  constructor(private _configService: ConfigService, private _afAuth: AngularFireAuth) { }
 
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     return new Promise((resolve, reject) => {
@@ -29,5 +30,9 @@ export class AuthGuardService implements CanActivate {
         }
       )
     })
+  }
+
+  public loginWithEmailAndPassword(email: string, password: string): Observable<any> {
+    return from(this._afAuth.signInWithEmailAndPassword(email, password))
   }
 }

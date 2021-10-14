@@ -1,4 +1,4 @@
-@import './home-page.theme.scss';
+@import './pages.theme.scss';
 $theme:(
     primary:#ffffff,
     secondary:#e0e2ea,
@@ -8,4 +8,4 @@ $theme:(
     dark:#101215
 );
 
-@include home-page-theme($theme);
+@include pages-theme($theme);
