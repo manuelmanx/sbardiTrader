@@ -1,0 +1,30 @@
+@mixin app-theme($theme){
+    .app-wrapper{
+        .header-wrapper{
+            background-color:map-get($theme,primary)!important;
+            color:map-get($theme,dark)!important;
+            .header-options{
+                .logout-header-button{
+                    background-color:map-get($theme,secondary)!important;
+                    transition: background-color 0.2s ease-in-out,
+                        color 0.2s ease-in-out;
+                    &:active{
+                        background-color:map-get($theme,primary-blue)!important;
+                        color:map-get($theme,primary)!important;
+                    }
+                    &:hover{
+                        background-color:map-get($theme,primary-blue)!important;
+                        color:map-get($theme,primary)!important;
+                    }
+                }
+            }
+        }
+    }
+
+    .page-container{
+        background-color:map-get($theme,secondary)!important;
+    }
+
+    
+    
+}

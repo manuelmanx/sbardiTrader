@@ -1,5 +1,43 @@
 .app-wrapper{
     width:100%!important;
     height:100vh!important;
-    
+    box-sizing: content-box;
+    .header-wrapper{
+        position:absolute;
+        top:0px;
+        left:0px;
+        width:calc(100% - 96px);
+        display:flex;
+        padding:16px 32px 16px  64px;
+        height:fit-content;
+        flex-wrap:nowrap;
+        min-height:30px;
+        .header-title{
+            font-size:16px;
+            font-weight:bold;
+            white-space:nowrap;
+            display:flex;
+            align-items:center;
+        }
+        .header-options{
+            height:100%;
+            width:100%;
+            padding-left:8px;
+            display:flex;
+            align-items:center;
+            justify-content:flex-end;
+            .button{
+                cursor:pointer;
+            }
+            .logout-header-button{
+                width:32px;
+                height:32px;
+                font-size:18px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                border-radius : 16px;
+            }
+        }
+    }
 }

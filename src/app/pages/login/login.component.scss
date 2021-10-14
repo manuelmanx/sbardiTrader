@@ -27,6 +27,18 @@
                 text-transform: capitalize;
                 font-weight:normal;
                 padding-left:8px;
+                align-items:center;
+                .hide-display-password-login-button{
+                    width:24px;
+                    font-weight:bold;
+                    height:24px;
+                    border-radius:4px;
+                    cursor:pointer;
+                    display:inline-flex;
+                    align-items:center;
+                    justify-content:center;
+                    //margin-left:16px;
+                }
             }
             .login-inputfield{
                 font-size:12px;

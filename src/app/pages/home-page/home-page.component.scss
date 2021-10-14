@@ -1,12 +1,16 @@
 
 .page-container{
-    .header-wrapper{
+    .welcome-section{
         display:flex;
-        padding:16px 32px 16px  64px;
-        height:fit-content;
-        .header-title{
-            font-size:16px;
-            font-weight:bold;
+        flex-direction: column;
+        width:100%;
+        padding:8px;
+        .welcome-title{
+            border:1px solid red;
+            width:100%;
+            padding:8px 16px 8px 32px;
+            border-radius:16px;
+            font-size:24px;
         }
     }
 }

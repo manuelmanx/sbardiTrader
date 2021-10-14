@@ -1,0 +1,34 @@
+@mixin login-theme($theme){
+    .page-container{
+        .login-card-wrapper{
+            .login-card{
+                .login-submit-button{
+                    background-color:map-get($theme,secondary)!important;
+                    transition: background-color 0.2s ease-in-out,
+                                color 0.2s ease-in-out;
+                    &.hilight{
+                        background-color:map-get($theme,primary-blue)!important;
+                        color:map-get($theme,primary)!important;
+                    }
+                    &:focus{
+                        @extend .hilight;
+                    }
+                    &:hover{
+                        @extend .hilight;
+                    }
+                    
+                }
+                .login-inputfield{
+                    background-color:map-get($theme,secondary)!important;
+                    &.active{
+                        background-color:map-get($theme,primary-blue)!important;
+                        color:map-get($theme,primary)!important;
+                    }
+                }
+                .login-card-title{
+                    color:map-get($theme,primary-blue)!important;
+                }
+            }
+        }
+    }
+}

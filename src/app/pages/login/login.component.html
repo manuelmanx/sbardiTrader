@@ -4,9 +4,14 @@
             <div class="login-card-title">Sbardi View</div>
             <div class="login-label">username</div>
             <input class="login-inputfield" type="email" [(ngModel)]="email">
-            <div class="login-label">password</div>
-            <input class="login-inputfield" [type]="(isPasswordVisible)?'text':'password'" [(ngModel)]="password">
+            <div class="login-label">password <div style="width:calc(100% -24px);display:inline-flex;"></div>
+                <div class="hide-display-password-login-button" (click)="showHidePassword()"><span
+                        class="lnr lnr-eye"></span></div>
+            </div>
+            <input class="login-inputfield" [ngClass]="{'active':isPasswordVisible}"
+                [type]="(isPasswordVisible)?'text':'password'" [(ngModel)]="password">
             <button class="login-submit-button" (click)="login()">Login</button>
         </div>
     </div>
+
 </div>

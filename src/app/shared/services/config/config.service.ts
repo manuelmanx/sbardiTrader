@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { zip } from 'rxjs';
-import { $DataCandleInterface } from '../../interfaces/api-data.dto';
 import { $I18nInterface, $SystemConfigurationInterface } from '../../interfaces/config.dto';
 
 @Injectable({
@@ -49,7 +48,6 @@ export class ConfigService {
   public getConfig(): $SystemConfigurationInterface {
     return this._config;
   }
-
 
   public throwError(error: any) {
     console.error(error?.message);
