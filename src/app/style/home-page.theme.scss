@@ -1,5 +1,12 @@
 @mixin home-page-theme($theme){
     .home-page-container{
+        
+    }
+    .app-wrapper{
         background-color: map-get($theme,secondary)!important;
+        .header-wrapper{
+            background-color:map-get($theme,primary)!important;
+            color:map-get($theme,dark)!important
+        }
     }
 }

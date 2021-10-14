@@ -1,0 +1,13 @@
+.app-wrapper{
+    width:100%!important;
+    height:100vh!important;
+    .header-wrapper{
+        display:flex;
+        padding:16px 32px 16px  64px;
+        height:fit-content;
+        .header-title{
+            font-size:16px;
+            font-weight:bold;
+        }
+    }
+}

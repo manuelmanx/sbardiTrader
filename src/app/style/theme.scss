@@ -4,9 +4,8 @@ $theme:(
     secondary:#e0e2ea,
     tertiary:#efeeee,
     hilight:#bbd9fb,
+    primary-blue:#2962FF,
     dark:#101215
-        
-
 );
 
 @include home-page-theme($theme);

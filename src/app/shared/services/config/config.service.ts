@@ -9,7 +9,6 @@ import { $I18nInterface, $SystemConfigurationInterface } from '../../interfaces/
 })
 export class ConfigService {
   private _config: $SystemConfigurationInterface;
-  private _localChartData: $DataCandleInterface[];
   constructor(private _http: HttpClient) { }
 
   public async downloadConfig$(): Promise<boolean> {
@@ -17,25 +16,10 @@ export class ConfigService {
       this._http.get("app/config/config.json").subscribe(
         (success: $SystemConfigurationInterface) => {
           this._config = success;
-          zip(this._downloadLoacalChartData$(), this._downloadTranslations$()).subscribe(
+          zip(this._downloadTranslations$()).subscribe(
             success => { resolve(true) },
             error => { reject(false) }
           )
-        },
-        error => {
-          reject(false);
-          this.throwError(error)
-        }
-      )
-    })
-  }
-
-  private async _downloadLoacalChartData$(): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      this._http.get("app/config/tmp-data.json").subscribe(
-        (success: $DataCandleInterface[]) => {
-          this._localChartData = success;
-          resolve(true);
         },
         error => {
           reject(false);
@@ -61,9 +45,7 @@ export class ConfigService {
     })
   }
 
-  public getLocalChartData(): $DataCandleInterface[] {
-    return this._localChartData;
-  }
+
   public getConfig(): $SystemConfigurationInterface {
     return this._config;
   }
