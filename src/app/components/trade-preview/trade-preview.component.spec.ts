@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChartplotComponent } from './chartplot.component';
+import { TradePreviewComponent } from './trade-preview.component';
 
-describe('ChartplotComponent', () => {
-  let component: ChartplotComponent;
-  let fixture: ComponentFixture<ChartplotComponent>;
+describe('TradePreviewComponent', () => {
+  let component: TradePreviewComponent;
+  let fixture: ComponentFixture<TradePreviewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChartplotComponent ]
+      declarations: [ TradePreviewComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChartplotComponent);
+    fixture = TestBed.createComponent(TradePreviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,7 +1,15 @@
 <div class="page-container">
     <div class="welcome-section">
-        <div class="welcome-title">
-            {{getWelcomeMessage()}}
-        </div>
+        <ng-container *ngIf="userDetails">
+            <div class="welcome-title">
+                Ciao {{getUserName()}}!
+            </div>
+            <div class="welcome-subtitle">
+                In questa sezione trovi le azioni rapide dell' applicativo e una panoramica delle tue ultime azioni.
+            </div>
+        </ng-container>
+        <ng-container *ngIf="isLoadingData">
+            <app-progressbar type="indefinite" class="loading-data-home-progress"></app-progressbar>
+        </ng-container>
     </div>
 </div>

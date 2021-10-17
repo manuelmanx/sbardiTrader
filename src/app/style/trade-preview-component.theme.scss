@@ -1,0 +1,30 @@
+@mixin trade-preview-component-theme($theme){
+    .trade-preview-wrapper{
+        background-color:map-get($theme,primary)!important;
+        .trade-preview-symbol{
+            background-color:map-get($theme,secondary-blue)!important;
+            color:map-get($theme,primary)!important;
+            &.primary-red{
+                background-color:map-get($theme,secondary-red)!important;
+            }
+            
+        }
+        .trade-preview-date{
+            box-shadow: inset 0px 0px 0px 1px map-get($theme,secondary-red)!important;
+            color:map-get($theme,primary-red)!important;
+        }
+        .trade-preview-close-type{
+            color:map-get($theme,primary-red)!important;
+        }
+        .trade-preview-button{
+            background-color:map-get($theme,hilight)!important;
+            color:map-get($theme,primary)!important;
+            &.hl-cross{
+                background-color:map-get($theme, primary-red)!important;
+            }
+            &.hl-exit-up{
+                background-color:map-get($theme, primary-blue)!important;
+            }
+        }
+    }
+}

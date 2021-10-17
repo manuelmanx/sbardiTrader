@@ -6,10 +6,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuardService } from './shared/services/auth-guard/auth-guard.service';
-import { NgApexchartsModule } from 'ng-apexcharts';
 import { AngularFireModule } from '@angular/fire';
 import { ConfigService } from './shared/services/config/config.service';
-import { ChartplotComponent } from './components/chartplot/chartplot.component';
 import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
@@ -17,19 +15,22 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { LoginComponent } from './pages/login/login.component';
 import { FormsModule } from '@angular/forms';
+import { ProgressbarComponent } from './components/progressbar/progressbar.component';
+import { DatabaseService } from './shared/services/database/database.service';
+import { TradePreviewComponent } from './components/trade-preview/trade-preview.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
-    ChartplotComponent,
     LoginComponent,
+    ProgressbarComponent,
+    TradePreviewComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
-    NgApexchartsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
@@ -40,6 +41,7 @@ import { FormsModule } from '@angular/forms';
   providers: [
     AuthGuardService,
     ConfigService,
+    DatabaseService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,4 @@
-@mixin login-theme($theme){
+@mixin login-page-theme($theme){
     .page-container{
         .login-card-wrapper{
             .login-card{
@@ -6,15 +6,13 @@
                     background-color:map-get($theme,secondary)!important;
                     transition: background-color 0.2s ease-in-out,
                                 color 0.2s ease-in-out;
-                    &.hilight{
+                    &:focus{
                         background-color:map-get($theme,primary-blue)!important;
                         color:map-get($theme,primary)!important;
                     }
-                    &:focus{
-                        @extend .hilight;
-                    }
                     &:hover{
-                        @extend .hilight;
+                        background-color:map-get($theme,primary-blue)!important;
+                        color:map-get($theme,primary)!important;
                     }
                     
                 }

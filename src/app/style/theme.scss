@@ -1,15 +1,24 @@
 @import './app.theme.scss';
 @import './login-page.theme.scss';
 @import './home-page.theme.scss';
+
+@import './progressbar-component.theme.scss';
+@import './trade-preview-component.theme.scss';
 $theme:(
     primary:#ffffff,
     secondary:#e0e2ea,
     tertiary:#efeeee,
     hilight:#bbd9fb,
     primary-blue:#2962FF,
+    secondary-blue:#6A92FF,
+    primary-red:#F16969,
+    secondary-red:#FF8585,
     dark:#101215
 );
 
 @include app-theme($theme);
-@include login-theme($theme);
-@include home-theme($theme);
+@include login-page-theme($theme);
+@include home-page-theme($theme);
+
+@include progressbar-component-theme($theme);
+@include trade-preview-component-theme($theme);

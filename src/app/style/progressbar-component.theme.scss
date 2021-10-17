@@ -1,0 +1,25 @@
+@mixin progressbar-component-theme($theme){
+    .progressbar-wrapper{
+        .indefinite-progress-line {
+            background-color:map-get($theme,hilight)!important;
+            &:before {
+                background-color: map-get($theme,primary-blue)!important;
+            }
+            &.primary-red{
+                &:before {
+                    background-color: map-get($theme,primary-red)!important;
+                }
+            }
+            
+        }
+        .default-progress-line {
+            background-color:map-get($theme,hilight)!important;
+            .default-progress-line-cursor {
+                background-color: map-get($theme,primary-blue)!important;
+                &.primary-red{
+                    background-color: map-get($theme,primary-red)!important;
+                }
+            }
+        }
+    }
+}

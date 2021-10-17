@@ -1,0 +1,34 @@
+<ng-container *ngIf="!!value">
+    <div class="trade-preview-wrapper">
+        <div class="trade-preview-symbol" [ngClass]="{'primary-red':isInLoss()}">{{value.symbol}}</div>
+        <ng-container *ngIf="!value?.ongoing">
+            <div class="trade-preview-date">{{value.date | date : 'dd/MM/yyyy'}}</div>
+            <div class="trade-preview-close-type">{{value?.closeType}}</div>
+        </ng-container>
+        <div class="trade-preview-profit-bar">
+            <app-progressbar class="profit-bar" [value]="getProgressValue()" [color]="getProgressBarTheme()">
+            </app-progressbar>
+        </div>
+        <div class="trade-preview-profit-number">
+            {{value?.percentProfit}}%
+        </div>
+        <div class="trade-preview-actions">
+            <ng-container *ngIf="value?.ongoing">
+                <div class="trade-preview-button hl-crop">
+                    <span class="lnr lnr-crop"></span>
+                </div>
+                <div class="trade-preview-button hl-cross">
+                    <span class="lnr lnr-cross"></span>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="!value?.ongoing">
+                <div class="trade-preview-button hl-link">
+                    <span class="lnr lnr-link"></span>
+                </div>
+                <div class="trade-preview-button hl-exit-up">
+                    <span class="lnr lnr-exit-up"></span>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</ng-container>

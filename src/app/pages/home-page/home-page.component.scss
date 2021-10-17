@@ -4,13 +4,24 @@
         display:flex;
         flex-direction: column;
         width:100%;
-        padding:8px;
+        padding:16px;
+        border-radius:16px;
         .welcome-title{
-            border:1px solid red;
-            width:100%;
-            padding:8px 16px 8px 32px;
             border-radius:16px;
-            font-size:24px;
+            font-size:16px;
+            padding:8px;
+            font-weight:bold;
+            display:flex;
+            overflow:hidden;
+        }
+        .welcome-subtitle{
+            @extend .welcome-title;
+            height:fit-content;
+            font-size:12px;
+            font-weight:normal;
+        }
+        .loading-data-home-progress{
+            padding:8px;
         }
     }
 }
