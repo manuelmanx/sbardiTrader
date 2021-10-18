@@ -23,5 +23,34 @@
         .loading-data-home-progress{
             padding:8px;
         }
+        .welcome-setup-not-complete{
+            display:flex;
+            height:fit-content;
+            .setup-not-compete-action{
+                margin:8px 8px;
+                display:flex;
+                flex-direction: column;
+                padding-top:8px;
+                align-items:center;
+                .setup-not-complete-button{
+                    cursor:pointer;
+                    border-radius:16px;
+                    font-size:18px;
+                    width:72px;
+                    height:72px;
+                    display:flex;
+                    align-items:center;
+                    justify-content: center;
+                }
+                .setup-not-complete-button-label{
+                    display:inline-flex;
+                    font-size:10px;
+                    margin-top:16px;
+                    font-weight: lighter;
+                    text-align:center;
+                }
+            }
+            
+        }
     }
 }

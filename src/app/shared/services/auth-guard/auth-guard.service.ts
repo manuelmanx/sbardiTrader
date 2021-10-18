@@ -1,23 +1,23 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import { from, Observable, Subject, zip } from 'rxjs';
+import { from, Observable, zip } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { $UserInterface } from '../../interfaces/user.dto';
 import { ConfigService } from '../config/config.service';
+import { DatabaseService } from '../database/database.service';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
   private _loggedUser: Observable<$UserInterface>;
-  private _$isTriggerRoute = new Subject<boolean>();
-  public onTriggerRoute = this._$isTriggerRoute.asObservable();
+
   constructor(
     private _configService: ConfigService,
     private _afAuth: AngularFireAuth,
-    private _afs: AngularFirestore,
     private _router: Router,
+    private injector: Injector
   ) {
+
   }
 
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
@@ -46,10 +46,11 @@ export class AuthGuardService implements CanActivate {
   }
 
   public async checkForUserLoggedInAnChangeRoute$(): Promise<boolean> {
-    this._loggedUser = await this.isLoggedIn();
+    this._loggedUser = await this.getUserInfoFromDB();
     return new Promise(resolve => {
       if (this._loggedUser) {
-        this._$isTriggerRoute.next(true);
+        const _injectorDb = this.injector.get<DatabaseService>(DatabaseService);
+        _injectorDb.initDB(this._loggedUser);
         resolve(true);
       } else {
         this._changeRoute('/loginpage')
@@ -62,12 +63,12 @@ export class AuthGuardService implements CanActivate {
     this._router.navigate([route]);
   }
 
-  public async updateUserDisplayName(newName: string): Promise<Observable<any>> {
-    return from((await this._afAuth.currentUser).updateProfile({ displayName: newName }))
+  public async updateUserDisplayName(newName: string): Promise<any> {
+    return (await this._afAuth.currentUser).updateProfile({ displayName: newName })
   }
 
-  public async updateUserPhotoURL(link: string): Promise<Observable<any>> {
-    return from((await this._afAuth.currentUser).updateProfile({ photoURL: link }))
+  public async updateUserPhotoURL(link: string): Promise<any> {
+    return (await this._afAuth.currentUser).updateProfile({ photoURL: link })
   }
 
   public loginWithEmailAndPassword(email: string, password: string): Observable<any> {
@@ -77,10 +78,13 @@ export class AuthGuardService implements CanActivate {
   public getUserInfo(): Observable<any> {
     return this._loggedUser;
   }
-  public isLoggedIn(): Observable<any> {
+
+  public getUserInfoFromDB(): Observable<any> {
     return from(this._afAuth.authState.pipe(first()).toPromise());
   }
-
+  // public refreshUserInfoFromDB(): Observable<any> {
+  //   return from(this._afAuth.authState.pipe(first()).toPromise());
+  // }
   public signOut(): Observable<any> {
     return from(this._afAuth.signOut());
   }

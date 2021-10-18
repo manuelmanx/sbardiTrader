@@ -1,10 +1,26 @@
 @mixin home-page-theme($theme){
     .page-container{
         .welcome-section{
-            background-color:map-get($theme,primary)!important;
-                        
+            background-color:map-get($theme,primary)!important;          
             .welcome-title{
                 color:map-get($theme,primary-blue)!important;
+            }
+            .welcome-setup-not-complete{
+                .setup-not-compete-action{
+                    .setup-not-complete-button{
+                        color:map-get($theme,primary)!important;
+                        background-color:map-get($theme,secondary-blue)!important;
+                        transition: background-color 0.2s ease-in-out,
+                                    color 0.2s ease-in-out;
+                        &:hover{
+                            color:map-get($theme,primary-blue)!important;
+                            background-color:map-get($theme,secondary)!important; 
+                        }
+                    }
+                    .setup-not-complete-button-label{
+                        color:map-get($theme,dark)!important;
+                    }
+                }
             }
         }
     }

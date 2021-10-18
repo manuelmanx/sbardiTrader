@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    await this._authGuardService.isLoggedIn().subscribe(user => {
+    await this._authGuardService.getUserInfoFromDB().subscribe(user => {
       if (user) {
         this._router.navigate(['/homepage'])
       }
