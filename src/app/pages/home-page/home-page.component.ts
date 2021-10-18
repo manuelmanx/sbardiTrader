@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { tap } from 'rxjs/operators';
+import { $UserTradingPlanType } from 'src/app/shared/interfaces/database.dto';
 import { $TradePreviewDataSource } from 'src/app/shared/interfaces/trade-preview.dto';
-import { $UserInterface } from 'src/app/shared/interfaces/user.dto';
+import { $AccountSetupCheckListType, $UserInterface } from 'src/app/shared/interfaces/user.dto';
 import { AuthGuardService } from 'src/app/shared/services/auth-guard/auth-guard.service';
+import { DatabaseService } from 'src/app/shared/services/database/database.service';
 
 @Component({
   selector: 'app-home-page',
@@ -11,8 +14,11 @@ import { AuthGuardService } from 'src/app/shared/services/auth-guard/auth-guard.
 export class HomePageComponent implements OnInit {
   public userDetails: $UserInterface;
   public isLoadingData: boolean = true;
+  public isAccountSetupComplete: boolean = false;
+  private _accountConfigurationChecklist: $AccountSetupCheckListType;
+  public isFirstLogin: boolean = false;
+  constructor(private _authGuardService: AuthGuardService, private _db: DatabaseService) {
 
-  constructor(private _authGuardService: AuthGuardService) {
   }
 
   ngOnInit(): void {
@@ -21,8 +27,19 @@ export class HomePageComponent implements OnInit {
         this.userDetails = data;
       }
     })
+
+    this._db.onLoadingData.subscribe((data: boolean) => {
+      this.isLoadingData = data;
+      this._setupAccountConfigurationChecklist();
+    });
+    this._db.onIsFirstLogin.subscribe((data: boolean) => {
+      this.isFirstLogin = data
+    })
   }
 
+  private _setupAccountConfigurationChecklist(): void {
+    //compose observable checklist
+  }
   public getUserName(): string {
     if (this.userDetails) {
       if (this.userDetails?.displayName) {

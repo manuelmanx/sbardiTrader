@@ -1,6 +1,6 @@
 <div class="page-container">
     <div class="welcome-section">
-        <ng-container *ngIf="userDetails">
+        <ng-container *ngIf="userDetails && !isLoadingData">
             <div class="welcome-title">
                 Ciao {{getUserName()}}!
             </div>
@@ -12,4 +12,6 @@
             <app-progressbar type="indefinite" class="loading-data-home-progress"></app-progressbar>
         </ng-container>
     </div>
+
+    Is First Login: {{isFirstLogin}}
 </div>

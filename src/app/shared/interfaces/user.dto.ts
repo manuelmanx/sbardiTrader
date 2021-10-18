@@ -6,3 +6,10 @@ export type $UserInterface = {
     emailVerified: boolean;
     refreshToken: string;
 }
+
+export type $AccountSetupCheckListType = {
+    displayName: boolean;
+    tradingPlan: boolean;
+    emailVerification: boolean;
+    photoURL: boolean;
+}

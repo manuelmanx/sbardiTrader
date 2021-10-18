@@ -2,19 +2,21 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import { from, Observable, zip } from 'rxjs';
+import { from, Observable, Subject, zip } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { $UserInterface } from '../../interfaces/user.dto';
 import { ConfigService } from '../config/config.service';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
-  private _loggedUser: Observable<$UserInterface>
+  private _loggedUser: Observable<$UserInterface>;
+  private _$isTriggerRoute = new Subject<boolean>();
+  public onTriggerRoute = this._$isTriggerRoute.asObservable();
   constructor(
     private _configService: ConfigService,
     private _afAuth: AngularFireAuth,
     private _afs: AngularFirestore,
-    private _router: Router
+    private _router: Router,
   ) {
   }
 
@@ -47,6 +49,7 @@ export class AuthGuardService implements CanActivate {
     this._loggedUser = await this.isLoggedIn();
     return new Promise(resolve => {
       if (this._loggedUser) {
+        this._$isTriggerRoute.next(true);
         resolve(true);
       } else {
         this._changeRoute('/loginpage')
@@ -72,7 +75,7 @@ export class AuthGuardService implements CanActivate {
   }
 
   public getUserInfo(): Observable<any> {
-    return this._loggedUser
+    return this._loggedUser;
   }
   public isLoggedIn(): Observable<any> {
     return from(this._afAuth.authState.pipe(first()).toPromise());

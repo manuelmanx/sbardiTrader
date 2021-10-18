@@ -8,14 +8,16 @@ import { AuthGuardService } from './shared/services/auth-guard/auth-guard.servic
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private _authGuardService: AuthGuardService, private _router: Router,) { }
+  constructor(private _authGuardService: AuthGuardService, private _router: Router) {
+    this._authGuardService.init()
+  }
   public logout() {
     this._authGuardService.signOut().subscribe(
       success => {
         this._router.navigate(['/loginpage']);
       },
       error => {
-        console.log(error);
+        console.error(error);
       }
     )
   }
