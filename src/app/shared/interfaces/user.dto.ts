@@ -8,8 +8,8 @@ export type $UserInterface = {
 }
 
 export type $AccountSetupCheckListType = {
-    displayName: boolean;
-    tradingPlan: boolean;
-    emailVerification: boolean;
-    photoURL: boolean;
+    displayName?: boolean;
+    tradingPlan?: boolean;
+    emailVerification?: boolean;
+    photoURL?: boolean;
 }

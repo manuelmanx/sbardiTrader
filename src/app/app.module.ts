@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { ProgressbarComponent } from './components/progressbar/progressbar.component';
 import { DatabaseService } from './shared/services/database/database.service';
 import { TradePreviewComponent } from './components/trade-preview/trade-preview.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +26,7 @@ import { TradePreviewComponent } from './components/trade-preview/trade-preview.
     LoginComponent,
     ProgressbarComponent,
     TradePreviewComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,

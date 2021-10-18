@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { async } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
 import { $UserTradingPlanType } from 'src/app/shared/interfaces/database.dto';
@@ -19,11 +20,17 @@ export class HomePageComponent implements OnInit {
   public isFirstLogin: boolean = false;
   public accountSetupChecklist: $AccountSetupCheckListType;
   private _uploadImageSubscription: Subscription;
-  constructor(private _authGuardService: AuthGuardService, private _db: DatabaseService) {
+  constructor(private _authGuardService: AuthGuardService, private _db: DatabaseService, private _router: Router) {
 
   }
 
-  ngOnInit(): void {
+  public async ngOnInit(): Promise<void> {
+    await this._authGuardService.getUserInfoFromDB().subscribe(user => {
+      if (!user) {
+        this._router.navigate(['/loginpage'])
+      }
+    })
+
     this._authGuardService.getUserInfo().subscribe(data => {
       if (data) {
         this.userDetails = data;
@@ -49,9 +56,13 @@ export class HomePageComponent implements OnInit {
     this._db.getUserTradingPlan()?.subscribe(data => {
       this.accountSetupChecklist = {
         displayName: !!this.userDetails?.displayName,
-        tradingPlan: (!!data) ? true : false,
         emailVerification: this.userDetails?.emailVerified,
         photoURL: !!this.userDetails?.photoURL,
+      }
+      async () => {
+        setTimeout(() => {
+          this.accountSetupChecklist.tradingPlan = (!!data) ? true : false;
+        }, 500)
       }
     })
   }
@@ -84,7 +95,9 @@ export class HomePageComponent implements OnInit {
           const url = data?.ref?._delegate?._location?.path;
           this._authGuardService.updateUserPhotoURL(url).then(success => {
             console.log("updated image")
-            this._uploadImageSubscription.unsubscribe();
+            if (!!this._uploadImageSubscription) {
+              this._uploadImageSubscription.unsubscribe();
+            }
             this._setupAccountConfigurationChecklist();
           });
         })
@@ -92,7 +105,7 @@ export class HomePageComponent implements OnInit {
   }
 
   public onUpdateDisplayName(): void {
-    let inputPrompt = prompt("Please enter your name:", "Harry Potter");
+    let inputPrompt = prompt("Inserisci il tuo nickname", "");
     if (inputPrompt == null || inputPrompt == "") {
       console.error("User cancelled the prompt.");
     } else {
@@ -102,5 +115,9 @@ export class HomePageComponent implements OnInit {
         this._setupAccountConfigurationChecklist();
       })
     }
+  }
+
+  public onAddTradingPlan(): void {
+
   }
 }

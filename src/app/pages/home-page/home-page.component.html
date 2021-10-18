@@ -17,7 +17,7 @@
         <ng-container *ngIf="isLoadingData">
             <app-progressbar type="indefinite" class="loading-data-home-progress"></app-progressbar>
         </ng-container>
-        <ng-container *ngIf="!isAccountSetupComplete() && !isLoadingData">
+        <ng-container *ngIf="!isAccountSetupComplete() && !isLoadingData && !!accountSetupChecklist">
             <div class="welcome-setup-not-complete">
                 <ng-container *ngIf="!accountSetupChecklist?.photoURL">
                     <div class="setup-not-compete-action">
@@ -43,14 +43,6 @@
                             <span class="lnr lnr-book"></span>
                         </div>
                         <p class="setup-not-complete-button-label">Aggiungi regole di trading</p>
-                    </div>
-                </ng-container>
-                <ng-container *ngIf="!accountSetupChecklist?.emailVerification">
-                    <div class="setup-not-compete-action">
-                        <div class="setup-not-complete-button">
-                            <span class="lnr lnr-envelope"></span>
-                        </div>
-                        <p class="setup-not-complete-button-label">Verifica la tua email</p>
                     </div>
                 </ng-container>
             </div>

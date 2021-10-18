@@ -46,7 +46,7 @@ export class AuthGuardService implements CanActivate {
   }
 
   public async checkForUserLoggedInAnChangeRoute$(): Promise<boolean> {
-    this._loggedUser = await this.getUserInfoFromDB();
+    this._loggedUser = await this._afAuth.authState.pipe(first());
     return new Promise(resolve => {
       if (this._loggedUser) {
         const _injectorDb = this.injector.get<DatabaseService>(DatabaseService);
@@ -69,6 +69,10 @@ export class AuthGuardService implements CanActivate {
 
   public async updateUserPhotoURL(link: string): Promise<any> {
     return (await this._afAuth.currentUser).updateProfile({ photoURL: link })
+  }
+
+  public async validateEmail(): Promise<any> {
+    return (await this._afAuth.currentUser).sendEmailVerification();
   }
 
   public loginWithEmailAndPassword(email: string, password: string): Observable<any> {
