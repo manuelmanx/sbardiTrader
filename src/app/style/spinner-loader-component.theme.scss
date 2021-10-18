@@ -1,0 +1,11 @@
+@mixin spinner-loader-component-theme($theme){
+    .inner-circles-loader:not(:required) {
+        background-color: map-get($theme,primary-blue)!important;
+    }
+    .inner-circles-loader:not(:required):before{
+        background-color: map-get($theme,secondary)!important;
+    }
+    .inner-circles-loader:not(:required):after{
+        background-color: map-get($theme,secondary-blue)!important;
+    }
+}

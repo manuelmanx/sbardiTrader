@@ -13,6 +13,10 @@ export type $UserTradingPlanType = {
     maxStopLossPerDay: number;
     maxPercentRiskPerTrade: number,
     minPercentProfitPerTrade: number;
+    montlyPercentGoal: number;
+    takePartials: boolean;
+    maxPartializationPerTrade: number;
+    minPartializationPerTrade: number;
     entryCheckList: $GenericEntryChecklistType[];
 }
 

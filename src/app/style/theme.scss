@@ -4,6 +4,8 @@
 
 @import './progressbar-component.theme.scss';
 @import './trade-preview-component.theme.scss';
+@import './spinner-loader-component.theme.scss';
+
 $theme:(
     primary:#ffffff,
     secondary:#e0e2ea,
@@ -22,3 +24,4 @@ $theme:(
 
 @include progressbar-component-theme($theme);
 @include trade-preview-component-theme($theme);
+@include spinner-loader-component-theme($theme);
