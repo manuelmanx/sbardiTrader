@@ -7,6 +7,7 @@
 @import './spinner-loader-component.theme.scss';
 @import './inputbox-component.theme.scss';
 @import './button-component.theme.scss';
+@import './tradingplan-editor-component.theme.scss';
 
 $theme:(
     primary:#ffffff,
@@ -29,3 +30,4 @@ $theme:(
 @include spinner-loader-component-theme($theme);
 @include inputbox-component-theme($theme);
 @include button-component-theme($theme);
+@include tradingplan-editor-component-theme($theme)

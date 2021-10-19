@@ -24,6 +24,7 @@ import { InputboxComponent } from './components/inputbox/inputbox.component';
 import { ComboboxComponent } from './components/combobox/combobox.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { ButtonComponent } from './components/button/button.component';
+import { CheckboxComponent } from './components/checkbox/checkbox.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +38,7 @@ import { ButtonComponent } from './components/button/button.component';
     ComboboxComponent,
     DatepickerComponent,
     ButtonComponent,
+    CheckboxComponent,
   ],
   imports: [
     BrowserModule,

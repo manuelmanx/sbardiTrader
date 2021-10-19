@@ -1,0 +1,20 @@
+.checkbox-wrapper{
+    height:fit-content;
+    display:flex;
+    flex-wrap:nowrap;
+    width:fit-content;
+    justify-content:center;
+    .input-checkbox-component{
+        cursor:pointer;
+    }
+    .checkbox-label{
+        height:100%;
+        width:fit-content;
+        padding:0px 8px;
+        display:flex;
+        white-space: nowrap;
+        justify-content:center;
+        padding-top:2px;
+    }
+
+}

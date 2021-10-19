@@ -1,1 +1,35 @@
-<p>tradingplan-editor works!</p>
+<div class="trading-plan-editor-wrapper">
+    <div class="trading-plan-form">
+        <div class="trading-plan-form-header">
+            Regole di trading
+        </div>
+        <div class="trading-plan-editor-content">
+            <div class="trading-plan-editor-line">
+                <app-inputbox title="nome strategia:"></app-inputbox>
+            </div>
+            <div class="trading-plan-editor-line">
+                <app-inputbox title="Operazioni Fluttuanti" class="inputfield" type="number" numbersType="positive">
+                </app-inputbox>
+                <app-inputbox title="Operazioni al giorno" class="inputfield" type="number" numbersType="positive">
+                </app-inputbox>
+                <app-inputbox title="Stop Loss al giorno" class="inputfield" type="number" numbersType="positive">
+                </app-inputbox>
+            </div>
+            <div class="trading-plan-editor-line">
+                <app-inputbox title="Rischio per trade %" class="inputfield" type="number" numbersType="negative">
+                </app-inputbox>
+                <app-inputbox title="Profitto minimo %" class="inputfield" type="number" numbersType="positive">
+                </app-inputbox>
+                <app-inputbox title="Obiettivo Mensile %" class="inputfield" type="number" numbersType="positive">
+                </app-inputbox>
+            </div>
+            <div class="trading-plan-editor-line">
+                <app-checkbox title="Parziali" class="inputfield"></app-checkbox>
+                <app-inputbox title="Parziali per trade" class="inputfield" type="number" numbersType="positive">
+                </app-inputbox>
+                <app-inputbox title="Parziale minimo %" class="inputfield" type="number" numbersType="positive">
+                </app-inputbox>
+            </div>
+        </div>
+    </div>
+</div>
