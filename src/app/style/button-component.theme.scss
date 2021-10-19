@@ -1,0 +1,55 @@
+@mixin button-component-theme($theme){
+    .button-component{
+        transition: background-color 0.2s ease-in-out,
+                                color 0.2s ease-in-out;
+        &.bg-primary-blue{
+            background-color:map-get($theme,primary-blue)!important;
+            color:map-get($theme,primary)!important;
+            &:focus{
+                background-color:map-get($theme,primary)!important;
+                color:map-get($theme,primary-blue)!important;
+            }
+            &:hover{
+                background-color:map-get($theme,primary)!important;
+                color:map-get($theme,primary-blue)!important;
+            }
+        }
+        &.bg-primary-red{
+            background-color:map-get($theme,primary-red)!important;
+            color:map-get($theme,primary)!important;
+            &:focus{
+                background-color:map-get($theme,primary)!important;
+                color:map-get($theme,primary-red)!important;
+            }
+            &:hover{
+                background-color:map-get($theme,primary)!important;
+                color:map-get($theme,primary-red)!important;
+            }
+        }
+        &.bg-default-red{
+            background-color:map-get($theme,secondary)!important;
+            color:map-get($theme,dark)!important;
+            &:focus{
+                background-color:map-get($theme,primary-red)!important;
+                color:map-get($theme,primary)!important;
+            }
+            &:hover{
+                background-color:map-get($theme,primary-red)!important;
+                color:map-get($theme,primary)!important;
+            }
+        }
+        &.bg-default-blue{
+            background-color:map-get($theme,secondary)!important;
+            color:map-get($theme,dark)!important;
+            &:focus{
+                background-color:map-get($theme,primary-blue)!important;
+                color:map-get($theme,primary)!important;
+            }
+            &:hover{
+                background-color:map-get($theme,primary-blue)!important;
+                color:map-get($theme,primary)!important;
+            }
+        }
+        
+    }
+}

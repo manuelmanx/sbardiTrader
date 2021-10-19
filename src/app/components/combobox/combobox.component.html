@@ -1,0 +1,11 @@
+<div class="input-wrapper">
+    <div class="input-title">{{title}}</div>
+    <select class="input-field combobox-theme"
+        [ngClass]="{'bg-primary':color==='primary', 'bg-secondary-red': color==='secondary-red'}"
+        (change)="emitComponentEvent()" [(ngModel)]="selectedOption">
+        <option value="placeholder" selected class="placeholder">{{value?.placeholder}}...</option>
+        <ng-container *ngFor="let option of value?.options">
+            <option [value]="option?.id" class="option">{{option?.value}}</option>
+        </ng-container>
+    </select>
+</div>

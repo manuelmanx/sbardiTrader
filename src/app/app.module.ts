@@ -19,6 +19,11 @@ import { ProgressbarComponent } from './components/progressbar/progressbar.compo
 import { DatabaseService } from './shared/services/database/database.service';
 import { TradePreviewComponent } from './components/trade-preview/trade-preview.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { TradingplanEditorComponent } from './components/tradingplan-editor/tradingplan-editor.component';
+import { InputboxComponent } from './components/inputbox/inputbox.component';
+import { ComboboxComponent } from './components/combobox/combobox.component';
+import { DatepickerComponent } from './components/datepicker/datepicker.component';
+import { ButtonComponent } from './components/button/button.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +32,11 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     ProgressbarComponent,
     TradePreviewComponent,
     LoadingSpinnerComponent,
+    TradingplanEditorComponent,
+    InputboxComponent,
+    ComboboxComponent,
+    DatepickerComponent,
+    ButtonComponent,
   ],
   imports: [
     BrowserModule,

@@ -11,9 +11,12 @@ export class TradePreviewComponent implements OnInit, $ComponentTemplateClass {
   @Input('value') public value: $TradePreviewDataSource = exampleDataOpenTrade;
   @Input('type') public type: any;
   @Input('id') public id: any;
+  @Input('title') public title: any;
+  @Input('color') public color: any;
   @Output() public onComponentEvent: EventEmitter<$ComponentEventType>;
 
   constructor() { }
+
 
   public ngOnInit(): void {
     if (!this.value) {

@@ -1,0 +1,6 @@
+<ng-container *ngIf="type==='default'">
+    <button class="button-component default" (click)="emitComponentEvent()"
+        [ngClass]="{'bg-primary-blue':color==='primary-blue','bg-primary-red':color==='primary-red', 'bg-default-red':color==='default-red','bg-default-blue':color==='default-blue'}">
+        <ng-content></ng-content>
+    </button>
+</ng-container>

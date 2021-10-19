@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { async } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { Subject, Subscription } from 'rxjs';
-import { finalize, tap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { $UserTradingPlanType } from 'src/app/shared/interfaces/database.dto';
-import { $TradePreviewDataSource } from 'src/app/shared/interfaces/trade-preview.dto';
 import { $AccountSetupCheckListType, $UserInterface } from 'src/app/shared/interfaces/user.dto';
 import { AuthGuardService } from 'src/app/shared/services/auth-guard/auth-guard.service';
 import { DatabaseService } from 'src/app/shared/services/database/database.service';
@@ -20,6 +17,7 @@ export class HomePageComponent implements OnInit {
   public isFirstLogin: boolean = false;
   public accountSetupChecklist: $AccountSetupCheckListType;
   private _uploadImageSubscription: Subscription;
+  private _tradingPlanRules: $UserTradingPlanType;
   constructor(private _authGuardService: AuthGuardService, private _db: DatabaseService, private _router: Router) {
 
   }
@@ -61,6 +59,7 @@ export class HomePageComponent implements OnInit {
       }
       async () => {
         setTimeout(() => {
+          this._tradingPlanRules = data;
           this.accountSetupChecklist.tradingPlan = (!!data) ? true : false;
         }, 500)
       }

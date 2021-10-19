@@ -1,0 +1,19 @@
+@mixin inputbox-component-theme($theme){
+    .input-wrapper{
+        .input-field{
+            background-color:map-get($theme,secondary)!important;
+            &.bg-primary{
+                background-color:map-get($theme,primary)!important;
+            }
+            &.bg-secondary-red{
+                background-color:map-get($theme,secondary-red)!important;
+            }
+            &.combobox-theme{
+                text-transform: capitalize;
+                .placeholder{
+                    opacity:0.5;
+                }
+            }
+        }
+    }
+}

@@ -10,6 +10,7 @@ export class ProgressbarComponent implements OnInit, $ComponentTemplateClass {
   @Input('type') type: string = "default"
   @Input('value') value: number = 80;
   @Input('color') color: string = "default" //default||primary-red||primary-blue
+  @Input('title') public title: any;
   public id: any;
   public onComponentEvent: EventEmitter<$ComponentEventType>;
 

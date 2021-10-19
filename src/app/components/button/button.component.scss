@@ -1,0 +1,14 @@
+.button-component{
+    &.default{
+        width:fit-content;
+        height:24px;
+        display:flex;
+        border:none;
+        border-radius:12px;
+        align-items:center;
+        justify-content: center;
+        font-size:11px;
+        padding:0px 16px;
+        cursor:pointer;
+    }
+}

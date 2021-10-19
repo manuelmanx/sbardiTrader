@@ -1,0 +1,25 @@
+.input-wrapper{
+    display:flex;
+    width:100%;
+    height:fit-content;
+    flex-direction: column;
+    box-sizing:border-box;
+    .input-title{
+        text-transform: capitalize;
+        font-weight: bold;
+        font-size:12px;
+    }
+    .input-field{
+        cursor:pointer;
+        height:25px;
+        outline: none;
+        width: 100%;
+        border:none;
+        border-radius:4px;
+        padding:0px 8px;
+        font-size:11px;
+        &.option{
+            border:none;
+        }
+    }
+}
