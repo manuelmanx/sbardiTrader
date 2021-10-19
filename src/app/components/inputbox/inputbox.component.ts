@@ -35,6 +35,7 @@ export class InputboxComponent implements OnInit, $ComponentTemplateClass {
       this.value *= -1;
     }
   }
+
   public getMaxNumber(): number {
     if (this.numbersType === "positive") {
       return null;
