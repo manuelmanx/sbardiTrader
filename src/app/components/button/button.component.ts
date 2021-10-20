@@ -8,10 +8,11 @@ import { $ComponentEventType, $ComponentTemplateClass } from 'src/app/shared/cla
 })
 export class ButtonComponent implements OnInit, $ComponentTemplateClass {
   @Input('title') public title: any;
-  @Input('value') public value: Date = new Date();
-  @Input('type') public type: "round" | "icon" | "default" = "default";
+  @Input('value') public value: any;
+  @Input('type') public type: "icon" | "default" = "default";
   @Input('id') public id: any;
-  @Input('color') public color: "deafult-red" | "default-blue" | "primary-blue" | "primary-red" = "default-blue";
+  @Input('color') public color: string = "default-blue";
+  @Input('isDisabled') isDisabled: boolean;
   @Output() public onComponentEvent: EventEmitter<$ComponentEventType> = new EventEmitter<$ComponentEventType>();
   constructor() { }
 

@@ -17,7 +17,7 @@ export type $UserTradingPlanType = {
     takePartials: boolean;
     maxPartializationPerTrade: number;
     minPartializationPerTrade: number;
-    entryCheckList: $GenericEntryChecklistType[];
+    entryCheckList: string[];
 }
 
 export type $UserTradeOperationType = {
@@ -28,8 +28,4 @@ export type $UserTradeOperationType = {
     date: Date,
     ongoing: boolean,
     closeType?: $TradeCloseType,
-}
-
-export type $GenericEntryChecklistType = {
-    [key: string]: string
 }

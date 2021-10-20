@@ -11,6 +11,7 @@ export class ProgressbarComponent implements OnInit, $ComponentTemplateClass {
   @Input('value') value: number = 80;
   @Input('color') color: string = "default" //default||primary-red||primary-blue
   @Input('title') public title: any;
+  @Input('isDisabled') isDisabled: boolean;
   public id: any;
   public onComponentEvent: EventEmitter<$ComponentEventType>;
 

@@ -7,13 +7,14 @@ import { $ComponentEventType, $ComponentTemplateClass } from 'src/app/shared/cla
   styleUrls: ['./inputbox.component.scss']
 })
 export class InputboxComponent implements OnInit, $ComponentTemplateClass {
-  @Input('title') public title: any = "title";
+  @Input('title') public title: any;
   @Input('placeholder') public placeholder: any = "Inserisci...";
   @Input('value') public value: any;
   @Input('numbersType') public numbersType: "positive" | "negative";
   @Input('type') public type: "number" | "text" = "text";
   @Input('id') public id: any;
   @Input('color') public color: string;
+  @Input('isDisabled') isDisabled: boolean;
   @Output() public onComponentEvent: EventEmitter<$ComponentEventType> = new EventEmitter<$ComponentEventType>();
 
   constructor() { }
@@ -43,12 +44,17 @@ export class InputboxComponent implements OnInit, $ComponentTemplateClass {
       return 0;
     }
   }
+
   public getMinNumber(): number {
     if (this.numbersType === "positive") {
       return 0;
     } else {
       return null;
     }
+  }
+
+  public reset(): void {
+    this.value = null;
   }
 
 }

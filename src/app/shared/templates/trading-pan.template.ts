@@ -11,7 +11,11 @@ export const $emptyTradingPlanTemplate1: $UserTradingPlanType = {
     takePartials: true,
     maxPartializationPerTrade: 3,
     minPartializationPerTrade: 1,
-    entryCheckList: null
+    entryCheckList: [
+        "70% Fibo",
+        "Order Block",
+        "Impulsività"
+    ]
 }
 export const $emptyTradingPlanTemplate: $UserTradingPlanType = {
     strategyName: null,
@@ -24,5 +28,5 @@ export const $emptyTradingPlanTemplate: $UserTradingPlanType = {
     takePartials: false,
     maxPartializationPerTrade: null,
     minPartializationPerTrade: null,
-    entryCheckList: null
+    entryCheckList: [],
 }

@@ -5,6 +5,18 @@
                 background-color:map-get($theme,primary-blue)!important;
                 color:map-get($theme,primary)!important;
             }
+            .checklist-wrapper{
+                .checklist-element{
+                    .pointer{
+                        background-color:map-get($theme,secondary-blue)
+                    }
+                    .delete{
+                        &:hover{
+                            color:map-get($theme,primary-red)
+                        }
+                    }
+                }
+            }
         }
     }
 }

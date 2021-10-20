@@ -41,8 +41,46 @@
                     &:last-child{
                         padding-right:0px;
                     }
+                    &.smaller{
+                        align-items:flex-end; 
+                    }
+                } 
+            }
+            .checklist-wrapper{
+                width:calc(100%-32px);
+                padding:8px 16px;
+                height:fit-content;
+                display:flex;
+                flex-direction: column;
+                .checklist-element{
+                    width:100%;
+                    display:flex;
+                    height:fit-content;
+                    align-items:center;
+                    margin: 8px 0px;
+                    .pointer{
+                       width:4px;
+                       height:4px;
+                       border-radius:50%;
+                    }
+                    .label{
+                       padding:0px 8px;
+                    }
+                    .delete{
+                        cursor:pointer;
+                    }
                 }
-                
+            }
+            .trading-plan-editor-footer{
+                width:calc(100%-32px);
+                display:flex;
+                justify-content:flex-end;
+                .button{
+                    margin:0px 4px;
+                    &:last-child{
+                        margin-right:0px;
+                    }
+                }
             }
         }
     }

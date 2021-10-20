@@ -7,11 +7,12 @@ import { $ComponentEventType, $ComponentTemplateClass } from 'src/app/shared/cla
   styleUrls: ['./datepicker.component.scss']
 })
 export class DatepickerComponent implements OnInit, $ComponentTemplateClass {
-  @Input('title') public title: any = "title";
+  @Input('title') public title: any;
   @Input('value') public value: Date = new Date();
   @Input('type') public type: any;
   @Input('id') public id: any;
   @Input('color') public color: string;
+  @Input('isDisabled') isDisabled: boolean;
   @Output() public onComponentEvent: EventEmitter<$ComponentEventType> = new EventEmitter<$ComponentEventType>();
 
   constructor() { }

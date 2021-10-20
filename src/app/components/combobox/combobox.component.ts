@@ -8,11 +8,12 @@ import { $ComboOptionsDataSource } from 'src/app/shared/interfaces/components.dt
   styleUrls: ['./combobox.component.scss']
 })
 export class ComboboxComponent implements OnInit, $ComponentTemplateClass {
-  @Input('title') public title: any = "title";
+  @Input('title') public title: any;
   @Input('value') public value: $ComboOptionsDataSource = { placeholder: "seleziona", options: [{ id: "a", value: "opzione 1", isDisabled: false, isSelected: false }] };
   @Input('type') public type: any;
   @Input('id') public id: any;
   @Input('color') public color: string;
+  @Input('isDisabled') isDisabled: boolean;
   @Output() public onComponentEvent: EventEmitter<$ComponentEventType> = new EventEmitter<$ComponentEventType>();
 
   public selectedOption: string;

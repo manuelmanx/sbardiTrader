@@ -1,4 +1,4 @@
-<div class="checkbox-wrapper">
-    <input class="input-checkbox-component" type="checkbox" [checked]="value" (change)="onSelectionChange($event)" />
+<div class="checkbox-wrapper" [ngClass]="{'disabled':isDisabled}">
+    <input class="input-checkbox-component" type="checkbox" [checked]="value" (input)="onSelectionChange($event)" />
     <div class="checkbox-label">{{title}}</div>
 </div>

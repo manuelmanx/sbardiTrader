@@ -1,4 +1,4 @@
-<div class="input-wrapper">
+<div class="input-wrapper" [ngClass]="{'disabled':isDisabled}">
     <div class="input-title">{{title}}</div>
     <input type="date" class="form-control" id="datepicker" name="datepicker" [ngModel]="value | date:'yyyy-MM-dd'"
         (ngModelChange)="onSelectionChange($event)" [value]="value | date:'yyyy-MM-dd'" #BirthDate="ngModel" required

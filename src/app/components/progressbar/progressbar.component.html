@@ -1,4 +1,4 @@
-<div class="progressbar-wrapper">
+<div class="progressbar-wrapper" [ngClass]="{'disabled':isDisabled}">
     <div class="indefinite-progress-line" *ngIf="type=='indefinite'" [ngClass]="{'primary-red':color==='primary-red'}">
     </div>
     <div class="default-progress-line" *ngIf="type=='default'">

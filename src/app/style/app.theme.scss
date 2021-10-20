@@ -25,6 +25,11 @@
         background-color:map-get($theme,secondary)!important;
     }
 
-    
+    .disabled{
+        transition:opacity 0.3s;
+        opacity:0.5;
+        pointer-events: none;
+        user-select:none;
+    }
     
 }
