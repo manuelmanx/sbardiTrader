@@ -52,12 +52,16 @@ export class DatabaseService {
     this._$isLoadingData.next(false);
   }
 
+  public setTradingPlanRules(data: $UserTradingPlanType): void {
+    this._af.object(`${this._userPath}/tradingPlan`).set(data);
+  }
+
   public getUserTradingPlan(): Observable<$UserTradingPlanType> {
     return this._userTradingPlan?.valueChanges();
   }
 
   public getUsertradeList(): Observable<$UserTradeOperationType[]> {
-    return this._userTradeList.valueChanges();
+    return this._userTradeList?.valueChanges();
   }
 
   private _createNewUserDbPath(): void {
@@ -69,5 +73,8 @@ export class DatabaseService {
 
   public uploadUserAccountImage(image: any): any {
     return this._as.upload(`${this._userPath}/accountImage`, image);
+  }
+  public getDownloadFileUrl(url): Promise<string> {
+    return this._as.ref(url).getDownloadURL().toPromise();
   }
 }

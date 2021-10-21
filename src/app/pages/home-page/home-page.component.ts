@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { $ComponentEventType } from 'src/app/shared/classes/component-template.class';
 import { $UserTradingPlanType } from 'src/app/shared/interfaces/database.dto';
 import { $AccountSetupCheckListType, $UserInterface } from 'src/app/shared/interfaces/user.dto';
 import { AuthGuardService } from 'src/app/shared/services/auth-guard/auth-guard.service';
@@ -18,6 +19,7 @@ export class HomePageComponent implements OnInit {
   public accountSetupChecklist: $AccountSetupCheckListType;
   private _uploadImageSubscription: Subscription;
   private _tradingPlanRules: $UserTradingPlanType;
+  public showTradingPlanModal: boolean = false;
   constructor(private _authGuardService: AuthGuardService, private _db: DatabaseService, private _router: Router) {
 
   }
@@ -54,15 +56,10 @@ export class HomePageComponent implements OnInit {
     this._db.getUserTradingPlan()?.subscribe(data => {
       this.accountSetupChecklist = {
         displayName: !!this.userDetails?.displayName,
-        emailVerification: this.userDetails?.emailVerified,
         photoURL: !!this.userDetails?.photoURL,
       }
-      async () => {
-        setTimeout(() => {
-          this._tradingPlanRules = data;
-          this.accountSetupChecklist.tradingPlan = (!!data) ? true : false;
-        }, 500)
-      }
+      this._tradingPlanRules = data;
+      this.accountSetupChecklist.tradingPlan = (!!data) ? true : false;
     })
   }
 
@@ -83,8 +80,12 @@ export class HomePageComponent implements OnInit {
       }
     }
   }
-
-  public onUserImageSelect(event): void {
+  public getUserAccountImage(): string {
+    if (this.userDetails) {
+      return this.userDetails?.photoURL;
+    }
+  }
+  public onUserImageSelect(event: any): void {
     const file: File = event.target.files[0];
     if (file) {
       const formData = new FormData();
@@ -92,13 +93,17 @@ export class HomePageComponent implements OnInit {
       if (!this._uploadImageSubscription)
         this._uploadImageSubscription = this._db.uploadUserAccountImage(file).snapshotChanges().subscribe(data => {
           const url = data?.ref?._delegate?._location?.path;
-          this._authGuardService.updateUserPhotoURL(url).then(success => {
-            console.log("updated image")
-            if (!!this._uploadImageSubscription) {
-              this._uploadImageSubscription.unsubscribe();
-            }
-            this._setupAccountConfigurationChecklist();
-          });
+          this._db.getDownloadFileUrl(url).then(data => {
+            console.log("image link", data)
+            this._authGuardService.updateUserPhotoURL(data).then(success => {
+              console.log("updated image")
+              if (!!this._uploadImageSubscription) {
+                this._uploadImageSubscription.unsubscribe();
+              }
+              this._setupAccountConfigurationChecklist();
+            });
+          })
+
         })
     }
   }
@@ -117,6 +122,22 @@ export class HomePageComponent implements OnInit {
   }
 
   public onAddTradingPlan(): void {
+    this.showTradingPlanModal = true;
+  }
+  public onTradingPlanEditorEvent(event: $ComponentEventType): void {
+    console.log(event)
+    switch (event?.eventName) {
+      case "onTradingPlanEditorSaveChanges":
+        this._saveTradingPlanRules(event.eventData);
+        this.showTradingPlanModal = false;
+        break;
+      case "onDestroyWindow":
+        this.showTradingPlanModal = false;
+        break;
+    }
+  }
 
+  private _saveTradingPlanRules(data: $UserTradingPlanType): void {
+    this._db.setTradingPlanRules(data)
   }
 }

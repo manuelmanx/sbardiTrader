@@ -8,7 +8,7 @@ export abstract class $ComponentTemplateClass {
     public abstract color;
     public abstract isDisabled;
     public abstract onComponentEvent: EventEmitter<$ComponentEventType>;
-    public abstract emitComponentEvent(): void;
+    public abstract emitComponentEvent(eventName?: string): void;
 }
 
 export type $ComponentEventType = {

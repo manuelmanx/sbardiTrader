@@ -1,5 +1,5 @@
 <ng-container>
-    <button [class]="'button-component ' + type" (click)="emitComponentEvent()"
+    <button [class]="'button-component ' + type" (click)="emitComponentEvent()" [style.width]="width||'fit-content'"
         [ngClass]="{'disabled':isDisabled,'bg-primary-blue':color==='primary-blue','bg-primary-red':color==='primary-red', 'bg-default-red':color==='default-red','bg-default-blue':color==='default-blue'}">
         <ng-content></ng-content>
     </button>

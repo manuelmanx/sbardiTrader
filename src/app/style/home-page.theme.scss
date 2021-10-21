@@ -22,6 +22,22 @@
                     }
                 }
             }
+            .fast-actions-wrapper{
+                .fast-action-user{
+                    background-color:map-get($theme,secondary)!important; 
+                    .user-account-photo{
+                        img{
+                            border-color:map-get($theme,primary-blue)!important
+                        }
+                        .edit-image-icon{
+                            color:map-get($theme,primary-blue)!important
+                        }
+                    }
+                }
+                .fast-action-ongoing-trades{
+                    background-color:map-get($theme,secondary)!important; 
+                }
+            }
         }
     }
 }

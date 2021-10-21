@@ -13,6 +13,7 @@ export class ButtonComponent implements OnInit, $ComponentTemplateClass {
   @Input('id') public id: any;
   @Input('color') public color: string = "default-blue";
   @Input('isDisabled') isDisabled: boolean;
+  @Input('width') width: string;
   @Output() public onComponentEvent: EventEmitter<$ComponentEventType> = new EventEmitter<$ComponentEventType>();
   constructor() { }
 

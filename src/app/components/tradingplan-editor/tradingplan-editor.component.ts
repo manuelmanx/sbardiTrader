@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { $ComponentEventType, $ComponentTemplateClass } from 'src/app/shared/classes/component-template.class';
 import { $UserTradingPlanType } from 'src/app/shared/interfaces/database.dto';
 import { $emptyTradingPlanTemplate } from 'src/app/shared/templates/trading-pan.template';
@@ -18,9 +18,10 @@ export class TradingplanEditorComponent implements OnInit, $ComponentTemplateCla
   public id: any;
   public color: any;
   public isDisabled: any;
-  public onComponentEvent: EventEmitter<$ComponentEventType> = new EventEmitter<$ComponentEventType>();
-  public emitComponentEvent(): void {
-    throw new Error('Method not implemented.');
+  @Output() onComponentEvent: EventEmitter<$ComponentEventType> = new EventEmitter<$ComponentEventType>();
+
+  public emitComponentEvent(eventName: string): void {
+    this.onComponentEvent.emit({ eventName: eventName, eventData: this.value })
   }
 
   ngOnInit(): void {
@@ -39,10 +40,27 @@ export class TradingplanEditorComponent implements OnInit, $ComponentTemplateCla
   }
 
   public onSaveButtonClick(): void {
-    console.log(this.value)
+    this.emitComponentEvent("onTradingPlanEditorSaveChanges");
+  }
+
+  public onDestroyButtonClick(): void {
+    this.emitComponentEvent("onDestroyWindow");
   }
 
   public canActivateSaveButton(): boolean {
-    return true
+    let arr = Object.keys(this.value).map(key => {
+      if (key !== "entryCheckList" && key !== "takePartials" && key !== "maxPartializationPerTrade" && key !== "minPartializationPerTrade") {
+        return `${!!this.value[key]}`;
+      } else if (key === "entryCheckList") {
+        return `${!!this.value[key].length}`;
+      } else {
+        if (!!this.value["takePartials"]) {
+          return `${!!this.value[key]}`;
+        } else {
+          return `true`;
+        }
+      }
+    })
+    return !arr.find(e => e === "false")
   }
 }

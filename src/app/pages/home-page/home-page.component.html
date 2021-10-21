@@ -39,7 +39,7 @@
                 </ng-container>
                 <ng-container *ngIf="!accountSetupChecklist?.tradingPlan">
                     <div class="setup-not-compete-action">
-                        <div class="setup-not-complete-button">
+                        <div class="setup-not-complete-button" (click)="onAddTradingPlan()">
                             <span class="lnr lnr-book"></span>
                         </div>
                         <p class="setup-not-complete-button-label">Aggiungi regole di trading</p>
@@ -47,6 +47,25 @@
                 </ng-container>
             </div>
         </ng-container>
+        <ng-container *ngIf="!!isAccountSetupComplete() && !isLoadingData">
+            <div class="fast-actions-wrapper">
+                <div class="fast-action-user">
+                    <div class="user-account-photo">
+                        <input type="file" style="display:none" (change)="onUserImageSelect($event)"
+                            accept=".png, .jpeg" #changeImageInput>
+                        <img [src]="getUserAccountImage()" (click)="changeImageInput.click()" />
+                        <span class="edit-image-icon lnr lnr-cloud-upload"></span>
+                    </div>
+                    <app-button color="primary-blue" width="100%" class="button">Nuovo Trade</app-button>
+                    <app-button color="primary-blue" width="100%" class="button">Vedi Report</app-button>
+                    <app-button color="primary-blue" width="100%" class="button">Impostazioni</app-button>
+                </div>
+                <div class="fast-action-ongoing-trades">
+
+                </div>
+            </div>
+        </ng-container>
     </div>
-    <app-tradingplan-editor></app-tradingplan-editor>
 </div>
+<app-tradingplan-editor (onComponentEvent)="onTradingPlanEditorEvent($event)" *ngIf="showTradingPlanModal">
+</app-tradingplan-editor>
