@@ -28,6 +28,9 @@ export class ComboboxComponent implements OnInit, $ComponentTemplateClass {
     setTimeout(() => {
       if (this.value?.options?.length) {
         this.selectedOption = this.value?.options?.find(o => o?.isSelected === true)?.id || 'placeholder';
+        if (!this.isDisabled) {
+          this.emitComponentEvent();
+        }
       }
     }, 0)
   }

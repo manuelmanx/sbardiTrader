@@ -56,20 +56,19 @@
                         <img [src]="getUserAccountImage()" (click)="changeImageInput.click()" />
                         <span class="edit-image-icon lnr lnr-cloud-upload"></span>
                     </div>
-                    <app-button color="primary-blue" width="100%" class="button">Nuovo Trade</app-button>
+                    <app-button color="primary-blue" width="100%" class="button" (onComponentEvent)="onAddNewTrade()">
+                        Nuovo Trade</app-button>
                     <app-button color="primary-blue" width="100%" class="button">Vedi Report</app-button>
                     <app-button color="primary-blue" width="100%" class="button">Impostazioni</app-button>
                 </div>
                 <div class="fast-action-ongoing-trades">
                     <div class="ongoing-trades-title">Trade Attive</div>
-                    <app-trade-preview class="trade-preview"></app-trade-preview>
-                    <app-trade-preview class="trade-preview"></app-trade-preview>
-                    <app-trade-preview class="trade-preview"></app-trade-preview>
                 </div>
             </div>
         </ng-container>
+        <app-new-trade-modal-form>
+        </app-new-trade-modal-form>
     </div>
 </div>
 <app-tradingplan-editor (onComponentEvent)="onTradingPlanEditorEvent($event)" *ngIf="showTradingPlanModal">
-    <!--showTradingPlanModal-->
 </app-tradingplan-editor>

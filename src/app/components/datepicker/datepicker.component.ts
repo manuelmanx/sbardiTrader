@@ -14,17 +14,32 @@ export class DatepickerComponent implements OnInit, $ComponentTemplateClass {
   @Input('color') public color: string;
   @Input('isDisabled') isDisabled: boolean;
   @Output() public onComponentEvent: EventEmitter<$ComponentEventType> = new EventEmitter<$ComponentEventType>();
-
+  public localDateTimeString: string;
   constructor() { }
 
   public emitComponentEvent(): void {
     this.onComponentEvent.emit({ eventName: "onDatePickerChange", eventData: this.value })
   }
   public onSelectionChange(event: Date): void {
-    this.value = new Date(event);
+    this.value = new Date(this.localDateTimeString);
     this.emitComponentEvent();
   }
-  ngOnInit(): void {
 
+  public ngOnInit(): void {
+    if (!!this.value && !this.isDisabled) {
+      this.localDateTimeString = this.getDateTimeString(this.value);
+      this.emitComponentEvent();
+    }
+  }
+
+  public getDateTimeString(value: Date): string {
+    return (value.toLocaleString("sv-SE", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit"
+    }).replace(" ", "T"));
   }
 }

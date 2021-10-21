@@ -76,7 +76,9 @@
                         width:100px;
                         border-radius:50px;
                         transition: filter 0.1s ease-in-out;
+                        margin:0px;
                         cursor:pointer;
+                        display: block;
                         &:hover{
                             filter:blur(1px) opacity(40%);
                         }

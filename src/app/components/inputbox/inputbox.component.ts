@@ -26,6 +26,9 @@ export class InputboxComponent implements OnInit, $ComponentTemplateClass {
 
   public ngOnInit(): void {
     this.inputValidation()
+    if (!!this.value && !this.isDisabled) {
+      this.emitComponentEvent();
+    }
   }
 
   public inputValidation(): void {

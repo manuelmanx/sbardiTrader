@@ -140,4 +140,8 @@ export class HomePageComponent implements OnInit {
   private _saveTradingPlanRules(data: $UserTradingPlanType): void {
     this._db.setTradingPlanRules(data)
   }
+
+  public onAddNewTrade(): void {
+
+  }
 }

@@ -5,7 +5,9 @@
         (change)="emitComponentEvent()" [(ngModel)]="selectedOption">
         <option value="placeholder" selected class="placeholder">{{value?.placeholder}}...</option>
         <ng-container *ngFor="let option of value?.options">
-            <option [value]="option?.id" class="option">{{option?.value}}</option>
+            <option [value]="option?.id" class="option">
+                {{option?.value}}
+            </option>
         </ng-container>
     </select>
 </div>

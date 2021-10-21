@@ -28,4 +28,14 @@ export type $UserTradeOperationType = {
     date: Date,
     ongoing: boolean,
     closeType?: $TradeCloseType,
+    canBePartialized?: boolean,
+    partializzations?: number,
+    checkListElements?: string[],
+    analisysLink?: string,
+    warnings?: $UserTradeWarningsType[],
+}
+
+export type $UserTradeWarningsType = {
+    key: string,
+    description: string,
 }

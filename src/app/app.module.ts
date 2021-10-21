@@ -25,6 +25,7 @@ import { ComboboxComponent } from './components/combobox/combobox.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { NewTradeModalFormComponent } from './components/new-trade-modal-form/new-trade-modal-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +40,7 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
     DatepickerComponent,
     ButtonComponent,
     CheckboxComponent,
+    NewTradeModalFormComponent,
   ],
   imports: [
     BrowserModule,
