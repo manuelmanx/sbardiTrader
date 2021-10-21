@@ -2,7 +2,7 @@
     .trade-preview-wrapper{
         background-color:map-get($theme,primary)!important;
         .trade-preview-symbol{
-            background-color:map-get($theme,secondary-blue)!important;
+            background-color:map-get($theme,primary-blue)!important;
             color:map-get($theme,primary)!important;
             &.primary-red{
                 background-color:map-get($theme,secondary-red)!important;

@@ -61,11 +61,15 @@
                     <app-button color="primary-blue" width="100%" class="button">Impostazioni</app-button>
                 </div>
                 <div class="fast-action-ongoing-trades">
-
+                    <div class="ongoing-trades-title">Trade Attive</div>
+                    <app-trade-preview class="trade-preview"></app-trade-preview>
+                    <app-trade-preview class="trade-preview"></app-trade-preview>
+                    <app-trade-preview class="trade-preview"></app-trade-preview>
                 </div>
             </div>
         </ng-container>
     </div>
 </div>
 <app-tradingplan-editor (onComponentEvent)="onTradingPlanEditorEvent($event)" *ngIf="showTradingPlanModal">
+    <!--showTradingPlanModal-->
 </app-tradingplan-editor>

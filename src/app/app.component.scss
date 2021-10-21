@@ -12,6 +12,9 @@
         height:fit-content;
         flex-wrap:nowrap;
         min-height:30px;
+        .icon{
+            padding-right:16px;
+        }
         .header-title{
             font-size:16px;
             font-weight:bold;
