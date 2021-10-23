@@ -26,6 +26,7 @@ import { DatepickerComponent } from './components/datepicker/datepicker.componen
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { NewTradeModalFormComponent } from './components/new-trade-modal-form/new-trade-modal-form.component';
+import { MultiselectComponent } from './components/multiselect/multiselect.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +42,7 @@ import { NewTradeModalFormComponent } from './components/new-trade-modal-form/ne
     ButtonComponent,
     CheckboxComponent,
     NewTradeModalFormComponent,
+    MultiselectComponent,
   ],
   imports: [
     BrowserModule,

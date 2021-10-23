@@ -56,7 +56,8 @@
                         <img [src]="getUserAccountImage()" (click)="changeImageInput.click()" />
                         <span class="edit-image-icon lnr lnr-cloud-upload"></span>
                     </div>
-                    <app-button color="primary-blue" width="100%" class="button" (onComponentEvent)="onAddNewTrade()">
+                    <app-button color="primary-blue" width="100%" class="button" (onComponentEvent)="onAddNewTrade()"
+                        [isDisabled]="!getTradingRulesData()">
                         Nuovo Trade</app-button>
                     <app-button color="primary-blue" width="100%" class="button">Vedi Report</app-button>
                     <app-button color="primary-blue" width="100%" class="button">Impostazioni</app-button>
@@ -66,9 +67,12 @@
                 </div>
             </div>
         </ng-container>
-        <app-new-trade-modal-form>
-        </app-new-trade-modal-form>
     </div>
 </div>
-<app-tradingplan-editor (onComponentEvent)="onTradingPlanEditorEvent($event)" *ngIf="showTradingPlanModal">
+<app-new-trade-modal-form [tradingPlanRules]="getTradingRulesData()" (onComponentEvent)="onNewTradeModalEvent($event)"
+    *ngIf="showNewTradeModal">
+</app-new-trade-modal-form>
+
+<app-tradingplan-editor [value]="getTradingRulesData()" (onComponentEvent)="onTradingPlanEditorEvent($event)"
+    *ngIf="showTradingPlanModal">
 </app-tradingplan-editor>

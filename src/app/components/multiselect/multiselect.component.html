@@ -1,0 +1,24 @@
+<ng-container *ngIf="value">
+    <div class="multiselect-full-wrapper">
+        <div class="multiselect-title">{{title}}</div>
+        <div class="multiselect-wrapper" #multiselectbox [ngClass]="{'disabled':isDisabled}">
+            <div class="multiselect-header" (click)="onExpandCollapse()" [ngClass]="{'expanded':isExpanded}">
+                <div class="multiselect-flat-placeholder">{{ getPlaceholder() }}</div>
+                <div class="multiselect-expander">
+                    <span class="lnr lnr-chevron-down" [ngClass]="{ expanded: isExpanded }"></span>
+                </div>
+            </div>
+            <div class="options-list"
+                [ngClass]="{ 'collapsed': !isExpanded, 'dropdown': dropDirection == 'down' && isExpanded, 'dropup': dropDirection == 'up' && isExpanded}">
+                <ng-container *ngFor="let option of value?.options">
+                    <div class="option" [ngClass]="{'disabled':option?.isDisabled}" (click)="checkOption(option?.id)">
+                        <app-checkbox [value]="option?.isSelected" [isDisabled]="option?.isDisabled"
+                            style="pointer-events: none; width:fit-content;"
+                            (onComponentEvent)="onSelectionChanges($event, option?.id)" [title]="option?.value">
+                        </app-checkbox>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</ng-container>

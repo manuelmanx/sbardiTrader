@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { $ComponentEventType, $ComponentTemplateClass } from 'src/app/shared/classes/component-template.class';
 import { $ComboOptionsDataSource } from 'src/app/shared/interfaces/components.dto';
 import { $UserTradeOperationType, $UserTradingPlanType } from 'src/app/shared/interfaces/database.dto';
-import { $emptyComboboxCloseTypeTemplate, $emptyNewTradeTemplate } from 'src/app/shared/templates/new-trade-modal-form.template';
+import { $emptyComboboxCloseTypeTemplate, $emptyMultiselectConfirmationCloseTypeTemplate, $emptyNewTradeTemplate } from 'src/app/shared/templates/new-trade-modal-form.template';
 import { v4 as uuidv4 } from 'uuid';
 @Component({
   selector: 'app-new-trade-modal-form',
@@ -11,7 +11,8 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class NewTradeModalFormComponent implements OnInit, $ComponentTemplateClass {
   public imageLink: string = null;
-  closeTypeCombobox: $ComboOptionsDataSource = $emptyComboboxCloseTypeTemplate
+  closeTypeCombobox: $ComboOptionsDataSource = $emptyComboboxCloseTypeTemplate;
+  confirmationCombobox: $ComboOptionsDataSource = $emptyMultiselectConfirmationCloseTypeTemplate;
   constructor() { }
   @Input('value') public value: $UserTradeOperationType = $emptyNewTradeTemplate;
   @Input('tradingPlanRules') public tradingPlanRules: $UserTradingPlanType;
@@ -23,16 +24,25 @@ export class NewTradeModalFormComponent implements OnInit, $ComponentTemplateCla
   public color: any;
   public isDisabled: any;
 
-  public emitComponentEvent(eventName?: string): void {
-    throw new Error('Method not implemented.');
+  public emitComponentEvent(eventName: string): void {
+    this.onComponentEvent.emit({ eventName: eventName, eventData: this.value })
   }
 
   ngOnInit(): void {
-    this.value.id = uuidv4()
-  }
-  public onDestroyButtonClick() { }
-  public onSaveButtonClick() {
+    this.value.id = uuidv4();
+    if (!!this.tradingPlanRules) {
+      this.confirmationCombobox.options = this.tradingPlanRules?.entryCheckList.map((c: string) => {
+        return { id: c, value: c, isSelected: false, isDisabled: false }
+      })
+    }
     console.log(this.value)
+  }
+  public onSaveButtonClick(): void {
+    this.emitComponentEvent("onTradingPlanEditorSaveChanges");
+  }
+
+  public onDestroyButtonClick(): void {
+    this.emitComponentEvent("onDestroyWindow");
   }
   public canActivateSaveButton() { return true }
 }

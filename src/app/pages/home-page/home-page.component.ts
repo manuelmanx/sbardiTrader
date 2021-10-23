@@ -20,6 +20,7 @@ export class HomePageComponent implements OnInit {
   private _uploadImageSubscription: Subscription;
   private _tradingPlanRules: $UserTradingPlanType;
   public showTradingPlanModal: boolean = false;
+  public showNewTradeModal: boolean = false;
   constructor(private _authGuardService: AuthGuardService, private _db: DatabaseService, private _router: Router) {
 
   }
@@ -62,7 +63,9 @@ export class HomePageComponent implements OnInit {
       this.accountSetupChecklist.tradingPlan = (!!data) ? true : false;
     })
   }
-
+  public getTradingRulesData(): $UserTradingPlanType {
+    return this._tradingPlanRules
+  }
   public isAccountSetupComplete(): boolean {
     if (!!this.accountSetupChecklist) {
       return !Object.keys(this.accountSetupChecklist).find(key => !this.accountSetupChecklist[key]);
@@ -136,12 +139,26 @@ export class HomePageComponent implements OnInit {
         break;
     }
   }
-
   private _saveTradingPlanRules(data: $UserTradingPlanType): void {
     this._db.setTradingPlanRules(data)
   }
 
   public onAddNewTrade(): void {
-
+    this.showNewTradeModal = true;
+  }
+  public onNewTradeModalEvent(event) {
+    console.log(event)
+    switch (event?.eventName) {
+      case "onTradingPlanEditorSaveChanges":
+        this._saveNewGeneratedTrade(event.eventData);
+        this.showNewTradeModal = false;
+        break;
+      case "onDestroyWindow":
+        this.showNewTradeModal = false;
+        break;
+    }
+  }
+  private _saveNewGeneratedTrade(data: any) {
+    console.log(data)
   }
 }

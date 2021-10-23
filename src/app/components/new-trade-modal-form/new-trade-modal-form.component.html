@@ -16,17 +16,18 @@
             </div>
             <div class="new-trade-modal-form-line">
                 <app-checkbox class="inputfield smaller" title="Trade Chiusa"
-                    (onComponentEvent)="value.ongoing = !$event?.eventData"></app-checkbox>
+                    (onComponentEvent)="value.ongoing = $event?.eventData"></app-checkbox>
+                <app-multiselect [value]="confirmationCombobox"></app-multiselect>
             </div>
             <div class="new-trade-modal-form-line">
                 <app-combobox class="inputfield smaller" title="Tipo Chiusura" [value]="closeTypeCombobox"
-                    [isDisabled]="value.ongoing" (onComponentEvent)="value.closeType = $event?.eventData">
+                    [isDisabled]="!value?.ongoing" (onComponentEvent)="value.closeType = $event?.eventData">
                 </app-combobox>
-                <app-inputbox [isDisabled]="value.ongoing" title="Profitto %" class="inputfield" type="number"
+                <app-inputbox [isDisabled]="!value?.ongoing" title="Profitto %" class="inputfield" type="number"
                     (onComponentEvent)="value.percentProfit = $event?.eventData">
                 </app-inputbox>
-                <app-inputbox [isDisabled]="value.ongoing || !tradingPlanRules?.takePartials" title="Parziali"
-                    class="inputfield" type="number" (onComponentEvent)="value.percentProfit = $event?.eventData">
+                <app-inputbox [isDisabled]="!value?.ongoing || !tradingPlanRules?.takePartials" title="Parziali"
+                    class="inputfield" type="number" (onComponentEvent)="value.partial = $event?.eventData">
                 </app-inputbox>
             </div>
             <div class="new-trade-modal-form-footer">

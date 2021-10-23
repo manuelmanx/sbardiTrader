@@ -3,10 +3,11 @@
     display:flex;
     flex-wrap:nowrap;
     width:fit-content;
-    justify-content:center;
+    align-items: center;
     .input-checkbox-component{
         cursor:pointer;
     }
+    
     .checkbox-label{
         height:100%;
         width:fit-content;

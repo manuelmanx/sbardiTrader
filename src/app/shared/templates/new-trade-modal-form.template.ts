@@ -30,3 +30,8 @@ export const $emptyComboboxCloseTypeTemplate = {
         }
     ]
 };
+
+export const $emptyMultiselectConfirmationCloseTypeTemplate = {
+    placeholder: "Seleziona",
+    options: []
+};
