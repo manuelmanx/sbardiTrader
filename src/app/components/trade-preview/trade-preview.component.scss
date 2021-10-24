@@ -10,10 +10,12 @@
         border-bottom-left-radius:4px;
         display:inline-flex;
         align-items:center;
-        justify-content: center;
+        justify-content: flex-start;
         padding:0px 8px;
         text-transform: uppercase;
-        width:fit-content;
+        width:60px;
+        max-width:60px;
+        min-width:60px;
         height:100%;
     }
     .trade-preview-date{

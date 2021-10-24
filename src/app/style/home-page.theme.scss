@@ -35,7 +35,10 @@
                     }
                 }
                 .fast-action-ongoing-trades{
-                    background-color:map-get($theme,secondary)!important; 
+                    background-color:map-get($theme,secondary)!important;
+                    .ongoing-trades-title{
+                        background-color:map-get($theme,secondary)!important;
+                    }
                 }
             }
         }

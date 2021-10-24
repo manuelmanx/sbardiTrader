@@ -18,7 +18,7 @@ export class CheckboxComponent implements OnInit, $ComponentTemplateClass {
   constructor() { }
 
   ngOnInit(): void {
-    if (!!this.value && !this.isDisabled) {
+    if (!this.isDisabled) {
       this.emitComponentEvent();
     }
   }

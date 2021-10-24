@@ -1,3 +1,4 @@
+import { query } from '@angular/animations';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -52,16 +53,21 @@ export class DatabaseService {
     this._$isLoadingData.next(false);
   }
 
-  public setTradingPlanRules(data: $UserTradingPlanType): void {
-    this._af.object(`${this._userPath}/tradingPlan`).set(data);
+  public setTradingPlanRules(data: $UserTradingPlanType): Promise<void> {
+    return this._userTradingPlan.set(data);
+  }
+
+  public registerNewTrade(data: $UserTradeOperationType): any {
+    return this._userTradeList.push(data);
   }
 
   public getUserTradingPlan(): Observable<$UserTradingPlanType> {
     return this._userTradingPlan?.valueChanges();
   }
 
-  public getUsertradeList(): Observable<$UserTradeOperationType[]> {
-    return this._userTradeList?.valueChanges();
+  public getUserOngoingTradeList(): Observable<$UserTradeOperationType[]> {
+    let ongoingTrades: AngularFireList<$UserTradeOperationType> = this._af.list(`${this._userPath}/tradeList`, ref => ref.orderByChild("ongoing").equalTo(true));
+    return ongoingTrades?.valueChanges()
   }
 
   private _createNewUserDbPath(): void {

@@ -18,6 +18,7 @@ export class TradingplanEditorComponent implements OnInit, $ComponentTemplateCla
   public id: any;
   public color: any;
   public isDisabled: any;
+  public isLoading: boolean = false;
   @Output() onComponentEvent: EventEmitter<$ComponentEventType> = new EventEmitter<$ComponentEventType>();
 
   public emitComponentEvent(eventName: string): void {
@@ -40,6 +41,7 @@ export class TradingplanEditorComponent implements OnInit, $ComponentTemplateCla
   }
 
   public onSaveButtonClick(): void {
+    this.isLoading = true;
     this.emitComponentEvent("onTradingPlanEditorSaveChanges");
   }
 

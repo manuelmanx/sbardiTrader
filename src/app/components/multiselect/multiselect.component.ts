@@ -79,11 +79,11 @@ export class MultiselectComponent implements OnInit, $ComponentTemplateClass {
   }
 
   public emitComponentEvent(): void {
-    this.onComponentEvent.emit({ eventName: "onComboboxChange", eventData: this._getCheckedOptions() })
+    this.onComponentEvent.emit({ eventName: "onComboboxChange", eventData: this._getCheckedOptions().map(e => e.id) })
   }
 
   ngOnInit(): void {
-
+    this._updatePlaceholder()
   }
 
 

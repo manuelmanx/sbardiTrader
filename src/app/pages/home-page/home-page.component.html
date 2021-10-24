@@ -64,6 +64,9 @@
                 </div>
                 <div class="fast-action-ongoing-trades">
                     <div class="ongoing-trades-title">Trade Attive</div>
+                    <ng-container *ngFor="let trade of getOngoingTrades()">
+                        <app-trade-preview class="ongoing-trade-preview" [value]="trade"></app-trade-preview>
+                    </ng-container>
                 </div>
             </div>
         </ng-container>

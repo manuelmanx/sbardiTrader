@@ -14,7 +14,7 @@ export class TradePreviewComponent implements OnInit, $ComponentTemplateClass {
   @Input('title') public title: any;
   @Input('color') public color: any;
   @Input('isDisabled') isDisabled: boolean;
-  @Output() public onComponentEvent: EventEmitter<$ComponentEventType>;
+  @Output() public onComponentEvent: EventEmitter<$ComponentEventType> = new EventEmitter<$ComponentEventType>();
 
   constructor() { }
 
@@ -23,9 +23,13 @@ export class TradePreviewComponent implements OnInit, $ComponentTemplateClass {
     if (!this.value) {
       console.warn("No data input found for app-trade-preview component.")
     }
+    if (!this.value?.percentProfit) {
+      this.value.percentProfit = 0;
+    }
   }
 
-  public emitComponentEvent(): void {
+  public emitComponentEvent(event): void {
+    this.onComponentEvent.emit({ eventName: event, eventData: this.value })
   }
 
   public getProgressValue() {
@@ -39,6 +43,14 @@ export class TradePreviewComponent implements OnInit, $ComponentTemplateClass {
 
   public getProgressBarTheme(): string {
     return this.isInLoss() ? 'primary-red' : 'default';
+  }
+
+  public onCloseTradeClick(): void {
+    this.emitComponentEvent("onCloseOngoingTrade");
+  }
+
+  public onPartializeTradeClick(): void {
+    this.emitComponentEvent("onPartializeOngoingTrade");
   }
 
 }

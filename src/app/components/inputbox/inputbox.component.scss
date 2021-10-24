@@ -18,5 +18,8 @@
         border-radius:4px;
         padding:0px 8px;
         font-size:11px;
+        &.uppercase{
+            text-transform: uppercase;
+        }
     }
 }

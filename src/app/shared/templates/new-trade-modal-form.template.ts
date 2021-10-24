@@ -5,6 +5,8 @@ export const $emptyNewTradeTemplate = {
     partial: null,
     date: null,
     ongoing: true,
+    analisysLink: null,
+    checkListElements: [],
 }
 
 export const $emptyComboboxCloseTypeTemplate = {

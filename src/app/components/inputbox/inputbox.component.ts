@@ -12,6 +12,7 @@ export class InputboxComponent implements OnInit, $ComponentTemplateClass {
   @Input('value') public value: any;
   @Input('numbersType') public numbersType: "positive" | "negative";
   @Input('type') public type: "number" | "text" = "text";
+  @Input('UStyle') public UStyle: "uppercase";
   @Input('id') public id: any;
   @Input('color') public color: string;
   @Input('isDisabled') isDisabled: boolean;

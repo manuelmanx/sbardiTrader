@@ -2,7 +2,7 @@
     <div class="input-title">{{title}}</div>
     <ng-container *ngIf="type==='text'">
         <input type="text" class="input-field" [placeholder]="placeholder" (input)="emitComponentEvent()"
-            [ngClass]="{'bg-primary':color==='primary', 'bg-secondary-red': color==='secondary-red'}"
+            [ngClass]="{'bg-primary':color==='primary', 'bg-secondary-red': color==='secondary-red', 'uppercase':UStyle==='uppercase'}"
             [(ngModel)]="value" />
     </ng-container>
     <ng-container *ngIf="type==='number'">

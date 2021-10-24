@@ -22,10 +22,10 @@
                 </div>
             </ng-container>
             <ng-container *ngIf="!value?.ongoing">
-                <div class="trade-preview-button hl-link">
+                <div class="trade-preview-button hl-link" (click)="onPartializeTradeClick()">
                     <span class="lnr lnr-link"></span>
                 </div>
-                <div class="trade-preview-button hl-exit-up">
+                <div class="trade-preview-button hl-exit-up" (click)="onCloseTradeClick()">
                     <span class="lnr lnr-exit-up"></span>
                 </div>
             </ng-container>

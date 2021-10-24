@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { $ComponentEventType } from 'src/app/shared/classes/component-template.class';
-import { $UserTradingPlanType } from 'src/app/shared/interfaces/database.dto';
+import { $UserTradeOperationType, $UserTradingPlanType } from 'src/app/shared/interfaces/database.dto';
 import { $AccountSetupCheckListType, $UserInterface } from 'src/app/shared/interfaces/user.dto';
 import { AuthGuardService } from 'src/app/shared/services/auth-guard/auth-guard.service';
 import { DatabaseService } from 'src/app/shared/services/database/database.service';
@@ -19,6 +19,7 @@ export class HomePageComponent implements OnInit {
   public accountSetupChecklist: $AccountSetupCheckListType;
   private _uploadImageSubscription: Subscription;
   private _tradingPlanRules: $UserTradingPlanType;
+  private _ongoingTrades: $UserTradeOperationType[];
   public showTradingPlanModal: boolean = false;
   public showNewTradeModal: boolean = false;
   constructor(private _authGuardService: AuthGuardService, private _db: DatabaseService, private _router: Router) {
@@ -46,11 +47,16 @@ export class HomePageComponent implements OnInit {
       this.isLoadingData = data;
       if (data === false) {
         this._setupAccountConfigurationChecklist();
+        this._db.getUserOngoingTradeList().subscribe(data => {
+          this._ongoingTrades = data;
+        })
       }
     });
+
     this._db.onIsFirstLogin.subscribe((data: boolean) => {
       this.isFirstLogin = data;
-    })
+    });
+
   }
 
   private async _setupAccountConfigurationChecklist(): Promise<void> {
@@ -64,8 +70,12 @@ export class HomePageComponent implements OnInit {
     })
   }
   public getTradingRulesData(): $UserTradingPlanType {
-    return this._tradingPlanRules
+    return this._tradingPlanRules;
   }
+  public getOngoingTrades(): $UserTradeOperationType[] {
+    return this._ongoingTrades;
+  }
+
   public isAccountSetupComplete(): boolean {
     if (!!this.accountSetupChecklist) {
       return !Object.keys(this.accountSetupChecklist).find(key => !this.accountSetupChecklist[key]);
@@ -131,16 +141,17 @@ export class HomePageComponent implements OnInit {
     console.log(event)
     switch (event?.eventName) {
       case "onTradingPlanEditorSaveChanges":
-        this._saveTradingPlanRules(event.eventData);
-        this.showTradingPlanModal = false;
+        this._saveTradingPlanRules(event.eventData).then(success => {
+          this.showTradingPlanModal = false;
+        });
         break;
       case "onDestroyWindow":
         this.showTradingPlanModal = false;
         break;
     }
   }
-  private _saveTradingPlanRules(data: $UserTradingPlanType): void {
-    this._db.setTradingPlanRules(data)
+  private _saveTradingPlanRules(data: $UserTradingPlanType): Promise<void> {
+    return this._db.setTradingPlanRules(data)
   }
 
   public onAddNewTrade(): void {
@@ -150,15 +161,16 @@ export class HomePageComponent implements OnInit {
     console.log(event)
     switch (event?.eventName) {
       case "onTradingPlanEditorSaveChanges":
-        this._saveNewGeneratedTrade(event.eventData);
-        this.showNewTradeModal = false;
+        this._saveNewGeneratedTrade(event.eventData).then(success => {
+          this.showNewTradeModal = false;
+        });
         break;
       case "onDestroyWindow":
         this.showNewTradeModal = false;
         break;
     }
   }
-  private _saveNewGeneratedTrade(data: any) {
-    console.log(data)
+  private _saveNewGeneratedTrade(data: any): Promise<void> {
+    return this._db.registerNewTrade(data)
   }
 }

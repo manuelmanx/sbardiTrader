@@ -71,6 +71,9 @@
                     [ngClass]="{'disabled': !canActivateSaveButton()}">Salva
                 </app-button>
             </div>
+            <div class="tradingplan-editor-form-loader" *ngIf="isLoading">
+                <app-progressbar type="indefinite" style="width:100%;"></app-progressbar>
+            </div>
         </div>
     </div>
 </div>

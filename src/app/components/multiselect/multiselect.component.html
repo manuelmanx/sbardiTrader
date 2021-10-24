@@ -13,8 +13,7 @@
                 <ng-container *ngFor="let option of value?.options">
                     <div class="option" [ngClass]="{'disabled':option?.isDisabled}" (click)="checkOption(option?.id)">
                         <app-checkbox [value]="option?.isSelected" [isDisabled]="option?.isDisabled"
-                            style="pointer-events: none; width:fit-content;"
-                            (onComponentEvent)="onSelectionChanges($event, option?.id)" [title]="option?.value">
+                            style="pointer-events: none; width:fit-content;" [title]="option?.value">
                         </app-checkbox>
                     </div>
                 </ng-container>

@@ -50,7 +50,6 @@
             }
             .new-trade-modal-form-footer{
                 padding-top:16px;
-                width:calc(100%-32px);
                 display:flex;
                 justify-content:flex-end;
                 .button{
@@ -59,6 +58,10 @@
                         margin-right:0px;
                     }
                 }
+            }
+            .new-trade-modal-form-loader{
+                padding-top:16px;
+                display:flex;
             }
         }
         
