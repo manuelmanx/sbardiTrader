@@ -1,7 +1,7 @@
 <ng-container>
     <button [class]="'button-component ' + type" (click)="emitComponentEvent()"
         [style.width]="(width && type==='default')?width:(type==='icon')?'24px':'fit-content'"
-        [ngClass]="{'disabled':isDisabled,'bg-primary-blue':color==='primary-blue','bg-primary-red':color==='primary-red', 'bg-default-red':color==='default-red','bg-default-blue':color==='default-blue'}">
+        [ngClass]="{'disabled':isDisabled,'bg-primary-blue':color==='primary-blue','bg-primary-red':color==='primary-red', 'bg-default-red':color==='default-red','bg-default-blue':color==='default-blue', 'bg-white-blue':color==='white-blue'}">
         <ng-content></ng-content>
     </button>
 </ng-container>

@@ -59,19 +59,21 @@
                     <app-button color="primary-blue" width="100%" class="button" (onComponentEvent)="onAddNewTrade()"
                         [isDisabled]="!getTradingRulesData()">
                         Nuovo Trade</app-button>
-                    <app-button color="primary-blue" width="100%" class="button">Vedi Report</app-button>
-                    <app-button color="primary-blue" width="100%" class="button">Impostazioni</app-button>
+                    <app-button color="white-blue" width="100%" class="button">Vedi Report</app-button>
+                    <app-button color="white-blue" width="100%" class="button">Impostazioni</app-button>
                 </div>
                 <div class="fast-action-ongoing-trades">
                     <div class="ongoing-trades-title">Trade Attive</div>
                     <ng-container *ngFor="let trade of getOngoingTrades()">
                         <app-trade-preview class="ongoing-trade-preview" [value]="trade"></app-trade-preview>
                     </ng-container>
+                    <div *ngIf="!getOngoingTrades().length" class="no-data-found">Ancora nessun dato...</div>
                 </div>
             </div>
         </ng-container>
     </div>
 </div>
+
 <app-new-trade-modal-form [tradingPlanRules]="getTradingRulesData()" (onComponentEvent)="onNewTradeModalEvent($event)"
     *ngIf="showNewTradeModal">
 </app-new-trade-modal-form>

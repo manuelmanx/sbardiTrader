@@ -33,10 +33,12 @@ export class NewTradeModalFormComponent implements OnInit, $ComponentTemplateCla
       this.value = JSON.parse(JSON.stringify($emptyNewTradeTemplate));
     }
     this.value.id = uuidv4();
+    this.value.percentProfit = 0;
     if (!!this.tradingPlanRules) {
       this.confirmationCombobox.options = this.tradingPlanRules?.entryCheckList.map((c: string) => {
         return { id: c, value: c, isSelected: false, isDisabled: false }
       })
+      this.value.percentTarget = this.tradingPlanRules.minPercentProfitPerTrade;
     }
   }
   public onSaveButtonClick(): void {

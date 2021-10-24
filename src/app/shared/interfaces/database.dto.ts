@@ -23,10 +23,11 @@ export type $UserTradingPlanType = {
 export type $UserTradeOperationType = {
     id: string,
     symbol: string,
-    percentProfit: number,
+    percentProfit?: number,
     partial: number,
     date: Date,
     ongoing: boolean,
+    percentTarget?: number,
     closeType?: $TradeCloseType,
     canBePartialized?: boolean,
     partializzations?: number,
