@@ -18,6 +18,7 @@ export class NewTradeModalFormComponent implements OnInit, $ComponentTemplateCla
   @Input('tradingPlanRules') public tradingPlanRules: $UserTradingPlanType;
   @Output() onComponentEvent: EventEmitter<$ComponentEventType> = new EventEmitter<$ComponentEventType>();
 
+  public tooltip: string;
   public title: any;
   public type: any;
   public id: any;
@@ -39,6 +40,7 @@ export class NewTradeModalFormComponent implements OnInit, $ComponentTemplateCla
         return { id: c, value: c, isSelected: false, isDisabled: false }
       })
       this.value.percentTarget = this.tradingPlanRules.minPercentProfitPerTrade;
+      this.value.ongoing = true;
     }
   }
   public onSaveButtonClick(): void {
@@ -54,13 +56,26 @@ export class NewTradeModalFormComponent implements OnInit, $ComponentTemplateCla
       if (key == "ongoing") {
         return 'true'
       } else if (key === "checkListElements") {
-        return `${!!this.value[key].length}`
-      } else if (key === "closeType" || key === "percentProfit" || key === "partial") {
-        return (!!this.value["ongoing"]) ? "true" : `${!!this.value[key]}`
+        return `${!!this.value[key].length}`;
+      } else if (key === "closeType" || key === "percentProfit") {
+        return (!!this.value["ongoing"]) ? "true" : `${!!this.value[key]}`;
+      } else if (key === "partial") {
+        return 'true';
       } else {
-        return `${!!this.value[key]}`
+        return `${!!this.value[key]}`;
       }
     })
-    return !arr.find(e => e === "false")
+    return !arr.find(e => e === "false");
+  }
+
+  public catchEvent(event): void {
+    switch (event?.eventName) {
+      case "onSaveModalClick":
+        this.onSaveButtonClick();
+        break
+      case "onDestroyModalClick":
+        this.onDestroyButtonClick();
+        break
+    }
   }
 }

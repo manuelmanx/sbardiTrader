@@ -11,6 +11,7 @@ export class CheckboxComponent implements OnInit, $ComponentTemplateClass {
   @Input('title') title: string;
   @Input('value') value: boolean = false;
   @Input('isDisabled') isDisabled: boolean;
+  @Input('tooltip') public tooltip: string;
   public type: any;
   public id: any;
   public color: any;

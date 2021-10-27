@@ -1,31 +1,38 @@
 <ng-container *ngIf="!!value">
     <div class="trade-preview-wrapper" [ngClass]="{'disabled':isDisabled}">
-        <div class="trade-preview-symbol" [ngClass]="{'primary-red':isInLoss()}">{{value.symbol}}</div>
+        <div class="trade-preview-symbol" [ngClass]="{'primary-red':isInLoss()}" title="Simbolo operato">
+            {{value.symbol}}
+        </div>
         <ng-container *ngIf="!value?.ongoing">
-            <div class="trade-preview-date">{{value.date | date : 'dd/MM/yyyy'}}</div>
-            <div class="trade-preview-close-type">{{value?.closeType}}</div>
+            <div class="trade-preview-date" [ngClass]="{'primary-red':isInLoss()}" title="Data dell' operazione">
+                {{value.date | date : 'dd/MM/yyyy
+                HH:mm'}}
+            </div>
+            <div class="trade-preview-close-type" title="Tipo di chiusura" [ngClass]="{'primary-red':isInLoss()}">
+                {{value?.closeType}}</div>
         </ng-container>
-        <div class="trade-preview-profit-bar">
+        <div class="trade-preview-profit-bar" title="Profitto percentuale rispetto al targhet">
             <app-progressbar class="profit-bar" [value]="getProgressValue()" [color]="getProgressBarTheme()">
             </app-progressbar>
         </div>
         <div class="trade-preview-profit-number">
-            {{value?.percentProfit}}%
+            {{value?.percentProfit}}% ({{value?.percentTarget||'X'}}%)
         </div>
         <div class="trade-preview-actions">
             <ng-container *ngIf="value?.ongoing">
-                <div class="trade-preview-button hl-crop">
+                <div class="trade-preview-button hl-crop" title="Parzializza operazione">
                     <span class="lnr lnr-crop"></span>
                 </div>
-                <div class="trade-preview-button hl-cross">
+                <div class="trade-preview-button hl-cross" title="Chiudi operazione">
                     <span class="lnr lnr-cross"></span>
                 </div>
             </ng-container>
             <ng-container *ngIf="!value?.ongoing">
-                <div class="trade-preview-button hl-link" (click)="onPartializeTradeClick()">
+                <div class="trade-preview-button hl-link" (click)="onPartializeTradeClick()" title="Copia link">
                     <span class="lnr lnr-link"></span>
                 </div>
-                <div class="trade-preview-button hl-exit-up" (click)="onCloseTradeClick()">
+                <div class="trade-preview-button hl-exit-up" (click)="onCloseTradeClick()"
+                    title="Apri dettagli in una nuova scheda">
                     <span class="lnr lnr-exit-up"></span>
                 </div>
             </ng-container>

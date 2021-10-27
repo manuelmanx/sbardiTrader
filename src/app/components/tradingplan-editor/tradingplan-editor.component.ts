@@ -13,6 +13,7 @@ export class TradingplanEditorComponent implements OnInit, $ComponentTemplateCla
   @Input('value') public value: $UserTradingPlanType;
   @ViewChild('checklistInput') private _checkinput: InputboxComponent;
   constructor() { }
+  public tooltip: string;
   public title: any;
   public type: any;
   public id: any;
@@ -64,5 +65,16 @@ export class TradingplanEditorComponent implements OnInit, $ComponentTemplateCla
       }
     })
     return !arr.find(e => e === "false")
+  }
+
+  public catchEvent(event): void {
+    switch (event.eventName) {
+      case "onSaveModalClick":
+        this.onSaveButtonClick();
+        break
+      case "onDestroyModalClick":
+        this.onDestroyButtonClick();
+        break
+    }
   }
 }

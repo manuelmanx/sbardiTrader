@@ -10,11 +10,18 @@
             
         }
         .trade-preview-date{
-            box-shadow: inset 0px 0px 0px 1px map-get($theme,secondary-red)!important;
-            color:map-get($theme,primary-red)!important;
+            box-shadow: inset 0px 0px 0px 1px map-get($theme,secondary-blue)!important;
+            color:map-get($theme,primary-blue)!important;
+            &.primary-red{
+                box-shadow: inset 0px 0px 0px 1px map-get($theme,secondary-red)!important;
+                color:map-get($theme,primary-red)!important;
+            }
         }
         .trade-preview-close-type{
-            color:map-get($theme,primary-red)!important;
+            color:map-get($theme,primary-blue)!important;
+            &.primary-red{
+                color:map-get($theme,primary-red)!important;
+            }
         }
         .trade-preview-button{
             background-color:map-get($theme,hilight)!important;

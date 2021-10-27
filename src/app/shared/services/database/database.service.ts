@@ -12,8 +12,13 @@ import { $UserInterface } from '../../interfaces/user.dto';
 })
 export class DatabaseService {
   private _userInfo: $UserInterface;
-  private _userTradeList: AngularFireList<$UserTradeOperationType>;
   private _userTradingPlan: AngularFireObject<$UserTradingPlanType>;
+
+  private _userTradeList: AngularFireList<$UserTradeOperationType>;
+  private _lastClosedTrades: AngularFireList<$UserTradeOperationType>;
+  private _ongoingTrades: AngularFireList<$UserTradeOperationType>;
+  private _todayStopLoss: AngularFireList<$UserTradeOperationType>;
+
   private _userPath: string;
   private _$isFirstLogin = new BehaviorSubject<boolean>(false);
   public onIsFirstLogin = this._$isFirstLogin.asObservable();
@@ -48,6 +53,9 @@ export class DatabaseService {
 
   private _loadUserData(): void {
     this._userTradeList = this._af.list(`${this._userPath}/tradeList`);
+    this._lastClosedTrades = this._af.list(`${this._userPath}/tradeList`, ref => ref.orderByChild("ongoing").equalTo(false).limitToLast(3));
+    this._ongoingTrades = this._af.list(`${this._userPath}/tradeList`, ref => ref.orderByChild("ongoing").equalTo(true));
+    this._todayStopLoss = this._af.list(`${this._userPath}/tradeList`, ref => ref.orderByChild("date").startAt(new Date().toISOString()));
     this._userTradingPlan = this._af.object(`${this._userPath}/tradingPlan`);
     console.log("User data successfully loaded...");
     this._$isLoadingData.next(false);
@@ -66,16 +74,25 @@ export class DatabaseService {
   }
 
   public getUserOngoingTradeList(): Observable<$UserTradeOperationType[]> {
-    let ongoingTrades: AngularFireList<$UserTradeOperationType> = this._af.list(`${this._userPath}/tradeList`, ref => ref.orderByChild("ongoing").equalTo(true));
-    return ongoingTrades?.valueChanges()
+    return this._ongoingTrades?.valueChanges()
+  }
+  public getUserLastClosedTrades(): Observable<$UserTradeOperationType[]> {
+    return this._lastClosedTrades?.valueChanges()
+  }
+  public getTodayStopLoss(): Observable<$UserTradeOperationType[]> {
+    return this._todayStopLoss?.valueChanges();
   }
 
   private _createNewUserDbPath(): void {
     console.log("Creating user database path...");
     this._af.object(`${this._userPath}/lastLogin`).set(`${new Date().toISOString()}`).then(data => {
-      this._loadUserData();
+      this._af.object(`${this._userPath}/email`).set(`${this._userInfo.email}`).then(data => {
+        this._loadUserData();
+      })
     })
   }
+
+
 
   public uploadUserAccountImage(image: any): any {
     return this._as.upload(`${this._userPath}/accountImage`, image);

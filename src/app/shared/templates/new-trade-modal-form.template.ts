@@ -25,6 +25,12 @@ export const $emptyComboboxCloseTypeTemplate = {
             isSelected: false
         },
         {
+            id: "BE",
+            value: "Break Even",
+            isDisabled: false,
+            isSelected: false
+        },
+        {
             id: "Market",
             value: "Mercato",
             isDisabled: false,

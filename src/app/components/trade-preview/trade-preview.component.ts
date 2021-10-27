@@ -14,6 +14,7 @@ export class TradePreviewComponent implements OnInit, $ComponentTemplateClass {
   @Input('title') public title: any;
   @Input('color') public color: any;
   @Input('isDisabled') isDisabled: boolean;
+  @Input('tooltip') public tooltip: string;
   @Output() public onComponentEvent: EventEmitter<$ComponentEventType> = new EventEmitter<$ComponentEventType>();
 
   constructor() { }

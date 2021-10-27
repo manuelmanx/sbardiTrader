@@ -19,18 +19,21 @@
         height:100%;
     }
     .trade-preview-date{
-        width:fit-content;
+        width:100px;
         padding:0px 16px;
         height:100%;
         display:inline-flex;
         white-space: nowrap;
         align-items:center;
-        justify-content:center;
+        justify-content:flex-start;
         font-weight:bold;
     }
     .trade-preview-close-type{
         @extend .trade-preview-date;
         font-weight:normal;
+        width:58px;
+        max-width:58px;
+        min-width:58px;
     }
     .trade-preview-profit-bar{
         display:inline-flex;
@@ -45,6 +48,7 @@
         width:fit-content;
         padding:0px 8px;
         align-items:center;
+        white-space: nowrap;;
     }
     .trade-preview-actions{
         display:inline-flex;

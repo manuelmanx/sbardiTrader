@@ -6,7 +6,8 @@
             </div>
             <div class="welcome-subtitle">
                 <ng-container *ngIf="isAccountSetupComplete()">
-                    In questa sezione trovi le azioni rapide dell' applicativo e una panoramica delle tue ultime azioni.
+                    In questa sezione trovi le azioni rapide dell' applicativo e una panoramica delle tue ultime
+                    azioni.
                 </ng-container>
                 <ng-container *ngIf="!isAccountSetupComplete()">
                     Il tuo profilo non è completo, ti consigliamo di partire da qui per poter usufruire della
@@ -62,15 +63,26 @@
                     <app-button color="white-blue" width="100%" class="button">Vedi Report</app-button>
                     <app-button color="white-blue" width="100%" class="button">Impostazioni</app-button>
                 </div>
+                <div class="todays-trades-counter">
+
+                </div>
                 <div class="fast-action-ongoing-trades">
                     <div class="ongoing-trades-title">Trade Attive</div>
                     <ng-container *ngFor="let trade of getOngoingTrades()">
                         <app-trade-preview class="ongoing-trade-preview" [value]="trade"></app-trade-preview>
                     </ng-container>
-                    <div *ngIf="!getOngoingTrades().length" class="no-data-found">Ancora nessun dato...</div>
+                    <div *ngIf="!getOngoingTrades()?.length" class="no-data-found">Ancora nessun dato...</div>
                 </div>
             </div>
         </ng-container>
+    </div>
+    <div class="last-closed-trades-section" *ngIf="!!getLastClosedTrades()?.length && !!isAccountSetupComplete()">
+        <div class="last-closed-trades-title">Ultime Operazioni Chiuse:</div>
+        <div class="last-closed-trades-content">
+            <ng-container *ngFor="let trade of getLastClosedTrades().slice().reverse()">
+                <app-trade-preview class="closed-trade-preview" [value]="trade"></app-trade-preview>
+            </ng-container>
+        </div>
     </div>
 </div>
 

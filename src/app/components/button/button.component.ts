@@ -14,6 +14,7 @@ export class ButtonComponent implements OnInit, $ComponentTemplateClass {
   @Input('color') public color: string = "default-blue";
   @Input('isDisabled') isDisabled: boolean;
   @Input('width') width: string;
+  @Input('tooltip') public tooltip: string;
   @Output() public onComponentEvent: EventEmitter<$ComponentEventType> = new EventEmitter<$ComponentEventType>();
   constructor() { }
 

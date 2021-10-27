@@ -14,6 +14,7 @@ export class ComboboxComponent implements OnInit, $ComponentTemplateClass {
   @Input('id') public id: any;
   @Input('color') public color: string;
   @Input('isDisabled') isDisabled: boolean;
+  @Input('tooltip') public tooltip: string;
   @Output() public onComponentEvent: EventEmitter<$ComponentEventType> = new EventEmitter<$ComponentEventType>();
 
   public selectedOption: string;

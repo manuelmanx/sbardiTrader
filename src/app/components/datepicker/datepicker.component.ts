@@ -9,16 +9,21 @@ import { $ComponentEventType, $ComponentTemplateClass } from 'src/app/shared/cla
 export class DatepickerComponent implements OnInit, $ComponentTemplateClass {
   @Input('title') public title: any;
   @Input('value') public value: Date = new Date();
-  @Input('type') public type: any;
+  @Input('type') public type: "string" | "date" = "date";
   @Input('id') public id: any;
   @Input('color') public color: string;
   @Input('isDisabled') isDisabled: boolean;
+  @Input('tooltip') public tooltip: string;
   @Output() public onComponentEvent: EventEmitter<$ComponentEventType> = new EventEmitter<$ComponentEventType>();
   public localDateTimeString: string;
   constructor() { }
 
   public emitComponentEvent(): void {
-    this.onComponentEvent.emit({ eventName: "onDatePickerChange", eventData: this.value })
+    let toEmit: any = this.value;
+    if (this.type === "string") {
+      toEmit = toEmit.toISOString();
+    }
+    this.onComponentEvent.emit({ eventName: "onDatePickerChange", eventData: toEmit })
   }
   public onSelectionChange(event: Date): void {
     this.value = new Date(this.localDateTimeString);

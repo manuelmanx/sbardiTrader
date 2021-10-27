@@ -25,7 +25,7 @@ export type $UserTradeOperationType = {
     symbol: string,
     percentProfit?: number,
     partial: number,
-    date: Date,
+    date: string,
     ongoing: boolean,
     percentTarget?: number,
     closeType?: $TradeCloseType,
@@ -34,6 +34,7 @@ export type $UserTradeOperationType = {
     checkListElements?: string[],
     analisysLink?: string,
     warnings?: $UserTradeWarningsType[],
+    description?: string;
 }
 
 export type $UserTradeWarningsType = {

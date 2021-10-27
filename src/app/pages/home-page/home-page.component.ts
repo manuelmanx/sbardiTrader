@@ -20,6 +20,8 @@ export class HomePageComponent implements OnInit {
   private _uploadImageSubscription: Subscription;
   private _tradingPlanRules: $UserTradingPlanType;
   private _ongoingTrades: $UserTradeOperationType[];
+  private _lastClosedTrades: $UserTradeOperationType[];
+  private _todayStopLoss: $UserTradeOperationType[];
   public showTradingPlanModal: boolean = false;
   public showNewTradeModal: boolean = false;
   constructor(private _authGuardService: AuthGuardService, private _db: DatabaseService, private _router: Router) {
@@ -50,6 +52,14 @@ export class HomePageComponent implements OnInit {
         this._db.getUserOngoingTradeList().subscribe(data => {
           this._ongoingTrades = data;
         })
+        this._db.getUserLastClosedTrades().subscribe(data => {
+          console.log(data)
+          this._lastClosedTrades = data;
+        })
+        this._db.getTodayStopLoss().subscribe(data => {
+          console.log('todaySL', data);
+          this._todayStopLoss = data;
+        })
       }
     });
 
@@ -75,7 +85,9 @@ export class HomePageComponent implements OnInit {
   public getOngoingTrades(): $UserTradeOperationType[] {
     return this._ongoingTrades;
   }
-
+  public getLastClosedTrades(): $UserTradeOperationType[] {
+    return this._lastClosedTrades;
+  }
   public isAccountSetupComplete(): boolean {
     if (!!this.accountSetupChecklist) {
       return !Object.keys(this.accountSetupChecklist).find(key => !this.accountSetupChecklist[key]);

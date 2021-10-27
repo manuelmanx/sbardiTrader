@@ -42,5 +42,8 @@
                 }
             }
         }
+        .last-closed-trades-section{
+            background-color:map-get($theme,primary)!important;
+        }
     }
 }

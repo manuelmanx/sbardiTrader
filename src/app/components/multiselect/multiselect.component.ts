@@ -15,6 +15,7 @@ export class MultiselectComponent implements OnInit, $ComponentTemplateClass {
   @Input('color') public color: string;
   @Input('isDisabled') public isDisabled: boolean = false;
   @Input('dropDirection') public dropDirection: "up" | "down" = "down";
+  @Input('tooltip') public tooltip: string;
   @Output() public onComponentEvent: EventEmitter<$ComponentEventType> = new EventEmitter<$ComponentEventType>();
   @ViewChild('multiselectbox') public multiselectbox: ElementRef;
   public isExpanded: boolean = false;
