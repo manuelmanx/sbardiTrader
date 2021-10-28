@@ -72,7 +72,7 @@
                     padding-bottom:16px;
                     img{
                         height:100px;
-                        border:2px solid;
+                        border:3px solid;
                         width:100px;
                         border-radius:50px;
                         transition: filter 0.1s ease-in-out;
@@ -134,6 +134,21 @@
                     align-items: center;
                     justify-content: center;
                     opacity:50%;
+                }
+            }
+            .todays-trades-counter{
+                padding-left:16px;
+                display:flex;
+                flex-direction:column;
+                .widget{
+                    padding:8px;
+                    border-radius:16px;
+                    height:fit-content;
+                    width:fit-content;
+                    cursor:help;
+                    &:last-child{
+                        margin-top:16px;
+                    }
                 }
             }
         }

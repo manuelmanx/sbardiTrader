@@ -40,6 +40,11 @@
                         background-color:map-get($theme,secondary)!important;
                     }
                 }
+                .todays-trades-counter{
+                    .widget{
+                        background-color:map-get($theme,secondary)!important;
+                    }
+                }
             }
         }
         .last-closed-trades-section{

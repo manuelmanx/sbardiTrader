@@ -47,11 +47,14 @@ export class TradePreviewComponent implements OnInit, $ComponentTemplateClass {
   }
 
   public onCloseTradeClick(): void {
-    this.emitComponentEvent("onCloseOngoingTrade");
+    this.emitComponentEvent("onCloseTrade");
   }
 
   public onPartializeTradeClick(): void {
-    this.emitComponentEvent("onPartializeOngoingTrade");
+    this.emitComponentEvent("onPartializeTrade");
+  }
+  public onDeleteTrade(): void {
+    this.emitComponentEvent("onDeleteTrade");
   }
 
 }

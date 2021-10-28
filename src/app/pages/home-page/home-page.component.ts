@@ -21,9 +21,12 @@ export class HomePageComponent implements OnInit {
   private _tradingPlanRules: $UserTradingPlanType;
   private _ongoingTrades: $UserTradeOperationType[];
   private _lastClosedTrades: $UserTradeOperationType[];
-  private _todayStopLoss: $UserTradeOperationType[];
+  private _todayTrades: $UserTradeOperationType[];
+  private _last100trades: $UserTradeOperationType[];
   public showTradingPlanModal: boolean = false;
   public showNewTradeModal: boolean = false;
+
+  public canIRegisterNewTrade = true;
   constructor(private _authGuardService: AuthGuardService, private _db: DatabaseService, private _router: Router) {
 
   }
@@ -56,9 +59,12 @@ export class HomePageComponent implements OnInit {
           console.log(data)
           this._lastClosedTrades = data;
         })
-        this._db.getTodayStopLoss().subscribe(data => {
-          console.log('todaySL', data);
-          this._todayStopLoss = data;
+        this._db.getTodayTrades().subscribe(data => {
+          console.log('todayTrades', data);
+          this._todayTrades = data;
+        })
+        this._db.getLast100Trades().subscribe(data => {
+          this._last100trades = data;
         })
       }
     });
@@ -170,7 +176,6 @@ export class HomePageComponent implements OnInit {
     this.showNewTradeModal = true;
   }
   public onNewTradeModalEvent(event) {
-    console.log(event)
     switch (event?.eventName) {
       case "onTradingPlanEditorSaveChanges":
         this._saveNewGeneratedTrade(event.eventData).then(success => {
@@ -184,5 +189,26 @@ export class HomePageComponent implements OnInit {
   }
   private _saveNewGeneratedTrade(data: any): Promise<void> {
     return this._db.registerNewTrade(data)
+  }
+
+  public getPercentageOfDailyTrades(): number {
+    const progress = 100 * this._todayTrades?.length / this._tradingPlanRules?.maxDailyTrades;
+    if (this.canIRegisterNewTrade === false && progress < 100) {
+      this.canIRegisterNewTrade = true;
+    } else if (progress >= 100 && this.canIRegisterNewTrade === true) {
+      this.canIRegisterNewTrade = false;
+    }
+    return progress;
+  }
+  public getDailyTradesLengthString(): string {
+    return `${this._todayTrades?.length}` || '';
+  }
+  public getDailyTradesLimitString(): string {
+    return `di ${this._tradingPlanRules.maxDailyTrades}` || ''
+  }
+  public getLast100TradesWinrate(): number {
+    const profit = this._last100trades?.filter(trade => trade?.ongoing == false && trade?.closeType === "Take Profit")?.length;
+    const loss = this._last100trades?.filter(trade => trade?.ongoing == false && trade?.closeType === "Stop Loss")?.length;
+    return Math.round(profit / (profit + loss) * 100)
   }
 }

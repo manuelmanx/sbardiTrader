@@ -1,0 +1,29 @@
+@mixin progress-circle-component-theme($theme){
+    .circular {
+        background-color:map-get($theme,primary-blue)!important;
+        &.clean{
+          background-color:map-get($theme,primary)!important;
+        }
+        .inner {
+            background-color:map-get($theme,secondary)!important;
+        }
+        .outer {
+        }
+        .circle {
+          .dot{
+            background-color:map-get($theme,primary-blue)!important;
+          }
+          .bar {
+            background-color:map-get($theme,primary)!important;
+            .progress {
+                background-color:map-get($theme,primary-blue)!important;
+            }
+          }
+        }
+        .numb {
+            color:map-get($theme,primary-blue)!important;
+        }
+        
+      }
+      
+}

@@ -1,0 +1,16 @@
+<div class="circular" [ngClass]="{'clean':value<=50}">
+    <div class="inner"></div>
+    <div class="outer"></div>
+    <div class="numb">{{ title||value }}</div>
+    <div class="scale">{{ subtitle || '%'}}</div>
+    <div class="circle">
+        <div class="dot start"></div>
+        <div class="dot end" [style.transform]="getDotDegree()"></div>
+        <div class="bar left">
+            <div class="progress" [style.transform]="getLeftSideDegree()"></div>
+        </div>
+        <div class="bar right">
+            <div class="progress" [style.transform]="getRightSideDegree()"></div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { $ComponentEventType, $ComponentTemplateClass } from 'src/app/shared/classes/component-template.class';
 
 @Component({
@@ -6,7 +6,7 @@ import { $ComponentEventType, $ComponentTemplateClass } from 'src/app/shared/cla
   templateUrl: './inputbox.component.html',
   styleUrls: ['./inputbox.component.scss']
 })
-export class InputboxComponent implements OnInit, $ComponentTemplateClass {
+export class InputboxComponent implements OnInit, OnChanges, $ComponentTemplateClass {
   @Input('title') public title: any;
   @Input('placeholder') public placeholder: any = "Inserisci...";
   @Input('value') public value: any;
@@ -32,7 +32,9 @@ export class InputboxComponent implements OnInit, $ComponentTemplateClass {
       this.emitComponentEvent();
     }
   }
-
+  public ngOnChanges(): void {
+    this.inputValidation();
+  }
   public inputValidation(): void {
     if (this.numbersType === 'negative' && this.value > 0 && this.type === 'number') {
       this.value *= -1;

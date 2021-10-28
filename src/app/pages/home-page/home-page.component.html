@@ -58,13 +58,10 @@
                         <span class="edit-image-icon lnr lnr-cloud-upload"></span>
                     </div>
                     <app-button color="primary-blue" width="100%" class="button" (onComponentEvent)="onAddNewTrade()"
-                        [isDisabled]="!getTradingRulesData()">
+                        [isDisabled]="!getTradingRulesData()||!canIRegisterNewTrade">
                         Nuovo Trade</app-button>
                     <app-button color="white-blue" width="100%" class="button">Vedi Report</app-button>
                     <app-button color="white-blue" width="100%" class="button">Impostazioni</app-button>
-                </div>
-                <div class="todays-trades-counter">
-
                 </div>
                 <div class="fast-action-ongoing-trades">
                     <div class="ongoing-trades-title">Trade Attive</div>
@@ -72,6 +69,17 @@
                         <app-trade-preview class="ongoing-trade-preview" [value]="trade"></app-trade-preview>
                     </ng-container>
                     <div *ngIf="!getOngoingTrades()?.length" class="no-data-found">Ancora nessun dato...</div>
+                </div>
+                <div class="todays-trades-counter">
+                    <div class="widget" title="Operazioni giornaliere">
+                        <app-progress-circle [title]="getDailyTradesLengthString()"
+                            [subtitle]="getDailyTradesLimitString()" [value]="getPercentageOfDailyTrades()">
+                        </app-progress-circle>
+                    </div>
+                    <div class="widget"
+                        title="Winrate ultime 100 Operazioni &#10;Viene calcolato con la percentuale di Take Profit e Stop Loss">
+                        <app-progress-circle [value]="getLast100TradesWinrate()"></app-progress-circle>
+                    </div>
                 </div>
             </div>
         </ng-container>

@@ -28,6 +28,7 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { NewTradeModalFormComponent } from './components/new-trade-modal-form/new-trade-modal-form.component';
 import { MultiselectComponent } from './components/multiselect/multiselect.component';
 import { PopupModalComponent } from './components/popup-modal/popup-modal.component';
+import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +46,7 @@ import { PopupModalComponent } from './components/popup-modal/popup-modal.compon
     NewTradeModalFormComponent,
     MultiselectComponent,
     PopupModalComponent,
+    ProgressCircleComponent,
   ],
   imports: [
     BrowserModule,

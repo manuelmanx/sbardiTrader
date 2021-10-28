@@ -17,7 +17,7 @@ export class DatabaseService {
   private _userTradeList: AngularFireList<$UserTradeOperationType>;
   private _lastClosedTrades: AngularFireList<$UserTradeOperationType>;
   private _ongoingTrades: AngularFireList<$UserTradeOperationType>;
-  private _todayStopLoss: AngularFireList<$UserTradeOperationType>;
+  private _todayTrades: AngularFireList<$UserTradeOperationType>;
 
   private _userPath: string;
   private _$isFirstLogin = new BehaviorSubject<boolean>(false);
@@ -52,10 +52,10 @@ export class DatabaseService {
   }
 
   private _loadUserData(): void {
-    this._userTradeList = this._af.list(`${this._userPath}/tradeList`);
+    this._userTradeList = this._af.list(`${this._userPath}/tradeList`, ref => ref.limitToLast(100));
     this._lastClosedTrades = this._af.list(`${this._userPath}/tradeList`, ref => ref.orderByChild("ongoing").equalTo(false).limitToLast(3));
     this._ongoingTrades = this._af.list(`${this._userPath}/tradeList`, ref => ref.orderByChild("ongoing").equalTo(true));
-    this._todayStopLoss = this._af.list(`${this._userPath}/tradeList`, ref => ref.orderByChild("date").startAt(new Date().toISOString()));
+    this._todayTrades = this._af.list(`${this._userPath}/tradeList`, ref => ref.orderByChild("date").startAt(new Date(new Date().setHours(0, 0, 0, 0)).toISOString()));
     this._userTradingPlan = this._af.object(`${this._userPath}/tradingPlan`);
     console.log("User data successfully loaded...");
     this._$isLoadingData.next(false);
@@ -79,8 +79,11 @@ export class DatabaseService {
   public getUserLastClosedTrades(): Observable<$UserTradeOperationType[]> {
     return this._lastClosedTrades?.valueChanges()
   }
-  public getTodayStopLoss(): Observable<$UserTradeOperationType[]> {
-    return this._todayStopLoss?.valueChanges();
+  public getLast100Trades(): Observable<$UserTradeOperationType[]> {
+    return this._userTradeList?.valueChanges()
+  }
+  public getTodayTrades(): Observable<$UserTradeOperationType[]> {
+    return this._todayTrades?.valueChanges();
   }
 
   private _createNewUserDbPath(): void {

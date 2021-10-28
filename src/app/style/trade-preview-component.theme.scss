@@ -27,10 +27,13 @@
             background-color:map-get($theme,hilight)!important;
             color:map-get($theme,primary)!important;
             &.hl-cross{
-                background-color:map-get($theme, primary-red)!important;
+                background-color:map-get($theme, primary-blue)!important;
             }
             &.hl-exit-up{
                 background-color:map-get($theme, primary-blue)!important;
+            }
+            &.hl-trash{
+                background-color:map-get($theme, primary-red)!important;
             }
         }
     }

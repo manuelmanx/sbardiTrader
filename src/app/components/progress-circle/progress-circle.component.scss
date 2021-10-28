@@ -1,0 +1,92 @@
+.circular {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    border-radius: 50%;
+    .common {
+      position: absolute;
+      z-index: 6;
+      height: 100%;
+      width: 100%;
+      border-radius: 100%;
+    }
+    .inner {
+      @extend .common;
+      top: 50%;
+      left: 50%;
+      height: 80px;
+      width: 80px;
+      margin: -40px 0 0 -40px;
+      border-radius: 100%;
+    }
+    .outer {
+      @extend .common;
+    }
+    .circle {
+      @extend .common;
+      z-index: 1;
+      .dot{
+          position:absolute;
+          display:block;
+          width:10px;
+          height:10px;
+          border-radius:50%;
+          left:45px;
+          z-index:500;
+          &.end{
+              transform-origin:5px 50px;
+          }
+      }
+      .bar {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        border-radius: 100%;
+        clip: rect(0px, 100px, 100px, 50px);
+        .progress {
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          border-radius: 100%;
+          clip: rect(0px, 50px, 100px, 0px);
+        }
+        &.left {
+          .progress {
+            z-index: 1;
+          }
+        }
+        &.right {
+          z-index: 3;
+          transform: rotate(180deg);
+        }
+      }
+    }
+    .numb {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      font-weight: bold;
+      font-size: 24px;
+      
+    }
+    .scale{
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+        font-weight: bold;
+        width:fit-content;
+        opacity:60%;
+        font-size: 14px;
+        box-shadow: inset 0px 3px 0px -1px rgba(0, 0, 0, 0.75);
+        padding-top:4px;
+        margin-top:2px;
+        padding-left:4px;
+        padding-right:4px;
+    }
+    
+  }
+  
