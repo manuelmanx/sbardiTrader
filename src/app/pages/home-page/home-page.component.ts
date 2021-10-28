@@ -56,11 +56,9 @@ export class HomePageComponent implements OnInit {
           this._ongoingTrades = data;
         })
         this._db.getUserLastClosedTrades().subscribe(data => {
-          console.log(data)
           this._lastClosedTrades = data;
         })
         this._db.getTodayTrades().subscribe(data => {
-          console.log('todayTrades', data);
           this._todayTrades = data;
         })
         this._db.getLast100Trades().subscribe(data => {
@@ -156,7 +154,6 @@ export class HomePageComponent implements OnInit {
     this.showTradingPlanModal = true;
   }
   public onTradingPlanEditorEvent(event: $ComponentEventType): void {
-    console.log(event)
     switch (event?.eventName) {
       case "onTradingPlanEditorSaveChanges":
         this._saveTradingPlanRules(event.eventData).then(success => {

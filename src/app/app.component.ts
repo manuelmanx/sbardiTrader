@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { $ComponentEventType } from './shared/classes/component-template.class';
 import { AuthGuardService } from './shared/services/auth-guard/auth-guard.service';
 
 @Component({
@@ -8,6 +9,7 @@ import { AuthGuardService } from './shared/services/auth-guard/auth-guard.servic
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  public isCalculatorOpened: boolean = false;
   constructor(private _authGuardService: AuthGuardService, private _router: Router) {
     this._authGuardService.init()
   }
@@ -22,7 +24,17 @@ export class AppComponent {
     )
   }
 
-  isLoginPage(): boolean {
+  public isLoginPage(): boolean {
     return this._router.url === "/loginpage";
+  }
+  public openCalculator(): void {
+    this.isCalculatorOpened = true;
+  }
+  public catchCalculatorEvents(event: $ComponentEventType) {
+    switch (event.eventName) {
+      case "onCloseCalculatorModal":
+        this.isCalculatorOpened = false;
+        break
+    }
   }
 }

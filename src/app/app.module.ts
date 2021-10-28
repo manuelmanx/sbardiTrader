@@ -29,6 +29,8 @@ import { NewTradeModalFormComponent } from './components/new-trade-modal-form/ne
 import { MultiselectComponent } from './components/multiselect/multiselect.component';
 import { PopupModalComponent } from './components/popup-modal/popup-modal.component';
 import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
+import { DraggableModalComponent } from './components/draggable-modal/draggable-modal.component';
+import { CalculatorComponent } from './components/calculator/calculator.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +49,8 @@ import { ProgressCircleComponent } from './components/progress-circle/progress-c
     MultiselectComponent,
     PopupModalComponent,
     ProgressCircleComponent,
+    DraggableModalComponent,
+    CalculatorComponent,
   ],
   imports: [
     BrowserModule,

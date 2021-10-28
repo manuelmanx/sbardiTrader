@@ -9,4 +9,26 @@
             }
         }
     }
+    
+   
+  
+  .floating-wrapper {
+    background-color: map-get($theme,primary)!important;
+    box-shadow: 0px 4px 4px -2px rgba(0,0,0,0.3);
+    .header-wrapper{
+        background-color: map-get($theme,primary-blue)!important;
+        .floating-dragger {
+            color: map-get($theme,primary)!important;
+        }
+        .floating-title{
+            color: map-get($theme,primary)!important;
+        }
+    }
+    .content-wrapper{
+        padding:8px 16px 16px 16px;
+        background:map-get($theme,primary)!important;
+    }
+  }
+  
+  
 }

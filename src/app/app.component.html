@@ -24,10 +24,15 @@
             Sbardi View
         </div>
         <div class="header-options">
-            <div class="logout-header-button button" (click)="logout()" *ngIf="!isLoginPage()">
+            <div class="logout-header-button button" title="Apri calcolatrice" (click)="openCalculator()"
+                *ngIf="!isLoginPage()" [ngClass]="{'active': isCalculatorOpened}">
+                <span class="lnr lnr-dice"></span>
+            </div>
+            <div class="logout-header-button button" title="Esci" (click)="logout()" *ngIf="!isLoginPage()">
                 <span class="lnr lnr-exit"></span>
             </div>
         </div>
     </div>
     <router-outlet></router-outlet>
 </div>
+<app-calculator (onComponentEvent)="catchCalculatorEvents($event)" *ngIf="isCalculatorOpened"></app-calculator>
