@@ -25,7 +25,11 @@ export class HomePageComponent implements OnInit {
   private _last100trades: $UserTradeOperationType[];
   public showTradingPlanModal: boolean = false;
   public showNewTradeModal: boolean = false;
+  public showPartializeTradeModal: boolean = false;
+  public showCloseTradeModal: boolean = false;
 
+  public tradeToPartialize: $UserTradeOperationType = null;
+  public tradeToClose: $UserTradeOperationType = null;
   public canIRegisterNewTrade = true;
   constructor(private _authGuardService: AuthGuardService, private _db: DatabaseService, private _router: Router) {
 
@@ -197,15 +201,61 @@ export class HomePageComponent implements OnInit {
     }
     return progress;
   }
+
   public getDailyTradesLengthString(): string {
     return `${this._todayTrades?.length}` || '';
   }
+
   public getDailyTradesLimitString(): string {
     return `di ${this._tradingPlanRules.maxDailyTrades}` || ''
   }
+
   public getLast100TradesWinrate(): number {
     const profit = this._last100trades?.filter(trade => trade?.ongoing == false && trade?.closeType === "Take Profit")?.length;
     const loss = this._last100trades?.filter(trade => trade?.ongoing == false && trade?.closeType === "Stop Loss")?.length;
-    return Math.round(profit / (profit + loss) * 100)
+    return Math.round(profit / (profit + loss) * 100) || 0
+  }
+
+  public catchOngoingTradeEvent(event: $ComponentEventType): void {
+    console.log(event)
+    switch (event?.eventName) {
+      case "onPartializeTrade":
+        this.tradeToPartialize = event.eventData;
+        this.showPartializeTradeModal = true;
+        break;
+      case "onCloseTrade":
+        this.tradeToClose = event.eventData;
+        this.showCloseTradeModal = true;
+        break;
+    }
+  }
+  public onPartializeTradeModalEvent(event): void {
+    console.log(event)
+    switch (event?.eventName) {
+      case "onDestroyWindow":
+        this.showPartializeTradeModal = false;
+        this.tradeToPartialize = null;
+        break;
+      case "onPartializeSave":
+        this._db.updateTradeValue(event?.eventData).then(success => {
+          this.showPartializeTradeModal = false;
+          this.tradeToPartialize = null;
+        })
+        break;
+    }
+  }
+  public onCloseTradeModalEvent(event): void {
+    switch (event?.eventName) {
+      case "onDestroyWindow":
+        this.showCloseTradeModal = false;
+        this.tradeToClose = null;
+        break;
+      case "onCloseTradeSave":
+        this._db.updateTradeValue(event?.eventData).then(success => {
+          this.showCloseTradeModal = false;
+          this.tradeToClose = null;
+        })
+        break;
+    }
   }
 }

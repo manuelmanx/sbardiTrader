@@ -31,6 +31,9 @@ import { PopupModalComponent } from './components/popup-modal/popup-modal.compon
 import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
 import { DraggableModalComponent } from './components/draggable-modal/draggable-modal.component';
 import { CalculatorComponent } from './components/calculator/calculator.component';
+import { PartializeTradeModalComponent } from './components/partialize-trade-modal/partialize-trade-modal.component';
+import { CloseTradeModalComponent } from './components/close-trade-modal/close-trade-modal.component';
+import { TextAreaComponent } from './components/text-area/text-area.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +54,9 @@ import { CalculatorComponent } from './components/calculator/calculator.componen
     ProgressCircleComponent,
     DraggableModalComponent,
     CalculatorComponent,
+    PartializeTradeModalComponent,
+    CloseTradeModalComponent,
+    TextAreaComponent,
   ],
   imports: [
     BrowserModule,

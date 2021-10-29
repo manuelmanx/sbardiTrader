@@ -26,8 +26,8 @@ export class DraggableModalComponent implements OnInit {
   @HostListener('document:mousemove', ['$event'])
   onMouseMove(e) {
     if (this.data.isDivHold) {
-      var xRight = Math.round((window.innerWidth - e.clientX) - this.data.offsetX);
-      var yBottom = Math.round((window.innerHeight - e.clientY) - this.data.offsetY);
+      var xRight = Math.round((window.innerWidth - e.clientX) - this.data.offsetX + (this._size.width / 2));
+      var yBottom = Math.round((window.innerHeight - e.clientY) - this.data.offsetY + (this._size.height / 2));
       this._makeComponentInsideBox(xRight, yBottom);
     }
   }
@@ -64,15 +64,13 @@ export class DraggableModalComponent implements OnInit {
       xRight = Math.round(ADR);
     }
 
-    if (!!xLeft && xLeft < 1) xLeft = 1;
-    if (!!xRight && xRight < 1) xRight = 1;
+    if (!!xLeft && (xLeft + this._size.width / 2) < 1) xLeft = 1 - (this._size.width / 2);
+    if (!!xRight && (xRight - this._size.width / 2) < 1) xRight = 1 + (this._size.width / 2);
 
-    if (yBottom < 1) {
-      yBottom = 1;
-    } else if (yBottom < 1) {
-      yBottom = 1;
-    } else if (yBottom > window.innerHeight - (this._size?.height)) {
-      yBottom = window.innerHeight - (this._size?.height)
+    if ((yBottom - this._size.height / 2) < 24) {
+      yBottom = 24 + (this._size.height / 2);
+    } else if ((yBottom + this._size.height / 2) > window.innerHeight - 1) {
+      yBottom = window.innerHeight - (this._size?.height) + (this._size.height / 2)
     }
     if (xRight) {
       this._floatingWrapper.nativeElement.style.removeProperty("left");

@@ -35,6 +35,7 @@ export type $UserTradeOperationType = {
     analisysLink?: string,
     warnings?: $UserTradeWarningsType[],
     description?: string;
+    _key?: string;
 }
 
 export type $UserTradeWarningsType = {

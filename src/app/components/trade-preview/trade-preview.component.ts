@@ -53,6 +53,7 @@ export class TradePreviewComponent implements OnInit, $ComponentTemplateClass {
   public onPartializeTradeClick(): void {
     this.emitComponentEvent("onPartializeTrade");
   }
+
   public onDeleteTrade(): void {
     this.emitComponentEvent("onDeleteTrade");
   }

@@ -23,11 +23,11 @@
             [isDisabled]="value?.ongoing" (onComponentEvent)="value.closeType = $event?.eventData?.value">
         </app-combobox>
         <app-inputbox [isDisabled]="value?.ongoing" title="Profitto %" class="inputfield" type="number"
-            (onComponentEvent)="value.percentProfit = $event?.eventData"
+            (onComponentEvent)="value.percentProfit = $event?.eventData||value?.percentProfit"
             [numbersType]="(value?.closeType=='Stop Loss')?'negative':(value?.closeType=='Take Profit')?'positive':null">
         </app-inputbox>
         <app-inputbox [isDisabled]="value?.ongoing || !tradingPlanRules?.takePartials" title="Parziali"
-            class="inputfield" type="number" (onComponentEvent)="value.partial = $event?.eventData">
+            class="inputfield" type="number" (onComponentEvent)="value.partial = $event?.eventData || value?.partial">
         </app-inputbox>
     </div>
 </app-popup-modal>

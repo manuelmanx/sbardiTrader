@@ -35,6 +35,7 @@ export class NewTradeModalFormComponent implements OnInit, $ComponentTemplateCla
     }
     this.value.id = uuidv4();
     this.value.percentProfit = 0;
+    this.value.partial = 0;
     if (!!this.tradingPlanRules) {
       this.confirmationCombobox.options = this.tradingPlanRules?.entryCheckList.map((c: string) => {
         return { id: c, value: c, isSelected: false, isDisabled: false }
@@ -43,8 +44,11 @@ export class NewTradeModalFormComponent implements OnInit, $ComponentTemplateCla
       this.value.ongoing = true;
     }
   }
+
   public onSaveButtonClick(): void {
     this.isLoading = true;
+    console.log(this.value)
+    this.value.symbol = this.value.symbol.toUpperCase();
     this.emitComponentEvent("onTradingPlanEditorSaveChanges");
   }
 

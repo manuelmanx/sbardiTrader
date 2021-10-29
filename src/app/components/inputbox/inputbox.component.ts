@@ -34,6 +34,7 @@ export class InputboxComponent implements OnInit, OnChanges, $ComponentTemplateC
   }
   public ngOnChanges(): void {
     this.inputValidation();
+    this.onComponentEvent.emit({ eventName: "onInputChange", eventData: this.value });
   }
   public inputValidation(): void {
     if (this.numbersType === 'negative' && this.value > 0 && this.type === 'number') {

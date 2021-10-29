@@ -1,12 +1,8 @@
 <div class="popup-modal-wrapper">
-    <div class="popup-modal-form">
-        <div class="popup-modal-form-header">
-            {{title}}
-        </div>
+    <app-draggable-modal [title]="title" class="draggable-modal" (onComponentEvent)="onDraggableModalEvent($event)">
         <div class="popup-modal-content">
             <ng-content></ng-content>
             <div class="popup-modal-footer">
-                <app-button class="button" (onComponentEvent)="onDestroyButtonClick()">Annulla</app-button>
                 <app-button class="button" color="primary-blue" (onComponentEvent)="onSaveButtonClick()"
                     [isDisabled]="!saveButtonEnabled">Salva
                 </app-button>
@@ -15,5 +11,5 @@
                 <app-progressbar type="indefinite" style="width:100%;"></app-progressbar>
             </div>
         </div>
-    </div>
+    </app-draggable-modal>
 </div>

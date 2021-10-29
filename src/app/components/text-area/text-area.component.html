@@ -1,0 +1,5 @@
+<div class="input-wrapper" [ngClass]="{'disabled':isDisabled}">
+    <div class="input-title">{{title}}</div>
+    <textarea type="text" class="input-field" (input)="emitComponentEvent()" [(ngModel)]="value">
+    </textarea>
+</div>

@@ -1,0 +1,23 @@
+.new-trade-modal-form-line{
+    display:flex;
+    flex-wrap: nowrap;
+    padding:8px 0px;
+    .inputfield{
+        padding:0px 8px;
+        width:100%;
+        display:flex;
+        align-items:center;
+        &:first-child{
+            padding-left:0px;
+        }
+        &:last-child{
+            padding-right:0px;
+        }
+        &.smaller{
+            align-items:flex-end; 
+        }
+        &.full-width{
+            width:100%;;
+        }
+    }
+}

@@ -31,10 +31,17 @@ export class PopupModalComponent implements OnInit, $ComponentTemplateClass {
     this.saveButtonEnabled = value;
   }
 
-  public onSaveButtonClick() {
+  public onSaveButtonClick(): void {
     this.emitComponentEvent("onSaveModalClick")
   }
-  public onDestroyButtonClick() {
+  public onDestroyButtonClick(): void {
     this.emitComponentEvent("onDestroyModalClick")
+  }
+  public onDraggableModalEvent(event): void {
+    switch (event?.eventName) {
+      case "onCloseDraggableModal":
+        this.emitComponentEvent("onDestroyModalClick");
+        break;
+    }
   }
 }

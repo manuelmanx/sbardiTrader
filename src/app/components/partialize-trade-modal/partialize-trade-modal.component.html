@@ -1,0 +1,19 @@
+<app-popup-modal title="Parzializza" (onComponentEvent)="catchEvent($event)" [isLoading]="isLoading"
+    [saveButtonEnabled]="canActivateSaveButton()">
+    <div class="new-trade-modal-form-line">
+        <label>Coppia: {{value?.symbol?.toUpperCase()}} </label>
+    </div>
+    <div class="new-trade-modal-form-line">
+        <label>Profitto totale: {{+((tmpProfit + value?.percentProfit).toFixed(2))||value?.percentProfit||0}}%
+        </label>
+    </div>
+    <div class="new-trade-modal-form-line">
+        <label>Parzializzazioni: {{value?.partial || '0'}} </label>
+    </div>
+    <div class="new-trade-modal-form-line">
+        <app-inputbox class="inputfield" title="Profitto %" tooltip="Profitto generato con la parzializzazione"
+            placeholder="es: 2,5%" type="number" (onComponentEvent)="tmpProfit = $event?.eventData"
+            [isDisabled]="isLoading">
+        </app-inputbox>
+    </div>
+</app-popup-modal>

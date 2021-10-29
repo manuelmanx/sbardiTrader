@@ -60,13 +60,17 @@
                     <app-button color="primary-blue" width="100%" class="button" (onComponentEvent)="onAddNewTrade()"
                         [isDisabled]="!getTradingRulesData()||!canIRegisterNewTrade">
                         Nuovo Trade</app-button>
-                    <app-button color="white-blue" width="100%" class="button">Vedi Report</app-button>
-                    <app-button color="white-blue" width="100%" class="button">Impostazioni</app-button>
+                    <app-button color="white-blue" width="100%" class="button" [isDisabled]="true">Vedi Report
+                    </app-button>
+                    <app-button color="white-blue" width="100%" class="button" (onComponentEvent)="onAddTradingPlan()">
+                        Trading Plan
+                    </app-button>
                 </div>
                 <div class="fast-action-ongoing-trades">
                     <div class="ongoing-trades-title">Trade Attive</div>
                     <ng-container *ngFor="let trade of getOngoingTrades()">
-                        <app-trade-preview class="ongoing-trade-preview" [value]="trade"></app-trade-preview>
+                        <app-trade-preview (onComponentEvent)="catchOngoingTradeEvent($event)"
+                            class="ongoing-trade-preview" [value]="trade"></app-trade-preview>
                     </ng-container>
                     <div *ngIf="!getOngoingTrades()?.length" class="no-data-found">Ancora nessun dato...</div>
                 </div>
@@ -93,6 +97,12 @@
         </div>
     </div>
 </div>
+
+<app-partialize-trade-modal [value]="tradeToPartialize" *ngIf="showPartializeTradeModal"
+    (onComponentEvent)="onPartializeTradeModalEvent($event)"></app-partialize-trade-modal>
+
+<app-close-trade-modal [value]="tradeToClose" *ngIf="showCloseTradeModal"
+    (onComponentEvent)="onCloseTradeModalEvent($event)"></app-close-trade-modal>
 
 <app-new-trade-modal-form [tradingPlanRules]="getTradingRulesData()" (onComponentEvent)="onNewTradeModalEvent($event)"
     *ngIf="showNewTradeModal">

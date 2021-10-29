@@ -65,8 +65,9 @@ export class DatabaseService {
     return this._userTradingPlan.set(data);
   }
 
-  public registerNewTrade(data: $UserTradeOperationType): any {
-    return this._userTradeList.push(data);
+  public registerNewTrade(data: $UserTradeOperationType): Promise<void> {
+    let tmp = this._userTradeList.push(data);
+    return this._userTradeList.update(tmp.key, { _key: tmp.key })
   }
 
   public getUserTradingPlan(): Observable<$UserTradingPlanType> {
@@ -95,7 +96,9 @@ export class DatabaseService {
     })
   }
 
-
+  public updateTradeValue(trade: $UserTradeOperationType): Promise<void> {
+    return this._ongoingTrades.update(trade?._key, trade)
+  }
 
   public uploadUserAccountImage(image: any): any {
     return this._as.upload(`${this._userPath}/accountImage`, image);

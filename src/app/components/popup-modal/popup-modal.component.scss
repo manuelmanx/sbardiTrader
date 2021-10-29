@@ -12,39 +12,25 @@
     align-items:center;
     justify-content:flex-start;
     overflow:auto;
-    .popup-modal-form{
-        position:relative;
-        top:120px;
-        min-width: 400px;
-        width:fit-content;
-        height:fit-content;
-        border-radius:16px;
-        margin-bottom:16px;
-        .popup-modal-form-header{
-            border-top-left-radius: 16px;
-            border-top-right-radius: 16px;
-            width:calc(100%-32px);
-            padding:16px;
-            text-transform: capitalize;
-        }
-        .popup-modal-content{
-            width:calc(100%-32px);
-            padding:8px 16px;
-            .popup-modal-footer{
+    .draggable-modal{
+            .popup-modal-content{
                 width:calc(100%-32px);
-                display:flex;
-                justify-content:flex-end;
-                .button{
-                    margin:0px 4px;
-                    &:last-child{
-                        margin-right:0px;
+                .popup-modal-footer{
+                    width:calc(100%-32px);
+                    padding-top:8px;
+                    display:flex;
+                    justify-content:flex-end;
+                    .button{
+                        margin:0px 4px;
+                        &:last-child{
+                            margin-right:0px;
+                        }
                     }
                 }
+                .popup-modal-form-loader{
+                    padding-top:16px;
+                    display:flex;
+                }
             }
-            .popup-modal-form-loader{
-                padding-top:16px;
-                display:flex;
-            }
-        }
     }
 }

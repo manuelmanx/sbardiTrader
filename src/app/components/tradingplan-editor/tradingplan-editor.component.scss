@@ -28,18 +28,25 @@
     height:fit-content;
     display:flex;
     flex-direction: column;
+    max-height:100px;
+    overflow-y:auto;
     .checklist-element{
         width:100%;
         display:flex;
         height:fit-content;
         align-items:center;
-        margin: 8px 0px;
+        margin-top:8px;
+        padding-bottom:4px;
+        margin-bottom:4px;
+        box-shadow: inset 0px -2px 0px -1px rgba(0,0,0,0.3);
         .pointer{
             width:4px;
             height:4px;
             border-radius:50%;
         }
         .label{
+            width:100%;
+            display:inline-flex;
             padding:0px 8px;
         }
         .delete{

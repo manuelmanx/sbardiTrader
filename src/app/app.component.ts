@@ -28,13 +28,13 @@ export class AppComponent {
     return this._router.url === "/loginpage";
   }
   public openCalculator(): void {
-    this.isCalculatorOpened = true;
+    this.isCalculatorOpened = !this.isCalculatorOpened;
   }
   public catchCalculatorEvents(event: $ComponentEventType) {
     switch (event.eventName) {
       case "onCloseCalculatorModal":
         this.isCalculatorOpened = false;
-        break
+        break;
     }
   }
 }
