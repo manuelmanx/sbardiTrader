@@ -24,34 +24,33 @@ export class DatabaseService {
   public onIsFirstLogin = this._$isFirstLogin.asObservable();
   private _$isLoadingData = new BehaviorSubject<boolean>(true);
   public onLoadingData = this._$isLoadingData.asObservable();
-  private _userSubscription: Subscription;
   constructor(private _af: AngularFireDatabase, private _as: AngularFireStorage) {
   }
 
   public initDB(user: Observable<$UserInterface>): void {
-    if (!this._userSubscription) {
-      console.log("Fetching data...")
-      this._userSubscription = user.subscribe(data => {
-        this._userInfo = data;
-        if (this._userInfo) {
-          this._setUpUserPath()
-          this._af.database.ref(`${this._userPath}/lastLogin`).once("value", snapshot => {
-            if (snapshot.exists()) {
-              this._loadUserData();
-            } else {
-              this._$isFirstLogin.next(true);
-              this._createNewUserDbPath();
-            }
-          })
-        }
-      })
-    }
+    console.log("Fetching data...");
+    user.subscribe(data => {
+      this._userInfo = data;
+      if (this._userInfo) {
+        this._setUpUserPath()
+        this._af.database.ref(`${this._userPath}/lastLogin`).once("value", snapshot => {
+          if (snapshot.exists()) {
+            this._loadUserData();
+          } else {
+            this._$isFirstLogin.next(true);
+            this._createNewUserDbPath();
+          }
+        })
+      }
+    })
   }
+
   private _setUpUserPath(): void {
     this._userPath = `users/${this._userInfo?.uid}`
   }
 
   private _loadUserData(): void {
+    console.log("Loading user data")
     this._userTradeList = this._af.list(`${this._userPath}/tradeList`, ref => ref.limitToLast(100));
     this._lastClosedTrades = this._af.list(`${this._userPath}/tradeList`, ref => ref.orderByChild("ongoing").equalTo(false).limitToLast(3));
     this._ongoingTrades = this._af.list(`${this._userPath}/tradeList`, ref => ref.orderByChild("ongoing").equalTo(true));

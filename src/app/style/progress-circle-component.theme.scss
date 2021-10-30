@@ -7,8 +7,6 @@
         .inner {
             background-color:map-get($theme,secondary)!important;
         }
-        .outer {
-        }
         .circle {
           .dot{
             background-color:map-get($theme,primary-blue)!important;
@@ -22,6 +20,9 @@
         }
         .numb {
             color:map-get($theme,primary-blue)!important;
+        }
+        .scale{ 
+          opacity:0.6!important;
         }
         
       }

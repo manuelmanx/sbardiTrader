@@ -22,7 +22,9 @@
         </app-combobox>
     </div>
     <div class="new-trade-modal-form-line">
-        <app-text-area title="Commento" (onComponentEvent)="value.description = $event.eventData"></app-text-area>
+        <app-text-area style="min-width:310px;" title="Commento"
+            (onComponentEvent)="value.description = $event.eventData">
+        </app-text-area>
     </div>
 
 </app-popup-modal>

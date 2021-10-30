@@ -45,7 +45,6 @@ export class HomePageComponent implements OnInit {
     this._authGuardService.getUserInfo().subscribe(data => {
       if (data) {
         this.userDetails = data;
-        console.log(data)
         if (!!this._db) {
           this._setupAccountConfigurationChecklist();
         }
@@ -217,7 +216,6 @@ export class HomePageComponent implements OnInit {
   }
 
   public catchOngoingTradeEvent(event: $ComponentEventType): void {
-    console.log(event)
     switch (event?.eventName) {
       case "onPartializeTrade":
         this.tradeToPartialize = event.eventData;
@@ -230,7 +228,6 @@ export class HomePageComponent implements OnInit {
     }
   }
   public onPartializeTradeModalEvent(event): void {
-    console.log(event)
     switch (event?.eventName) {
       case "onDestroyWindow":
         this.showPartializeTradeModal = false;
