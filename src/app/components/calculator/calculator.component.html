@@ -1,23 +1,52 @@
 <app-draggable-modal title="Calcolatrice" (onComponentEvent)="catchModalEvent($event)">
+    <app-tabs [value]="tabsOptions" (onComponentEvent)="activeTabName = $event?.eventData"></app-tabs>
     <div class="content">
-        <!-- <app-tabs [value]="tabsOptions"></app-tabs> -->
+        <ng-container *ngIf="activeTabName=='percent_calc'">
+            <div class="calculator-line">
+                <app-inputbox [value]="countSize[activeTabName]" style="width:100%" title="dimensione conto ($)"
+                    type="number" (onComponentEvent)="onCountSizeChanges($event)">
+                </app-inputbox>
+            </div>
+            <div class="calculator-line">
+                <app-inputbox [value]="profitSize[activeTabName]" style="width:100%" title="Profitto ($)" type="number"
+                    (onComponentEvent)="onProfitSizeChanges($event)">
+                </app-inputbox>
+            </div>
+            <div class="calculator-line">
+                <span class="orizontal-spacer"></span>
+            </div>
+            <div class="calculator-line">
+                <app-inputbox style="width:100%" title="Profitto (%)" placeholder="Risultato..." [value]="getResult()"
+                    type="number">
+                </app-inputbox>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="activeTabName=='value_calc'">
+            <div class="calculator-line">
+                <app-inputbox [value]="countSize[activeTabName]" style="width:100%" title="dimensione conto ($)"
+                    type="number" (onComponentEvent)="onCountSizeChanges($event)">
+                </app-inputbox>
+            </div>
+            <div class="calculator-line">
+                <app-inputbox [value]="profitSize[activeTabName]" style="width:100%" title="Profitto (%)" type="number"
+                    (onComponentEvent)="onProfitSizeChanges($event)">
+                </app-inputbox>
+            </div>
+            <div class="calculator-line">
+                <span class="orizontal-spacer"></span>
+            </div>
+            <div class="calculator-line">
+                <app-inputbox style="width:100%" title="Profitto ($)" placeholder="Risultato..." [value]="getResult()"
+                    type="number">
+                </app-inputbox>
+            </div>
+        </ng-container>
         <div class="calculator-line">
-            <app-inputbox style="width:100%" title="dimensione conto ($)" type="number"
-                (onComponentEvent)="countSize=$event?.eventData">
-            </app-inputbox>
+            <app-button style="width:100%;" width="100%" (onComponentEvent)="copyResult()">Copia</app-button>
         </div>
         <div class="calculator-line">
-            <app-inputbox style="width:100%" title="Profitto ($)" type="number"
-                (onComponentEvent)="profitSize = $event?.eventData">
-            </app-inputbox>
-        </div>
-        <div class="calculator-line">
-            <span class="orizontal-spacer"></span>
-        </div>
-        <div class="calculator-line">
-            <app-inputbox style="width:100%" title="Profitto (%)" placeholder="Risultato..."
-                [value]="getProfitPercentage()" type="number">
-            </app-inputbox>
+            <app-button style="width:100%;" width="100%" (onComponentEvent)="resetData()">Resetta</app-button>
         </div>
     </div>
+
 </app-draggable-modal>

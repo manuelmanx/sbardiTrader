@@ -35,6 +35,7 @@ import { PartializeTradeModalComponent } from './components/partialize-trade-mod
 import { CloseTradeModalComponent } from './components/close-trade-modal/close-trade-modal.component';
 import { TextAreaComponent } from './components/text-area/text-area.component';
 import { TabsComponent } from './components/tabs/tabs.component';
+import { SnackbarComponent } from './components/snackbar/snackbar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,6 +60,7 @@ import { TabsComponent } from './components/tabs/tabs.component';
     CloseTradeModalComponent,
     TextAreaComponent,
     TabsComponent,
+    SnackbarComponent,
   ],
   imports: [
     BrowserModule,

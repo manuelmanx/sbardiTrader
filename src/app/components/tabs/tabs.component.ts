@@ -23,18 +23,20 @@ export class TabsComponent implements OnInit, $ComponentTemplateClass {
   @Output() public onComponentEvent: EventEmitter<$ComponentEventType> = new EventEmitter<$ComponentEventType>();
 
   public emitComponentEvent(eventName?: string): void {
-    this.onComponentEvent.emit({ eventName: "OnTabChangeSelection", eventData: this.value?.find(e => e.isActive) })
+    this.onComponentEvent.emit({ eventName: "OnTabChangeSelection", eventData: this.value?.find(e => e.isActive)?.key })
   }
 
   ngOnInit(): void {
     if (!this.value.find(e => e.isActive) && !!this.value?.length) {
       this.value[0].isActive = true;
+      this.emitComponentEvent();
     }
   }
   public selectTab(key: string) {
     this.value?.forEach(e => {
       e.isActive = false;
     })
-    this.value.find(e => e.key === key).isActive = true
+    this.value.find(e => e.key === key).isActive = true;
+    this.emitComponentEvent();
   }
 }

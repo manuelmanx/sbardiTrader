@@ -69,8 +69,8 @@ export class DraggableModalComponent implements OnInit {
 
     if ((yBottom - this._size.height / 2) < 24) {
       yBottom = 24 + (this._size.height / 2);
-    } else if ((yBottom + this._size.height / 2) > window.innerHeight - 1) {
-      yBottom = window.innerHeight - (this._size?.height) + (this._size.height / 2)
+    } else if ((yBottom + this._size.height / 2) > window.innerHeight - 68) {
+      yBottom = window.innerHeight - 68 - (this._size?.height) + (this._size.height / 2)
     }
     if (xRight) {
       this._floatingWrapper.nativeElement.style.removeProperty("left");

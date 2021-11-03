@@ -4,6 +4,7 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angula
 import { AngularFireStorage } from '@angular/fire/storage';
 import { BehaviorSubject, from, Observable, Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { $CalculatorSetting } from '../../interfaces/components.dto';
 import { $UserTradeOperationType, $UserTradingPlanType } from '../../interfaces/database.dto';
 import { $UserInterface } from '../../interfaces/user.dto';
 
@@ -85,7 +86,14 @@ export class DatabaseService {
   public getTodayTrades(): Observable<$UserTradeOperationType[]> {
     return this._todayTrades?.valueChanges();
   }
-
+  public getCalculatorSettings(): Observable<$CalculatorSetting> {
+    let calcPath: AngularFireObject<$CalculatorSetting> = this._af.object(`${this._userPath}/calculator`)
+    return calcPath?.valueChanges()
+  }
+  public updateCalculatorSettings(data: $CalculatorSetting): Promise<void> {
+    let calcPath: AngularFireObject<$CalculatorSetting> = this._af.object(`${this._userPath}/calculator`)
+    return calcPath.update(data);
+  }
   private _createNewUserDbPath(): void {
     console.log("Creating user database path...");
     this._af.object(`${this._userPath}/lastLogin`).set(`${new Date().toISOString()}`).then(data => {

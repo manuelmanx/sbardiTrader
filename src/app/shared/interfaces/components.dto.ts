@@ -14,3 +14,10 @@ export type $TabsDataSourceType = {
     isActive?: boolean;
     isDisabled?: boolean;
 }
+
+export type $CalculatorSetting = {
+    countSize?: { [key: string]: number };
+    profitSize?: { [key: string]: number };
+    activeTabName?: $CalculatorTabsType;
+}
+export type $CalculatorTabsType = 'percent_calc' | 'value_calc'
