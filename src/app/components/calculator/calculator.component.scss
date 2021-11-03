@@ -1,14 +1,18 @@
-.calculator-line{
-    width:100%;
-    display:flex;
-    padding:8px 4px;
-    .orizontal-spacer{
-        display:block;
-        margin-top:2px;
-        height:1px;
+.content{
+    min-width:250px;
+    .calculator-line{
+        width:100%;
         display:flex;
-        width:calc(100% - 8px);
-        border-top:2px dotted black;
-        opacity:0.4;
+        padding:8px 4px;
+        .orizontal-spacer{
+            display:block;
+            margin-top:2px;
+            height:1px;
+            display:flex;
+            width:calc(100% - 8px);
+            border-top:2px dotted black;
+            opacity:0.4;
+        }
     }
 }
+

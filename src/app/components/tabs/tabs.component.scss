@@ -1,0 +1,29 @@
+.tabs-wrapper{
+    width:100%;
+    box-sizing: border-box;
+    height:fit-content;
+    display:flex;
+    flex-wrap:nowrap;
+    .tab{
+        height:fit-content;
+        width:fit-content;
+        display:flex;
+        flex-direction: column;
+        flex-wrap:nowrap;
+        cursor:pointer;
+        &:last-child{
+            border-top-right-radius:8px;
+        }
+        .content{
+            padding:8px 16px;
+            display:flex;
+            flex-direction: row;
+            white-space:nowrap;
+        }
+        .slide{
+            height:2px;
+            width:100%;
+            background:transparent;
+        }
+    } 
+}

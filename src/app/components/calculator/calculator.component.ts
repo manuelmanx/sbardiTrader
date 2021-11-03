@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { $ComponentEventType, $ComponentTemplateClass } from 'src/app/shared/classes/component-template.class';
+import { $TabsDataSourceType } from 'src/app/shared/interfaces/components.dto';
+import { $calculatorTabsTemplate } from 'src/app/shared/templates/calculator.template';
 
 @Component({
   selector: 'app-calculator',
@@ -17,6 +19,7 @@ export class CalculatorComponent implements OnInit, $ComponentTemplateClass {
   public color: any;
   public isDisabled: any;
   public tooltip: any;
+  public tabsOptions: $TabsDataSourceType[] = $calculatorTabsTemplate;
   @Output() public onComponentEvent: EventEmitter<$ComponentEventType> = new EventEmitter<$ComponentEventType>();
   public emitComponentEvent(eventName?: string): void {
     this.onComponentEvent.emit({ eventName: eventName, eventData: null })

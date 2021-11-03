@@ -1,0 +1,10 @@
+<div class="tabs-wrapper">
+    <ng-container *ngFor="let tab of value">
+        <div class="tab" [ngClass]="{'active':tab?.isActive, 'disabled':tab?.isDisabled}" (click)="selectTab(tab?.key)">
+            <div class="content" [ngClass]="{'active':tab?.isActive}">
+                {{tab?.label}}
+            </div>
+            <div class="slide" [ngClass]="{'active':tab?.isActive}"></div>
+        </div>
+    </ng-container>
+</div>

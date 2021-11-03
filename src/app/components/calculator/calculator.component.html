@@ -1,17 +1,23 @@
 <app-draggable-modal title="Calcolatrice" (onComponentEvent)="catchModalEvent($event)">
-    <div class="calculator-line">
-        <app-inputbox title="dimensione conto ($)" type="number" (onComponentEvent)="countSize=$event?.eventData">
-        </app-inputbox>
-    </div>
-    <div class="calculator-line">
-        <app-inputbox title="Profitto ($)" type="number" (onComponentEvent)="profitSize = $event?.eventData">
-        </app-inputbox>
-    </div>
-    <div class="calculator-line">
-        <span class="orizontal-spacer"></span>
-    </div>
-    <div class="calculator-line">
-        <app-inputbox title="Profitto (%)" placeholder="Risultato..." [value]="getProfitPercentage()" type="number">
-        </app-inputbox>
+    <div class="content">
+        <!-- <app-tabs [value]="tabsOptions"></app-tabs> -->
+        <div class="calculator-line">
+            <app-inputbox style="width:100%" title="dimensione conto ($)" type="number"
+                (onComponentEvent)="countSize=$event?.eventData">
+            </app-inputbox>
+        </div>
+        <div class="calculator-line">
+            <app-inputbox style="width:100%" title="Profitto ($)" type="number"
+                (onComponentEvent)="profitSize = $event?.eventData">
+            </app-inputbox>
+        </div>
+        <div class="calculator-line">
+            <span class="orizontal-spacer"></span>
+        </div>
+        <div class="calculator-line">
+            <app-inputbox style="width:100%" title="Profitto (%)" placeholder="Risultato..."
+                [value]="getProfitPercentage()" type="number">
+            </app-inputbox>
+        </div>
     </div>
 </app-draggable-modal>

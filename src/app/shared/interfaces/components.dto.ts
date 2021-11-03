@@ -8,3 +8,9 @@ export type $ComboOptionType = {
     isDisabled: boolean;
     isSelected: boolean;
 }
+export type $TabsDataSourceType = {
+    key: string;
+    label: string;
+    isActive?: boolean;
+    isDisabled?: boolean;
+}

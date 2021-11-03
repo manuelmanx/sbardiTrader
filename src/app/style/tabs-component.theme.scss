@@ -1,0 +1,21 @@
+
+@mixin tabs-component-theme($theme){
+    .tabs-wrapper{
+        background:transparent!important;
+        .tab{
+            background:map-get($theme,primary)!important;
+            .content{
+                color:map-get($theme,dark)!important;
+                opacity:0.6;
+                &.active{
+                    opacity:1;
+                }
+            }
+            .slide{
+                &.active{
+                    background:map-get($theme,primary-blue)!important;
+                }
+            }
+        } 
+    }
+}

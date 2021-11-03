@@ -10,6 +10,7 @@
 @import './tradingplan-editor-component.theme.scss';
 @import './popup-modal-component.theme.scss';
 @import './progress-circle-component.theme.scss';
+@import './tabs-component.theme.scss';
 
 $theme:(
     primary:#ffffff,
@@ -35,3 +36,4 @@ $theme:(
 @include tradingplan-editor-component-theme($theme);
 @include popup-modal-theme-component($theme);
 @include progress-circle-component-theme($theme);
+@include tabs-component-theme($theme);
