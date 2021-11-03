@@ -11,6 +11,7 @@
 @import './popup-modal-component.theme.scss';
 @import './progress-circle-component.theme.scss';
 @import './tabs-component.theme.scss';
+@import './snackbar-component.theme.scss';
 
 $theme:(
     primary:#ffffff,
@@ -37,3 +38,4 @@ $theme:(
 @include popup-modal-theme-component($theme);
 @include progress-circle-component-theme($theme);
 @include tabs-component-theme($theme);
+@include snackbar-component-theme($theme);

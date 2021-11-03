@@ -1,0 +1,6 @@
+@mixin snackbar-component-theme($theme){
+    .snackbar-wrapper{
+        background:map-get($theme,dark)!important;
+        color:map-get($theme,primary)!important;
+    }
+}

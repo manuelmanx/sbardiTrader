@@ -1,1 +1,11 @@
-<p>snackbar works!</p>
+<div class="snackbar-wrapper">
+    <div class="snackbar-content" [ngClass]="{'spaced':!value?.autoDestroySeconds}">
+        <div class="snackbar-title" *ngIf="value?.title">{{value?.title||'Title'}}</div>
+        <div class="snackbar-subtitle" *ngIf="value?.subtitle">{{value?.subtitle}}</div>
+    </div>
+    <ng-container *ngIf="!value?.autoDestroySeconds">
+        <div class="snackbar-destroy-btn">
+            <span class="lnr lnr-cross btn" (click)="emitComponentEvent()"></span>
+        </div>
+    </ng-container>
+</div>

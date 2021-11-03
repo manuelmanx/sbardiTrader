@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { $ComponentEventType } from './shared/classes/component-template.class';
+import { $SnackBarDataSourceType } from './shared/interfaces/components.dto';
 import { AuthGuardService } from './shared/services/auth-guard/auth-guard.service';
+import { SlaveService } from './shared/services/slave/slave.service';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +12,12 @@ import { AuthGuardService } from './shared/services/auth-guard/auth-guard.servic
 })
 export class AppComponent {
   public isCalculatorOpened: boolean = false;
-  constructor(private _authGuardService: AuthGuardService, private _router: Router) {
+  public snackBarSource: $SnackBarDataSourceType = null;
+  constructor(private _authGuardService: AuthGuardService, private _router: Router, private _slave: SlaveService) {
     this._authGuardService.init()
+    this._slave.onSnackbarChanges.subscribe((data: $SnackBarDataSourceType) => {
+      this.snackBarSource = data;
+    })
   }
   public logout() {
     this._authGuardService.signOut().subscribe(

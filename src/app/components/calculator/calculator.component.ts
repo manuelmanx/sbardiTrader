@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { $ComponentEventType, $ComponentTemplateClass } from 'src/app/shared/classes/component-template.class';
 import { $CalculatorSetting, $CalculatorTabsType, $TabsDataSourceType } from 'src/app/shared/interfaces/components.dto';
 import { DatabaseService } from 'src/app/shared/services/database/database.service';
+import { SlaveService } from 'src/app/shared/services/slave/slave.service';
 import { $calculatorTabsTemplate } from 'src/app/shared/templates/calculator.template';
 
 @Component({
@@ -22,7 +23,7 @@ export class CalculatorComponent implements OnInit, $ComponentTemplateClass {
   public tooltip: any;
   public tabsOptions: $TabsDataSourceType[] = $calculatorTabsTemplate;
   public activeTabName: $CalculatorTabsType = null;
-  constructor(private _db: DatabaseService) {
+  constructor(private _db: DatabaseService, private _slave: SlaveService) {
     this.tabsOptions.forEach(el => {
       this.countSize[el.key] = null;
       this.profitSize[el.key] = null;
@@ -62,8 +63,9 @@ export class CalculatorComponent implements OnInit, $ComponentTemplateClass {
   }
 
   public copyResult(): void {
-    navigator.clipboard.writeText(`${this.getResult()}`)
-    alert("Copied the text: " + `${this.getResult()}`);
+    const text = `${this.getResult()}`
+    navigator.clipboard.writeText(text)
+    this._slave.showSnackbar({ title: "Testo Copiato!", autoDestroySeconds: 2 })
     this._storeChanges();
   }
 

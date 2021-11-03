@@ -36,3 +36,6 @@
     <router-outlet></router-outlet>
 </div>
 <app-calculator (onComponentEvent)="catchCalculatorEvents($event)" *ngIf="isCalculatorOpened"></app-calculator>
+<div class="snack-container-wiew" *ngIf="!!snackBarSource">
+    <app-snackbar [value]="snackBarSource"></app-snackbar>
+</div>

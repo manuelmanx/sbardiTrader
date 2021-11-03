@@ -49,3 +49,12 @@
         }
     }
 }
+.snack-container-wiew{
+    width:fit-content;
+    position:absolute;
+    height:fit-content;
+    top:8px;
+    z-index:1002;
+    left: 50%;
+    transform:translate(-50%,50%)
+}

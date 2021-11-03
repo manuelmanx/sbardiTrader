@@ -1,5 +1,5 @@
 <ng-container *ngIf="!!value">
-    <div class="trade-preview-wrapper" [ngClass]="{'disabled':isDisabled}">
+    <div class="trade-preview-wrapper" [ngClass]="{'disabled':isDisabled, 'focus':isFocused}">
         <div class="trade-preview-symbol" [ngClass]="{'primary-red':isInLoss()}" title="Simbolo operato">
             {{value.symbol}}
         </div>
