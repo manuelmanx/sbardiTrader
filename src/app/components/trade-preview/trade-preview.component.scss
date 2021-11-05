@@ -5,8 +5,8 @@
     height:30px;
     align-items:center;
     border-radius:4px;
-    cursor:pointer;
     .trade-preview-symbol{
+        cursor:pointer;
         border-top-left-radius:4px;
         border-bottom-left-radius:4px;
         display:inline-flex;
@@ -28,6 +28,8 @@
         align-items:center;
         justify-content:flex-start;
         font-weight:bold;
+        user-select:none;
+        cursor:pointer;
     }
     .trade-preview-close-type{
         @extend .trade-preview-date;
