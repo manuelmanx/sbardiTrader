@@ -18,11 +18,10 @@ export class HomePageComponent implements OnInit {
   public isFirstLogin: boolean = false;
   public accountSetupChecklist: $AccountSetupCheckListType;
   private _uploadImageSubscription: Subscription;
-  private _tradingPlanRules: $UserTradingPlanType;
-  private _ongoingTrades: $UserTradeOperationType[];
-  private _closedTradesList: $UserTradeOperationType[];
-  private _todayTrades: $UserTradeOperationType[];
-  private _last100trades: $UserTradeOperationType[];
+  private _tradingPlanRules: $UserTradingPlanType = null;
+  private _ongoingTrades: $UserTradeOperationType[] = [];
+  private _closedTradesList: $UserTradeOperationType[] = [];
+  private _todayTrades: $UserTradeOperationType[] = [];
   public showTradingPlanModal: boolean = false;
   public showNewTradeModal: boolean = false;
   public showPartializeTradeModal: boolean = false;
@@ -30,7 +29,7 @@ export class HomePageComponent implements OnInit {
 
   public tradeToPartialize: $UserTradeOperationType = null;
   public tradeToClose: $UserTradeOperationType = null;
-  public canIRegisterNewTrade = true;
+  public canIRegisterNewTrade = null;
   constructor(private _authGuardService: AuthGuardService, private _db: DatabaseService, private _router: Router) {
 
   }
@@ -58,14 +57,11 @@ export class HomePageComponent implements OnInit {
         this._db.getUserOngoingTradeList().subscribe(data => {
           this._ongoingTrades = data;
         })
-        this._db.getUserClosedTrades().subscribe(data => {
+        this._db.getUserClosedTrades()?.subscribe(data => {
           this._closedTradesList = data;
         })
-        this._db.getTodayTrades().subscribe(data => {
+        this._db.getTodayTrades()?.subscribe(data => {
           this._todayTrades = data;
-        })
-        this._db.getLast100Trades().subscribe(data => {
-          this._last100trades = data;
         })
       }
     });
@@ -210,8 +206,8 @@ export class HomePageComponent implements OnInit {
   }
 
   public getLast100TradesWinrate(): number {
-    const profit = this._last100trades?.filter(trade => trade?.ongoing == false && trade?.closeType === "Take Profit")?.length;
-    const loss = this._last100trades?.filter(trade => trade?.ongoing == false && trade?.closeType === "Stop Loss")?.length;
+    const profit = this._closedTradesList?.filter(trade => trade?.ongoing == false && trade?.closeType === "Take Profit")?.length;
+    const loss = this._closedTradesList?.filter(trade => trade?.ongoing == false && trade?.closeType === "Stop Loss")?.length;
     return Math.round(profit / (profit + loss) * 100) || 0
   }
 

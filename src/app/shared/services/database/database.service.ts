@@ -80,9 +80,7 @@ export class DatabaseService {
   public getUserClosedTrades(): Observable<$UserTradeOperationType[]> {
     return this._lastClosedTrades?.valueChanges()
   }
-  public getLast100Trades(): Observable<$UserTradeOperationType[]> {
-    return this._userTradeList?.valueChanges()
-  }
+
   public getTodayTrades(): Observable<$UserTradeOperationType[]> {
     return this._todayTrades?.valueChanges();
   }
