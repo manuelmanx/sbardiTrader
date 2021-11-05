@@ -71,7 +71,7 @@
                     </div>
                     <div class="fast-action-ongoing-trades">
                         <div class="ongoing-trades-title">Trade Attive</div>
-                        <ng-container *ngFor="let trade of getOngoingTrades().slice().reverse()">
+                        <ng-container *ngFor="let trade of getOngoingTrades()?.slice()?.reverse()">
                             <app-trade-preview (onComponentEvent)="catchOngoingTradeEvent($event)"
                                 class="ongoing-trade-preview" [value]="trade"></app-trade-preview>
                         </ng-container>
@@ -94,7 +94,7 @@
         <div class="last-closed-trades-section" *ngIf="!!getLastClosedTrades()?.length && !!isAccountSetupComplete()">
             <div class="last-closed-trades-title">Ultime Operazioni Chiuse:</div>
             <div class="last-closed-trades-content">
-                <ng-container *ngFor="let trade of getLastClosedTrades().slice().reverse()">
+                <ng-container *ngFor="let trade of getLastClosedTrades()?.slice()?.reverse()">
                     <app-trade-preview class="closed-trade-preview" [value]="trade"></app-trade-preview>
                 </ng-container>
             </div>
