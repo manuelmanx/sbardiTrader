@@ -53,7 +53,7 @@ export class DatabaseService {
   private _loadUserData(): void {
     console.log("Loading user data")
     this._userTradeList = this._af.list(`${this._userPath}/tradeList`, ref => ref.limitToLast(100));
-    this._lastClosedTrades = this._af.list(`${this._userPath}/tradeList`, ref => ref.orderByChild("ongoing").equalTo(false).limitToLast(3));
+    this._lastClosedTrades = this._af.list(`${this._userPath}/tradeList`, ref => ref.orderByChild("ongoing").equalTo(false).limitToLast(100));
     this._ongoingTrades = this._af.list(`${this._userPath}/tradeList`, ref => ref.orderByChild("ongoing").equalTo(true));
     this._todayTrades = this._af.list(`${this._userPath}/tradeList`, ref => ref.orderByChild("date").startAt(new Date(new Date().setHours(0, 0, 0, 0)).toISOString()));
     this._userTradingPlan = this._af.object(`${this._userPath}/tradingPlan`);
@@ -77,7 +77,7 @@ export class DatabaseService {
   public getUserOngoingTradeList(): Observable<$UserTradeOperationType[]> {
     return this._ongoingTrades?.valueChanges()
   }
-  public getUserLastClosedTrades(): Observable<$UserTradeOperationType[]> {
+  public getUserClosedTrades(): Observable<$UserTradeOperationType[]> {
     return this._lastClosedTrades?.valueChanges()
   }
   public getLast100Trades(): Observable<$UserTradeOperationType[]> {

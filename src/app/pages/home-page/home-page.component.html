@@ -1,99 +1,124 @@
 <div class="page-container">
-    <div class="welcome-section">
-        <ng-container *ngIf="userDetails && !isLoadingData">
-            <div class="welcome-title">
-                Ciao {{getUserName()}}!
-            </div>
-            <div class="welcome-subtitle">
-                <ng-container *ngIf="isAccountSetupComplete()">
-                    In questa sezione trovi le azioni rapide dell' applicativo e una panoramica delle tue ultime
-                    azioni.
-                </ng-container>
-                <ng-container *ngIf="!isAccountSetupComplete()">
-                    Il tuo profilo non è completo, ti consigliamo di partire da qui per poter usufruire della
-                    piattaforma.
-                </ng-container>
-            </div>
-        </ng-container>
-        <ng-container *ngIf="isLoadingData">
-            <app-progressbar type="indefinite" class="loading-data-home-progress"></app-progressbar>
-        </ng-container>
-        <ng-container *ngIf="!isAccountSetupComplete() && !isLoadingData && !!accountSetupChecklist">
-            <div class="welcome-setup-not-complete">
-                <ng-container *ngIf="!accountSetupChecklist?.photoURL">
-                    <div class="setup-not-compete-action">
-                        <input type="file" style="display:none" (change)="onUserImageSelect($event)"
-                            accept=".png, .jpeg" #fileUpload>
-                        <div class="setup-not-complete-button" (click)="fileUpload.click()">
-                            <span class="lnr lnr-cloud-upload"></span>
-                        </div>
-                        <p class="setup-not-complete-button-label">Imposta una foto profilo</p>
-                    </div>
-                </ng-container>
-                <ng-container *ngIf="!accountSetupChecklist?.displayName">
-                    <div class="setup-not-compete-action">
-                        <div class="setup-not-complete-button" (click)="onUpdateDisplayName()">
-                            <span class="lnr lnr-pencil"></span>
-                        </div>
-                        <p class="setup-not-complete-button-label">Aggiungi un nome utente</p>
-                    </div>
-                </ng-container>
-                <ng-container *ngIf="!accountSetupChecklist?.tradingPlan">
-                    <div class="setup-not-compete-action">
-                        <div class="setup-not-complete-button" (click)="onAddTradingPlan()">
-                            <span class="lnr lnr-book"></span>
-                        </div>
-                        <p class="setup-not-complete-button-label">Aggiungi regole di trading</p>
-                    </div>
-                </ng-container>
-            </div>
-        </ng-container>
-        <ng-container *ngIf="!!isAccountSetupComplete() && !isLoadingData">
-            <div class="fast-actions-wrapper">
-                <div class="fast-action-user">
-                    <div class="user-account-photo">
-                        <input type="file" style="display:none" (change)="onUserImageSelect($event)"
-                            accept=".png, .jpeg" #changeImageInput>
-                        <img [src]="getUserAccountImage()" (click)="changeImageInput.click()" />
-                        <span class="edit-image-icon lnr lnr-cloud-upload"></span>
-                    </div>
-                    <app-button color="primary-blue" width="100%" class="button" (onComponentEvent)="onAddNewTrade()"
-                        [isDisabled]="!getTradingRulesData()||!canIRegisterNewTrade">
-                        Nuovo Trade</app-button>
-                    <app-button color="white-blue" width="100%" class="button" [isDisabled]="true">Vedi Report
-                    </app-button>
-                    <app-button color="white-blue" width="100%" class="button" (onComponentEvent)="onAddTradingPlan()">
-                        Trading Plan
-                    </app-button>
+    <div class="left-section">
+        <div class="welcome-section">
+            <ng-container *ngIf="userDetails && !isLoadingData">
+                <div class="welcome-title">
+                    Ciao {{getUserName()}}!
                 </div>
-                <div class="fast-action-ongoing-trades">
-                    <div class="ongoing-trades-title">Trade Attive</div>
-                    <ng-container *ngFor="let trade of getOngoingTrades()">
-                        <app-trade-preview (onComponentEvent)="catchOngoingTradeEvent($event)"
-                            class="ongoing-trade-preview" [value]="trade"></app-trade-preview>
+                <div class="welcome-subtitle">
+                    <ng-container *ngIf="isAccountSetupComplete()">
+                        In questa sezione trovi le azioni rapide dell' applicativo e una panoramica delle tue ultime
+                        azioni.
                     </ng-container>
-                    <div *ngIf="!getOngoingTrades()?.length" class="no-data-found">Ancora nessun dato...</div>
+                    <ng-container *ngIf="!isAccountSetupComplete()">
+                        Il tuo profilo non è completo, ti consigliamo di partire da qui per poter usufruire della
+                        piattaforma.
+                    </ng-container>
                 </div>
-                <div class="todays-trades-counter">
-                    <div class="widget" title="Operazioni giornaliere">
-                        <app-progress-circle [title]="getDailyTradesLengthString()"
-                            [subtitle]="getDailyTradesLimitString()" [value]="getPercentageOfDailyTrades()">
-                        </app-progress-circle>
-                    </div>
-                    <div class="widget"
-                        title="Winrate ultime 100 Operazioni &#10;Viene calcolato con la percentuale di Take Profit e Stop Loss">
-                        <app-progress-circle [value]="getLast100TradesWinrate()"></app-progress-circle>
-                    </div>
-                </div>
-            </div>
-        </ng-container>
-    </div>
-    <div class="last-closed-trades-section" *ngIf="!!getLastClosedTrades()?.length && !!isAccountSetupComplete()">
-        <div class="last-closed-trades-title">Ultime Operazioni Chiuse:</div>
-        <div class="last-closed-trades-content">
-            <ng-container *ngFor="let trade of getLastClosedTrades().slice().reverse()">
-                <app-trade-preview class="closed-trade-preview" [value]="trade"></app-trade-preview>
             </ng-container>
+            <ng-container *ngIf="isLoadingData">
+                <app-progressbar type="indefinite" class="loading-data-home-progress"></app-progressbar>
+            </ng-container>
+            <ng-container *ngIf="!isAccountSetupComplete() && !isLoadingData && !!accountSetupChecklist">
+                <div class="welcome-setup-not-complete">
+                    <ng-container *ngIf="!accountSetupChecklist?.photoURL">
+                        <div class="setup-not-compete-action">
+                            <input type="file" style="display:none" (change)="onUserImageSelect($event)"
+                                accept=".png, .jpeg" #fileUpload>
+                            <div class="setup-not-complete-button" (click)="fileUpload.click()">
+                                <span class="lnr lnr-cloud-upload"></span>
+                            </div>
+                            <p class="setup-not-complete-button-label">Imposta una foto profilo</p>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="!accountSetupChecklist?.displayName">
+                        <div class="setup-not-compete-action">
+                            <div class="setup-not-complete-button" (click)="onUpdateDisplayName()">
+                                <span class="lnr lnr-pencil"></span>
+                            </div>
+                            <p class="setup-not-complete-button-label">Aggiungi un nome utente</p>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="!accountSetupChecklist?.tradingPlan">
+                        <div class="setup-not-compete-action">
+                            <div class="setup-not-complete-button" (click)="onAddTradingPlan()">
+                                <span class="lnr lnr-book"></span>
+                            </div>
+                            <p class="setup-not-complete-button-label">Aggiungi regole di trading</p>
+                        </div>
+                    </ng-container>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="!!isAccountSetupComplete() && !isLoadingData">
+                <div class="fast-actions-wrapper">
+                    <div class="fast-action-user">
+                        <div class="user-account-photo">
+                            <input type="file" style="display:none" (change)="onUserImageSelect($event)"
+                                accept=".png, .jpeg" #changeImageInput>
+                            <img [src]="getUserAccountImage()" (click)="changeImageInput.click()" />
+                            <span class="edit-image-icon lnr lnr-cloud-upload"></span>
+                        </div>
+                        <app-button color="primary-blue" width="100%" class="button"
+                            (onComponentEvent)="onAddNewTrade()"
+                            [isDisabled]="!getTradingRulesData()||!canIRegisterNewTrade">
+                            Nuovo Trade</app-button>
+                        <app-button color="white-blue" width="100%" class="button" [isDisabled]="true">Vedi Report
+                        </app-button>
+                        <app-button color="white-blue" width="100%" class="button"
+                            (onComponentEvent)="onAddTradingPlan()">
+                            Trading Plan
+                        </app-button>
+                    </div>
+                    <div class="fast-action-ongoing-trades">
+                        <div class="ongoing-trades-title">Trade Attive</div>
+                        <ng-container *ngFor="let trade of getOngoingTrades().slice().reverse()">
+                            <app-trade-preview (onComponentEvent)="catchOngoingTradeEvent($event)"
+                                class="ongoing-trade-preview" [value]="trade"></app-trade-preview>
+                        </ng-container>
+                        <div *ngIf="!getOngoingTrades()?.length" class="no-data-found">Ancora nessun dato...</div>
+                    </div>
+                    <div class="todays-trades-counter">
+                        <div class="widget" title="Operazioni giornaliere">
+                            <app-progress-circle [title]="getDailyTradesLengthString()"
+                                [subtitle]="getDailyTradesLimitString()" [value]="getPercentageOfDailyTrades()">
+                            </app-progress-circle>
+                        </div>
+                        <div class="widget"
+                            title="Winrate ultime 100 Operazioni &#10;Viene calcolato con la percentuale di Take Profit e Stop Loss">
+                            <app-progress-circle [value]="getLast100TradesWinrate()"></app-progress-circle>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div class="last-closed-trades-section" *ngIf="!!getLastClosedTrades()?.length && !!isAccountSetupComplete()">
+            <div class="last-closed-trades-title">Ultime Operazioni Chiuse:</div>
+            <div class="last-closed-trades-content">
+                <ng-container *ngFor="let trade of getLastClosedTrades().slice().reverse()">
+                    <app-trade-preview class="closed-trade-preview" [value]="trade"></app-trade-preview>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="right-section">
+        <div class="left-navigator-section">
+            <ng-container *ngIf="isLoadingData">
+                <app-progressbar type="indefinite" class="loading-data-home-progress" style="margin-top:16px;">
+                </app-progressbar>
+            </ng-container>
+            <ng-container *ngIf="!isLoadingData">
+                <div class="menu-wrapper">
+                    <div class="menu-toggle-wrapper">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+                <app-tabs class="menu-tabs"
+                    [value]="[{key:'home_news',label:'News'},{key:'home_dashboard',label:'Dashboard'}]"></app-tabs>
+                <div class="no-data">Funzionalità in arrivo...</div>
+            </ng-container>
+
         </div>
     </div>
 </div>

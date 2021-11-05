@@ -20,7 +20,7 @@ export class HomePageComponent implements OnInit {
   private _uploadImageSubscription: Subscription;
   private _tradingPlanRules: $UserTradingPlanType;
   private _ongoingTrades: $UserTradeOperationType[];
-  private _lastClosedTrades: $UserTradeOperationType[];
+  private _closedTradesList: $UserTradeOperationType[];
   private _todayTrades: $UserTradeOperationType[];
   private _last100trades: $UserTradeOperationType[];
   public showTradingPlanModal: boolean = false;
@@ -58,8 +58,8 @@ export class HomePageComponent implements OnInit {
         this._db.getUserOngoingTradeList().subscribe(data => {
           this._ongoingTrades = data;
         })
-        this._db.getUserLastClosedTrades().subscribe(data => {
-          this._lastClosedTrades = data;
+        this._db.getUserClosedTrades().subscribe(data => {
+          this._closedTradesList = data;
         })
         this._db.getTodayTrades().subscribe(data => {
           this._todayTrades = data;
@@ -93,7 +93,7 @@ export class HomePageComponent implements OnInit {
     return this._ongoingTrades;
   }
   public getLastClosedTrades(): $UserTradeOperationType[] {
-    return this._lastClosedTrades;
+    return this._closedTradesList;
   }
   public isAccountSetupComplete(): boolean {
     if (!!this.accountSetupChecklist) {

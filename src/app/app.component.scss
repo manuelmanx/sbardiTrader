@@ -6,9 +6,9 @@
         position:absolute;
         top:0px;
         left:0px;
-        width:calc(100% - 96px);
+        width:calc(100% - 66px);
         display:flex;
-        padding:16px 32px 16px  64px;
+        padding:16px 32px 16px 32px;
         height:fit-content;
         flex-wrap:nowrap;
         min-height:30px;
@@ -34,16 +34,16 @@
                 cursor:pointer;
             }
             .logout-header-button{
-                width:32px;
-                height:32px;
+                width:40px;
+                height:40px;
                 font-size:18px;
                 display:flex;
                 align-items:center;
                 justify-content:center;
-                border-radius : 16px;
-                margin:0px 8px;
+                border-radius : 20px;
+                margin-right: 16px;
                 &:last-child{
-                    margin-left:0px;
+                    margin:0px;
                 }
             }
         }

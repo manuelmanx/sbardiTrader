@@ -1,54 +1,72 @@
 @mixin home-page-theme($theme){
     .page-container{
-        .welcome-section{
-            background-color:map-get($theme,primary)!important;          
-            .welcome-title{
-                color:map-get($theme,primary-blue)!important;
-            }
-            .welcome-setup-not-complete{
-                .setup-not-compete-action{
-                    .setup-not-complete-button{
-                        color:map-get($theme,primary)!important;
-                        background-color:map-get($theme,secondary-blue)!important;
-                        transition: background-color 0.2s ease-in-out,
-                                    color 0.2s ease-in-out;
-                        &:hover{
-                            color:map-get($theme,primary-blue)!important;
-                            background-color:map-get($theme,secondary)!important; 
-                        }
-                    }
-                    .setup-not-complete-button-label{
-                        color:map-get($theme,dark)!important;
-                    }
+        .left-section{
+            .welcome-section{
+                background-color:map-get($theme,primary)!important;          
+                .welcome-title{
+                    color:map-get($theme,primary-blue)!important;
                 }
-            }
-            .fast-actions-wrapper{
-                .fast-action-user{
-                    background-color:map-get($theme,secondary)!important; 
-                    .user-account-photo{
-                        img{
-                            border-color:map-get($theme,primary-blue)!important
+                .welcome-setup-not-complete{
+                    .setup-not-compete-action{
+                        .setup-not-complete-button{
+                            color:map-get($theme,primary)!important;
+                            background-color:map-get($theme,secondary-blue)!important;
+                            transition: background-color 0.2s ease-in-out,
+                                        color 0.2s ease-in-out;
+                            &:hover{
+                                color:map-get($theme,primary-blue)!important;
+                                background-color:map-get($theme,secondary)!important; 
+                            }
                         }
-                        .edit-image-icon{
-                            color:map-get($theme,primary-blue)!important
+                        .setup-not-complete-button-label{
+                            color:map-get($theme,dark)!important;
                         }
                     }
                 }
-                .fast-action-ongoing-trades{
-                    background-color:map-get($theme,secondary)!important;
-                    .ongoing-trades-title{
+                .fast-actions-wrapper{
+                    .fast-action-user{
+                        background-color:map-get($theme,secondary)!important; 
+                        .user-account-photo{
+                            img{
+                                border-color:map-get($theme,primary-blue)!important
+                            }
+                            .edit-image-icon{
+                                color:map-get($theme,primary-blue)!important
+                            }
+                        }
+                    }
+                    .fast-action-ongoing-trades{
                         background-color:map-get($theme,secondary)!important;
+                        .ongoing-trades-title{
+                            background-color:map-get($theme,secondary)!important;
+                        }
+                    }
+                    .todays-trades-counter{
+                        .widget{
+                            background-color:map-get($theme,secondary)!important;
+                        }
                     }
                 }
-                .todays-trades-counter{
-                    .widget{
-                        background-color:map-get($theme,secondary)!important;
-                    }
-                }
+            }
+            .last-closed-trades-section{
+                background-color:map-get($theme,primary)!important;
             }
         }
-        .last-closed-trades-section{
-            background-color:map-get($theme,primary)!important;
+        .right-section{
+            .left-navigator-section{
+                background-color:map-get($theme,primary)!important;
+                .menu-wrapper{
+                    .menu-toggle-wrapper{
+                        cursor:pointer;
+                        .dot{
+                            background-color:map-get($theme,dark)!important;
+                        }
+                        &:hover{
+                            opacity: 0.5!important;
+                        }
+                    }
+                }
+            }
         }
     }
 }
