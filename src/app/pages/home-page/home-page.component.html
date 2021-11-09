@@ -70,11 +70,17 @@
                         </app-button>
                     </div>
                     <div class="fast-action-ongoing-trades">
-                        <div class="ongoing-trades-title">Trade Attive</div>
+                        <div class="ongoing-trades-title">Trade Attive
+                            <div class="icons-wrapper">
+                                <div class="max-daily-trade-reached-message"
+                                    title="Hai raggiunto il limite &#10;di operazioni giornaliere">!</div>
+                            </div>
+                        </div>
                         <ng-container *ngFor="let trade of getOngoingTrades()?.slice()?.reverse()">
                             <app-trade-preview (onComponentEvent)="catchOngoingTradeEvent($event)"
                                 class="ongoing-trade-preview" [value]="trade"></app-trade-preview>
                         </ng-container>
+
                         <div *ngIf="!getOngoingTrades()?.length" class="no-data-found">Ancora nessun dato...</div>
                     </div>
                     <div class="todays-trades-counter">
@@ -84,8 +90,9 @@
                             </app-progress-circle>
                         </div>
                         <div class="widget"
-                            title="Winrate ultime 100 Operazioni &#10;Viene calcolato con la percentuale di Take Profit e Stop Loss">
-                            <app-progress-circle [value]="getLast100TradesWinrate()"></app-progress-circle>
+                            title="Winrate ultime 100 Operazioni &#10; Trade positivi vs. Trade negativi">
+                            <app-progress-circle [value]="getLast100TradesWinrate()" [subtitle]="'% Win'">
+                            </app-progress-circle>
                         </div>
                     </div>
                 </div>
@@ -114,9 +121,16 @@
                         <div class="dot"></div>
                     </div>
                 </div>
-                <app-tabs class="menu-tabs"
-                    [value]="[{key:'home_news',label:'News'},{key:'home_dashboard',label:'Dashboard'}]"></app-tabs>
-                <div class="no-data">Funzionalità in arrivo...</div>
+                <app-tabs class="menu-tabs" [value]="leftTabsDataTemplate"
+                    (onComponentEvent)="onActiveTabChange($event.eventData)"></app-tabs>
+                <div class="content">
+                    <ng-container *ngIf="getActiveTab()==='home_dashboard'">
+                        <app-dashboard></app-dashboard>
+                    </ng-container>
+                    <ng-container *ngIf="getActiveTab()!=='home_dashboard'">
+                        <div class="no-data">Funzionalità in arrivo...</div>
+                    </ng-container>
+                </div>
             </ng-container>
 
         </div>

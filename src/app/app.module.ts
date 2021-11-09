@@ -36,6 +36,9 @@ import { CloseTradeModalComponent } from './components/close-trade-modal/close-t
 import { TextAreaComponent } from './components/text-area/text-area.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ChartsModule } from 'ng2-charts';
+import { ChartComponent } from './components/chart/chart.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,6 +64,8 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
     TextAreaComponent,
     TabsComponent,
     SnackbarComponent,
+    DashboardComponent,
+    ChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,7 +77,8 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-    FormsModule
+    FormsModule,
+    ChartsModule,
   ],
   providers: [
     AuthGuardService,

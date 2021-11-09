@@ -36,6 +36,7 @@ export type $UserTradeOperationType = {
     warnings?: $UserTradeWarningsType[],
     description?: string;
     _key?: string;
+    _deltaPercentProfit?: number;
 }
 
 export type $UserTradeWarningsType = {

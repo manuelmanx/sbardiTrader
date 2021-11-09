@@ -16,7 +16,7 @@
             </app-progressbar>
         </div>
         <div class="trade-preview-profit-number">
-            {{value?.percentProfit}}% ({{value?.percentTarget||'X'}}%)
+            {{value?.percentProfit.toFixed(2)}}% ({{value?.percentTarget.toFixed(2)||'X'}}%)
         </div>
         <div class="trade-preview-actions">
             <ng-container *ngIf="value?.ongoing">

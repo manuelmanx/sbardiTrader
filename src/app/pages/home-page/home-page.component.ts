@@ -6,6 +6,7 @@ import { $UserTradeOperationType, $UserTradingPlanType } from 'src/app/shared/in
 import { $AccountSetupCheckListType, $UserInterface } from 'src/app/shared/interfaces/user.dto';
 import { AuthGuardService } from 'src/app/shared/services/auth-guard/auth-guard.service';
 import { DatabaseService } from 'src/app/shared/services/database/database.service';
+import { $HomePageLeftTabsTemplate } from 'src/app/shared/templates/home-page.template';
 
 @Component({
   selector: 'app-home-page',
@@ -29,11 +30,20 @@ export class HomePageComponent implements OnInit {
 
   public tradeToPartialize: $UserTradeOperationType = null;
   public tradeToClose: $UserTradeOperationType = null;
-  public canIRegisterNewTrade = null;
+  public canIRegisterNewTrade = true;
+  public leftTabsDataTemplate = $HomePageLeftTabsTemplate;
+
+  private _activeTab = this.leftTabsDataTemplate[0].key;
   constructor(private _authGuardService: AuthGuardService, private _db: DatabaseService, private _router: Router) {
 
   }
 
+  public onActiveTabChange(key: string): void {
+    this._activeTab = key;
+  }
+  public getActiveTab(): string {
+    return this._activeTab;
+  }
   public async ngOnInit(): Promise<void> {
     await this._authGuardService.getUserInfoFromDB().subscribe(user => {
       if (!user) {
@@ -189,9 +199,9 @@ export class HomePageComponent implements OnInit {
 
   public getPercentageOfDailyTrades(): number {
     const progress = 100 * this._todayTrades?.length / this._tradingPlanRules?.maxDailyTrades;
-    if (this.canIRegisterNewTrade === false && progress < 100) {
+    if (progress < 100) {
       this.canIRegisterNewTrade = true;
-    } else if (progress >= 100 && this.canIRegisterNewTrade === true) {
+    } else if (progress >= 100) {
       this.canIRegisterNewTrade = false;
     }
     return progress;
@@ -206,9 +216,9 @@ export class HomePageComponent implements OnInit {
   }
 
   public getLast100TradesWinrate(): number {
-    const profit = this._closedTradesList?.filter(trade => trade?.ongoing == false && trade?.closeType === "Take Profit")?.length;
-    const loss = this._closedTradesList?.filter(trade => trade?.ongoing == false && trade?.closeType === "Stop Loss")?.length;
-    return Math.round(profit / (profit + loss) * 100) || 0
+    const profit = this._closedTradesList?.filter(trade => trade?.percentProfit > 0);
+    const loss = this._closedTradesList?.filter(trade => trade?.percentProfit < 0);
+    return Math.round(profit?.length / (profit?.length + loss?.length) * 100) || 0;
   }
 
   public catchOngoingTradeEvent(event: $ComponentEventType): void {
@@ -250,5 +260,11 @@ export class HomePageComponent implements OnInit {
         })
         break;
     }
+  }
+  public getProfitPercentage(): number {
+    if (!this._closedTradesList?.length) return NaN;
+    return +this._closedTradesList?.map(e => e?.percentProfit)?.reduce((tot, num) => {
+      return tot + num;
+    })?.toFixed(2);
   }
 }

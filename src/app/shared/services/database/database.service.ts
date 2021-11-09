@@ -77,8 +77,14 @@ export class DatabaseService {
   public getUserOngoingTradeList(): Observable<$UserTradeOperationType[]> {
     return this._ongoingTrades?.valueChanges()
   }
+
   public getUserClosedTrades(): Observable<$UserTradeOperationType[]> {
     return this._lastClosedTrades?.valueChanges()
+  }
+
+  public getTradeListByStartDate(date: Date): Observable<$UserTradeOperationType[]> {
+    let list: AngularFireList<$UserTradeOperationType> = this._af.list(`${this._userPath}/tradeList`, ref => ref.orderByChild("date").startAt(date.toISOString()));
+    return list.valueChanges();
   }
 
   public getTodayTrades(): Observable<$UserTradeOperationType[]> {

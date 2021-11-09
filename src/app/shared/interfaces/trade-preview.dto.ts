@@ -8,4 +8,4 @@ export type $TradePreviewDataSource = {
     ongoing: boolean,
     closeType?: $TradeCloseType,
 }
-export type $TradeCloseType = "Take Profit" | "Stop Loss" | "Mercato";
+export type $TradeCloseType = "Take Profit" | "Stop Loss" | "Mercato" | 'Break Even';

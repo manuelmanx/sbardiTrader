@@ -37,8 +37,13 @@
                     }
                     .fast-action-ongoing-trades{
                         background-color:map-get($theme,secondary)!important;
+                        
                         .ongoing-trades-title{
                             background-color:map-get($theme,secondary)!important;
+                            .max-daily-trade-reached-message{
+                                background-color:map-get($theme,secondary-blue)!important;
+                                color:white;
+                            }
                         }
                     }
                     .todays-trades-counter{

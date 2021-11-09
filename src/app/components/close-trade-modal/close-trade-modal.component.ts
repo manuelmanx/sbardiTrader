@@ -43,9 +43,9 @@ export class CloseTradeModalComponent implements OnInit {
 
   private _parseValueOnSave(): void {
     if (!!this.value?.percentProfit) {
-      this.value.percentProfit += this.tmpProfit;
+      this.value.percentProfit += +this.tmpProfit.toFixed(2);
     } else {
-      this.value.percentProfit = this.tmpProfit;
+      this.value.percentProfit = +this.tmpProfit.toFixed(2);
     }
     if (!!this.value.partial) {
       this.value.partial += 1;
@@ -53,6 +53,7 @@ export class CloseTradeModalComponent implements OnInit {
       this.value.partial = 1;
     }
     this.value.ongoing = false;
+
   }
   public onDestroyButtonClick(): void {
     this.emitComponentEvent("onDestroyWindow");
