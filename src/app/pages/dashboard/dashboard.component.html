@@ -1,5 +1,17 @@
 <div class="dashboard-wrapper">
-    <ng-container *ngIf="chartData">
-        <app-chart [data]="chartData" [labels]="chartLabels"></app-chart>
+    <div class="title">
+        Equity
+        <div class="header-right-section">
+            <div class="tf-btn" [ngClass]="{'active': getTimeframe()=='1D'}" (click)="changeTimeFrame('1D')">1D</div>
+            <div class="tf-btn" [ngClass]="{'active': getTimeframe()=='1M'}" (click)="changeTimeFrame('1M')">1M</div>
+            <div class="tf-btn" [ngClass]="{'active': getTimeframe()=='3M'}" (click)="changeTimeFrame('3M')">3M</div>
+            <div class="tf-btn" [ngClass]="{'active': getTimeframe()=='1Y'}" (click)="changeTimeFrame('1Y')">1Y</div>
+            <div class="tf-btn download" href="#" (click)="downloadEquidtyImage($event)"><span
+                    class="lnr lnr-camera"></span>
+            </div>
+        </div>
+    </div>
+    <ng-container *ngIf="chartData?.length">
+        <app-chart #equityChart [data]="chartData" [labels]="chartLabels"></app-chart>
     </ng-container>
 </div>

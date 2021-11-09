@@ -32,7 +32,7 @@ export class HomePageComponent implements OnInit {
   public tradeToClose: $UserTradeOperationType = null;
   public canIRegisterNewTrade = true;
   public leftTabsDataTemplate = $HomePageLeftTabsTemplate;
-
+  public globalProfit: number;
   private _activeTab = this.leftTabsDataTemplate[0].key;
   constructor(private _authGuardService: AuthGuardService, private _db: DatabaseService, private _router: Router) {
 
@@ -73,12 +73,16 @@ export class HomePageComponent implements OnInit {
         this._db.getTodayTrades()?.subscribe(data => {
           this._todayTrades = data;
         })
+        this._db.getCurrentGlobalProfit().subscribe((data: number) => {
+          this.globalProfit = data;
+        })
       }
     });
 
     this._db.onIsFirstLogin.subscribe((data: boolean) => {
       this.isFirstLogin = data;
     });
+
 
   }
 
@@ -185,6 +189,10 @@ export class HomePageComponent implements OnInit {
     switch (event?.eventName) {
       case "onTradingPlanEditorSaveChanges":
         this._saveNewGeneratedTrade(event.eventData).then(success => {
+          if (!!event?.eventData?._deltaPercentProfit) {
+            const p: number = +event?.eventData?._deltaPercentProfit.toFixed(2);
+            this._db.updateGlobalProfit(p)
+          }
           this.showNewTradeModal = false;
         });
         break;
@@ -257,6 +265,8 @@ export class HomePageComponent implements OnInit {
         this._db.updateTradeValue(event?.eventData).then(success => {
           this.showCloseTradeModal = false;
           this.tradeToClose = null;
+          const p: number = +event?.eventData?._deltaPercentProfit.toFixed(2);
+          this._db.updateGlobalProfit(p)
         })
         break;
     }

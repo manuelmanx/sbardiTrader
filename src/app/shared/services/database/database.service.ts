@@ -86,7 +86,14 @@ export class DatabaseService {
     let list: AngularFireList<$UserTradeOperationType> = this._af.list(`${this._userPath}/tradeList`, ref => ref.orderByChild("date").startAt(date.toISOString()));
     return list.valueChanges();
   }
-
+  public getCurrentGlobalProfit(): Observable<number> {
+    let value: AngularFireObject<number> = this._af.object(`${this._userPath}/globalProfit`);
+    return value.valueChanges();
+  }
+  public updateGlobalProfit(profit: number): Promise<void> {
+    let value: AngularFireObject<any> = this._af.object(`${this._userPath}`);
+    return value.update({ globalProfit: profit });
+  }
   public getTodayTrades(): Observable<$UserTradeOperationType[]> {
     return this._todayTrades?.valueChanges();
   }

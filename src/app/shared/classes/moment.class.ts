@@ -11,7 +11,7 @@ export class $MomentClass {
         let startDate = date;
         startDate.setHours(0, 0, 0, 0);
         let moment = {
-            '1D': new Date(startDate.setDate(date.getDate() - 1)),
+            '1D': new Date(startDate),
             '1M': new Date(startDate.setMonth(date.getMonth() - 1)),
             '3M': new Date(startDate.setMonth(date.getMonth() - 3)),
             '1Y': new Date(startDate.setFullYear(date.getFullYear() - 1)),

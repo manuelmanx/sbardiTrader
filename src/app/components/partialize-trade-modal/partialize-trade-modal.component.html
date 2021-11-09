@@ -4,7 +4,8 @@
         <label>Coppia: {{value?.symbol?.toUpperCase()}} </label>
     </div>
     <div class="new-trade-modal-form-line">
-        <label>Profitto totale: {{+((tmpProfit + value?.percentProfit).toFixed(2))||value?.percentProfit||0}}%
+        <label>Profitto totale: {{+((tmpProfit +
+            value?.percentProfit)?.toFixed(2))||value?.percentProfit?.toFixed(2)||0}}%
         </label>
     </div>
     <div class="new-trade-modal-form-line">

@@ -50,7 +50,7 @@ export class CalculatorComponent implements OnInit, $ComponentTemplateClass {
       result = 100 / this.countSize[this.activeTabName] * this.profitSize[this.activeTabName];
     else if (this.activeTabName === 'value_calc')
       result = this.countSize[this.activeTabName] / 100 * this.profitSize[this.activeTabName]
-    return Number(result.toFixed(2))
+    return +result?.toFixed(2);
   }
 
   public catchModalEvent(event: $ComponentEventType): void {

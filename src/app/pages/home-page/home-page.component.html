@@ -72,7 +72,7 @@
                     <div class="fast-action-ongoing-trades">
                         <div class="ongoing-trades-title">Trade Attive
                             <div class="icons-wrapper">
-                                <div class="max-daily-trade-reached-message"
+                                <div class="max-daily-trade-reached-message" *ngIf="!canIRegisterNewTrade"
                                     title="Hai raggiunto il limite &#10;di operazioni giornaliere">!</div>
                             </div>
                         </div>
@@ -140,11 +140,11 @@
 <app-partialize-trade-modal [value]="tradeToPartialize" *ngIf="showPartializeTradeModal"
     (onComponentEvent)="onPartializeTradeModalEvent($event)"></app-partialize-trade-modal>
 
-<app-close-trade-modal [value]="tradeToClose" *ngIf="showCloseTradeModal"
+<app-close-trade-modal [globalProfit]="globalProfit" [value]="tradeToClose" *ngIf="showCloseTradeModal"
     (onComponentEvent)="onCloseTradeModalEvent($event)"></app-close-trade-modal>
 
-<app-new-trade-modal-form [tradingPlanRules]="getTradingRulesData()" (onComponentEvent)="onNewTradeModalEvent($event)"
-    *ngIf="showNewTradeModal">
+<app-new-trade-modal-form [globalProfit]="globalProfit" [tradingPlanRules]="getTradingRulesData()"
+    (onComponentEvent)="onNewTradeModalEvent($event)" *ngIf="showNewTradeModal">
 </app-new-trade-modal-form>
 
 <app-tradingplan-editor [value]="getTradingRulesData()" (onComponentEvent)="onTradingPlanEditorEvent($event)"

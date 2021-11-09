@@ -28,6 +28,7 @@ export class CloseTradeModalComponent implements OnInit {
   public tooltip: any;
   public isLoading: boolean = false;
   public tmpProfit: number = 0;
+  @Input('globalProfit') private _globalProfit: number;
   @Output() public onComponentEvent: EventEmitter<$ComponentEventType> = new EventEmitter<$ComponentEventType>();
   public emitComponentEvent(eventName?: string): void {
     this.onComponentEvent.emit({ eventName: eventName, eventData: this.value });
@@ -43,9 +44,9 @@ export class CloseTradeModalComponent implements OnInit {
 
   private _parseValueOnSave(): void {
     if (!!this.value?.percentProfit) {
-      this.value.percentProfit += +this.tmpProfit.toFixed(2);
+      this.value.percentProfit += +this.tmpProfit?.toFixed(2);
     } else {
-      this.value.percentProfit = +this.tmpProfit.toFixed(2);
+      this.value.percentProfit = +this.tmpProfit?.toFixed(2);
     }
     if (!!this.value.partial) {
       this.value.partial += 1;
@@ -53,7 +54,8 @@ export class CloseTradeModalComponent implements OnInit {
       this.value.partial = 1;
     }
     this.value.ongoing = false;
-
+    this.value._deltaPercentProfit = this._globalProfit + this.value.percentProfit;
+    if (!this.value?.description) this.value.description = "";
   }
   public onDestroyButtonClick(): void {
     this.emitComponentEvent("onDestroyWindow");

@@ -16,6 +16,7 @@ export class NewTradeModalFormComponent implements OnInit, $ComponentTemplateCla
   constructor() { }
   @Input('value') public value: $UserTradeOperationType;
   @Input('tradingPlanRules') public tradingPlanRules: $UserTradingPlanType;
+  @Input('globalProfit') private _globalProfit: number;
   @Output() onComponentEvent: EventEmitter<$ComponentEventType> = new EventEmitter<$ComponentEventType>();
 
   public tooltip: string;
@@ -47,8 +48,8 @@ export class NewTradeModalFormComponent implements OnInit, $ComponentTemplateCla
 
   public onSaveButtonClick(): void {
     this.isLoading = true;
-    console.log(this.value)
     this.value.symbol = this.value.symbol.toUpperCase();
+    if (!this.value?.ongoing) this.value._deltaPercentProfit = this._globalProfit + this.value.percentProfit
     this.emitComponentEvent("onTradingPlanEditorSaveChanges");
   }
 

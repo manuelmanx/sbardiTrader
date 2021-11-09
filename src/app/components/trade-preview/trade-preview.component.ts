@@ -36,7 +36,7 @@ export class TradePreviewComponent implements OnInit, $ComponentTemplateClass {
 
   public getProgressValue() {
     const progress: number = (100 / this.value?.percentTarget * this.value?.percentProfit);
-    return (progress < 0) ? +(progress * -1).toFixed(2) : +progress.toFixed(2);
+    return (progress < 0) ? +(progress * -1)?.toFixed(2) : +progress?.toFixed(2);
   }
 
   public isInLoss(): boolean {

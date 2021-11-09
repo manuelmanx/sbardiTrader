@@ -1,1 +1,1 @@
-export const $HomePageLeftTabsTemplate = [{ key: 'home_news', label: 'News' }, { key: 'home_dashboard', label: 'Dashboard' }]
+export const $HomePageLeftTabsTemplate = [{ key: 'home_dashboard', label: 'Dashboard' }, { key: 'home_news', label: 'News' }]

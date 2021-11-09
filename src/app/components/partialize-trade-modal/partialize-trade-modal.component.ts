@@ -50,6 +50,7 @@ export class PartializeTradeModalComponent implements OnInit, $ComponentTemplate
     } else {
       this.value.partial = 1;
     }
+    this.value._deltaPercentProfit = null;
   }
   public onDestroyButtonClick(): void {
     this.emitComponentEvent("onDestroyWindow");
